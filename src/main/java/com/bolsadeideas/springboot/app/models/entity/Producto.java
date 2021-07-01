@@ -30,6 +30,7 @@ public class Producto implements Serializable {
 	@Column(name="create_at")
 	private Date createAt;
 	
+
 	@PrePersist
 	public void prePersist() {
 		createAt=new Date();
