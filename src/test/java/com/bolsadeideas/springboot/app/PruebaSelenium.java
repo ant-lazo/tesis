@@ -46,7 +46,7 @@ public class PruebaSelenium {
 		driver.findElement(registerLinkLocator).click();
 		Thread.sleep(2000);
 		if(driver.findElement(classLocator).isDisplayed()) {
-			driver.findElement(usernameLocator).sendKeys("admin");
+			driver.findElement(usernameLocator).sendKeys("omar");
 			driver.findElement(passwordLocator).sendKeys("12345");
 			
 			driver.findElement(iniciarsesionLocator).click();
