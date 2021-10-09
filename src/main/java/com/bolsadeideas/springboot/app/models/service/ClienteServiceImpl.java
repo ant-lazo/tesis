@@ -49,14 +49,12 @@ public class ClienteServiceImpl implements IClienteService{
 	@Override
 	@Transactional
 	public void delete(Long id) {
-		
 		clienteDao.deleteById(id);
 	}
 
 	@Transactional(readOnly = true)
 	@Override
 	public Page<Cliente> findAll(Pageable pageable) {
-		
 		return clienteDao.findAll(pageable);
 	}
 
@@ -68,7 +66,6 @@ public class ClienteServiceImpl implements IClienteService{
 	@Override
 	@Transactional
 	public void saveFactura(Factura factura) {
-		// TODO Auto-generated method stub
 		facturaDao.save(factura);
 		
 	}
@@ -76,21 +73,18 @@ public class ClienteServiceImpl implements IClienteService{
 	@Override
 	@Transactional(readOnly = true)
 	public Producto findProductoById(Long id) {
-		// TODO Auto-generated method stub
 		return productoDao.findById(id).orElse(null);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public Factura findFactruaById(Long id) {
-		// TODO Auto-generated method stub
 		return facturaDao.findById(id).orElse(null);
 	}
 
 	@Override
 	@Transactional
 	public void deleteFactura(Long id) {
-		// TODO Auto-generated method stub
 		facturaDao.deleteById(id);
 		
 	}
@@ -98,15 +92,31 @@ public class ClienteServiceImpl implements IClienteService{
 	@Override
 	@Transactional(readOnly = true)
 	public Factura fetchFacturaByIdWithClienteWithItemFacturaWithProducto(Long id) {
-		// TODO Auto-generated method stub
 		return facturaDao.fetchByIdWithClienteWithItemFacturaWithProducto(id);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public Cliente fetchByIdWithFacturas(Long id) {
-		// TODO Auto-generated method stub
 		return clienteDao.fetchByIdWithFacturas(id);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Factura> findAllFacturas() {
+		return (List<Factura>)facturaDao.findAll();
+	}
+	
+	@Transactional(readOnly = true)
+	@Override
+	public Page<Factura> findAllFacturas(Pageable pageable) {
+		return facturaDao.findAll(pageable);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Factura fetchFacturaByIdWithItemFacturaWithProducto(Long id) {
+		return facturaDao.fetchByIdWithItemFacturaWithProducto(id);
 	}
 
 }

@@ -22,8 +22,8 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
-@Component("factura/ver")
-public class FacturaPdfView extends AbstractPdfView {
+@Component("factura/versc")
+public class FacturaPdfView2 extends AbstractPdfView {
 
 	@Autowired
 	private MessageSource messageSource;
@@ -43,18 +43,18 @@ public class FacturaPdfView extends AbstractPdfView {
 		MessageSourceAccessor mensajes= getMessageSourceAccessor();
 		
 		PdfPTable tabla = new PdfPTable(1);
-		tabla.setSpacingAfter(20);
+		//tabla.setSpacingAfter(20);
 		
 		PdfPCell cell= null;
 		
-		cell= new PdfPCell(new Phrase(messageSource.getMessage("text.factura.ver.datos.cliente", null, locale)));
-		cell.setBackgroundColor(new Color(184, 218, 255));
-		cell.setPadding(8f);
-		tabla.addCell(cell);
+		//cell= new PdfPCell(new Phrase(messageSource.getMessage("text.factura.ver.datos.cliente", null, locale)));
+		//cell.setBackgroundColor(new Color(184, 218, 255));
+		//cell.setPadding(8f);
+		//tabla.addCell(cell);
 		
 		
-		tabla.addCell(factura.getCliente().getNombre()+" "+factura.getCliente().getApellido());
-		tabla.addCell(factura.getCliente().getEmail());
+		//tabla.addCell(factura.getCliente().getNombre()+" "+factura.getCliente().getApellido());
+		//tabla.addCell(factura.getCliente().getEmail());
 		
 		
 		PdfPTable tabla2 = new PdfPTable(1);

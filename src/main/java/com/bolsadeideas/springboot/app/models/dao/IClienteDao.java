@@ -1,8 +1,6 @@
 package com.bolsadeideas.springboot.app.models.dao;
 
 
-
-
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 

@@ -147,7 +147,7 @@ public class ClienteController {
 
 		}
 		
-		Pageable pageRequest = PageRequest.of(page, 2,Sort.by(Sort.Direction.DESC,"id"));
+		Pageable pageRequest = PageRequest.of(page, 7,Sort.by(Sort.Direction.DESC,"id"));
 
 		Page<Cliente> clientes = clienteService.findAll(pageRequest);
 

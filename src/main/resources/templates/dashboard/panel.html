@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<html xmlns:th="http://www.thymeleaf.org" />
+<head th:replace="layout/layout :: head"></head>
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<!--  dfadfadfadfadfadfadfadf -->
+	
+	
+
+	<div class="container py-4 px-4" sec:authorize="hasRole('ROLE_USER')">
+		
+		
+		<from>
+			<div class="form-group row py-4">
+				<label class="col-sm-1 col-form-label" th:text="'Fecha:'"></label>
+				<div class="col-sm-4">
+						<input class="form-control">
+				</div>
+			</div>
+		</from>
+		
+		
+		<div class="row">
+			<div class="col-6">
+				<div class="card bg-light border-success">
+		
+					<div class="card-header">
+						<h4>Porcentaje de Crecimiento en Ventas</h4>
+					</div>
+					<div class="card-body">
+					<h1 align="right">1.85%</h1>
+					</div>
+				</div>
+			</div>
+			<div class="col-6">
+				<div class="card bg-light border-warning">
+		
+					<div class="card-header">
+						<h4>Índice de Productividad en Ventas</h4>
+					</div>
+					<div class="card-body">
+					<h1 align="right">0.58</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row py-4">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+					CHARTS 1
+					</div>
+					<div class="card-body">
+						<canvas class="chart" width="400" height="200"></canvas>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+					CHARTS 2
+					</div>
+					<div class="card-body">
+						<canvas class="chart" width="400" height="200"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+	</div>
+
+	<!-- fadkfjaldkfjadkfja�ldkfja�kdf -->
+
+	<div id="cuadrarfooter"></div>
+	<footer th:replace="layout/layout :: footer"></footer>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+	<script th:replace="dashboard/js/estadisticas-panel :: javascript"></script>
+</body>
+</html>

@@ -15,7 +15,7 @@
 			<h4 class="card-title">			
 			<a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-primary btn-xs"
 						th:href="@{'/factura/form/' + ${cliente.id}}"
-						th:text="'crear factura'"></a>
+						th:text="'crear comprobante'"></a>
 			</h4>
 			
 			
@@ -36,8 +36,8 @@
 
 				<table th:if="${not #lists.isEmpty(cliente.facturas)}"
 					class="table table-bordered table-striped my-4">
-					<thead class="thead-dark">
-						<tr>
+					<thead>
+						<tr class="table-warning">
 							<th>folio</th>
 							<th>descripcion</th>
 							<th>fecha</th>
@@ -62,6 +62,7 @@
 			</div>
 		</div>
 	</div>
+	<div id="cuadrarfooter"></div>
 	<footer th:replace="layout/layout :: footer"></footer>
 
 </body>

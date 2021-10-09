@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PostPersist;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -27,6 +28,13 @@ public class ItemFactura implements Serializable {
 	@JoinColumn(name = "producto_id")
 	@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 	private Producto producto;
+	
+	private Double importe;
+	
+	@PostPersist
+	public void postImporte() {
+		this.importe=this.calcularImporte();
+	}
 
 	public Producto getProducto() {
 		return producto;
@@ -53,9 +61,18 @@ public class ItemFactura implements Serializable {
 	}
 
 	public Double calcularImporte() {
-		return cantidad.doubleValue()*producto.getPrecio();
+		Double resul = cantidad.doubleValue()*producto.getPrecio();
+		return resul;
 	}
 	
+	public Double getImporte() {
+		return importe;
+	}
+
+	public void setImporte(Double importe) {
+		this.importe = importe;
+	}
+
 	private static final long serialVersionUID = 1L;
 
 }

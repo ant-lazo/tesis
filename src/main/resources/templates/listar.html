@@ -23,12 +23,12 @@
 					<a sec:authorize="hasRole('ROLE_ADMIN')"
 						class="btn btn-success btn-xs" th:href="@{/form}">Crear
 						Cliente</a>
-					<a class="btn btn-secondary btn-xs float-right mx-2"
-						th:href="@{'/listar'(format=csv)}">CSV</a>
-					<a class="btn btn-outline-secondary btn-xs float-right mx-2"
+					<!-- <a class="btn btn-secondary btn-xs float-right mx-2 mr-4"
+						th:href="@{'/listar'(format=csv)}">EXCEL</a>-->
+					<!--<a class="btn btn-outline-secondary btn-xs float-right mx-2"
 						th:href="@{'/listar'(format=xml)}">XML</a>
 					<a class="btn btn-warning btn-xs float-right"
-						th:href="@{'/listar'(format=json)}">JSON</a>
+						th:href="@{'/listar'(format=json)}">JSON</a>-->
 				</h4>
 				<table class="table table-striped">
 					<thead>
@@ -38,9 +38,9 @@
 							<th th:text="#{text.cliente.apellido}">apellido</th>
 							<th th:text="#{text.cliente.email}">email</th>
 							<th th:text="#{text.cliente.createAt}"></th>
-							<th sec:authorize="hasRole('ROLE_ADMIN')">Crear Factura</th>
-							<th sec:authorize="hasRole('ROLE_ADMIN')">editar</th>
-							<th sec:authorize="hasRole('ROLE_ADMIN')">eliminar</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">Crear Comprobante</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">Editar</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -54,7 +54,7 @@
 							<td th:text="${cliente.createAt}"></td>
 							<td sec:authorize="hasRole('ROLE_ADMIN')"><a
 								class="btn btn-primary btn-xs"
-								th:href="@{/factura/form/}+${cliente.id}">crear factura</a></td>
+								th:href="@{/factura/form/}+${cliente.id}">crear Comprob..</a></td>
 							<td sec:authorize="hasRole('ROLE_ADMIN')"><a
 								class="btn btn-success btn-xs" th:href="@{/form/}+${cliente.id}">editar</a></td>
 							<td sec:authorize="hasRole('ROLE_ADMIN')"><a
@@ -68,7 +68,8 @@
 			</div>
 		</div>
 	</div>
-
+	
+	<div id="cuadrarfooter"></div>
 	<footer th:replace="layout/layout :: footer"></footer>
 
 </body>

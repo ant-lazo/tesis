@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PostPersist;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -50,13 +51,20 @@ public class Factura implements Serializable {
 	@JoinColumn(name = "factura_id")
 	private List<ItemFactura> items;
 	
+	private Double preciototal;
+	
 	
 	public Factura() {
 		this.items = new ArrayList<ItemFactura>();
 	}
+	
+	@PostPersist
+	public void postPersistTotal() {
+		preciototal=this.getTotal();
+	}
 
 	@PrePersist
-	public void prePersist() {
+	public void prePersistFecha() {
 		createAt=new Date();
 	}
 	
@@ -111,6 +119,15 @@ public class Factura implements Serializable {
 			total+= items.get(i).calcularImporte();
 		}
 		return total;
+	}
+
+
+	public Double getPreciototal() {
+		return preciototal;
+	}
+
+	public void setPreciototal(Double preciototal) {
+		this.preciototal = preciototal;
 	}
 
 
