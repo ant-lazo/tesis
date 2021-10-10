@@ -13,7 +13,7 @@
 <body>
 	<header th:fragment="header">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
-			<a class="navbar-brand" href="#"><b>MIKAR</b>farma</b></a>
+			<a class="navbar-brand" href="#" style="font-size: 140%"><b style="color:orange">MIKAR</b>farma</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarNav" aria-controls="navbarNav"
 				aria-expanded="false" aria-label="Toggle navigation">
@@ -21,9 +21,9 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active"><a class="nav-link"
+					<!-- <li class="nav-item active"><a class="nav-link"
 						th:href="@{/form}">Formulario<span class="sr-only">(current)</span></a>
-					</li>
+					</li> -->
 					<li class="nav-item"><a class="nav-link" th:href="@{/listar}">Clientes</a></li>
 					<!-- <li class="nav-item"><a class="nav-link" th:href="@{'factura' + 'factura/listarfacturas'}">Comprobantes</a></li>  -->
 					<li class="nav-item"><a class="nav-link" th:href="@{/factura/listarfacturas}">Comprobantes</a></li>

@@ -67,7 +67,7 @@ public class ClienteController {
 	@Autowired
 	private MessageSource messageSource;
 	
-	@Secured({"ROLE_USER,ROLE_ADMIN"})
+	@Secured("ROLE_USER")
 	@GetMapping(value = "/uploads/{filename:.+}")
 	public ResponseEntity<Resource> verFoto(@PathVariable String filename) {
 
