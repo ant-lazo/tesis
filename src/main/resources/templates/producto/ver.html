@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html>
+<head>
+<html xmlns:th="http://www.thymeleaf.org" />
 <head th:replace="layout/layout :: head"></head>
+</head>
 <body>
-
 	<header th:replace="layout/layout :: header"></header>
-
+	
+	<!--  dfadfadfadfadfadfadfadf -->
+	
 	<div class="container py-4">
 
 		<div class="card bg-light">
@@ -12,29 +16,29 @@
 			<div class="card-header text-success" th:text="${titulo}"></div>
 			<div class="card-body">
 			
-			<h4 class="card-title">			
-			<a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-primary btn-xs"
+			<h4 class="card-title">
+				<!-- <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-primary btn-xs"
 						th:href="@{'/factura/form/' + ${cliente.id}}"
-						th:text="'crear comprobante'"></a>
+						th:text="'crear comprobante'"></a> -->
 			</h4>
 			
 			
-				<img th:if="${#strings.length(cliente.foto) > 0}"
+				<img th:if="${#strings.length(producto.foto) > 0}"
 					class="img-thumbnail rounded float-left" style="max-width: 25%;"
-					th:src="@{'/uploads/' + ${cliente.foto}}" th:alt="${cliente.foto}" >
+					th:src="@{'/uploads/' + ${producto.foto}}" th:alt="${producto.foto}" >
 
 				<ul class="list-group">
-					<li class="list-group-item" th:text="'Nombre: '+${cliente.nombre}"></li>
-					<li class="list-group-item" th:text="'Apellido: '+${cliente.apellido}"></li>
-					<li class="list-group-item" th:text="'Email: '+${cliente.email}"></li>
-					<li class="list-group-item" th:text="'Fedcha: '+${cliente.createAt}"></li>
+					<li class="list-group-item" th:text="'Nombre: '+${producto.nombre}"></li>
+					<li class="list-group-item" th:text="'Laboratorio: '+${producto.laboratorio}"></li>
+					<li class="list-group-item" th:text="'Precio S/. '+${producto.precio}"></li>
+					<li class="list-group-item" th:text="'Fecha: '+${producto.createAt}"></li>
 				</ul>
 
-				<div th:if="${#lists.isEmpty(cliente.facturas)}"
+				<!-- <div th:if="${#lists.isEmpty(cliente.facturas)}"
 					class="alert alert-info my-4"
-					th:text="'No hay factura asignada para el cliente: '+${cliente.nombre}+' '+${cliente.apellido}"></div>
+					th:text="'No hay factura asignada para el cliente: '+${cliente.nombre}+' '+${cliente.apellido}"></div> -->
 
-				<table th:if="${not #lists.isEmpty(cliente.facturas)}"
+				<!-- <table th:if="${not #lists.isEmpty(cliente.facturas)}"
 					class="table table-bordered table-striped my-4">
 					<thead>
 						<tr class="table-warning">
@@ -54,16 +58,17 @@
 							<th th:text="${factura.total}"></th>
 							<th sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-primary btn-xs" th:href="@{'/factura/ver/'+${factura.id}}" th:text="'detalle'"></a></th>
 							<th sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger btn-xs" th:href="@{'/factura/eliminar/'+${factura.id}}" th:text="'eliminar'"
-							onclick="return confirm('Â¿Estas seguro de eliminar la factura?');"></a></th>
+							onclick="return confirm('¿Estas seguro de eliminar la factura?');"></a></th>
 						</tr>
 					</tbody>
-				</table>
+				</table> -->
 
 			</div>
 		</div>
 	</div>
+	
+	
 	<div id="cuadrarfooter"></div>
 	<footer th:replace="layout/layout :: footer"></footer>
-
 </body>
 </html>

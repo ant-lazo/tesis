@@ -119,4 +119,34 @@ public class ClienteServiceImpl implements IClienteService{
 		return facturaDao.fetchByIdWithItemFacturaWithProducto(id);
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public List<Producto> findAllProductosl() {
+		return (List<Producto>)productoDao.findAll();
+	}
+
+	@Transactional(readOnly = true)
+	@Override
+	public Page<Producto> findAllProductos(Pageable pageable) {
+		return productoDao.findAll(pageable);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Producto findOneProducto(Long id) {
+		return productoDao.findById(id).orElse(null);
+	}
+
+	@Override
+	public void saveProducto(Producto producto) {
+		productoDao.save(producto);
+	}
+
+	@Override
+	public void deleteProducto(Long id) {
+		productoDao.deleteById(id);
+		
+	}
+
+
 }

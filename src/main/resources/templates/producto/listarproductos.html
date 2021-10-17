@@ -6,22 +6,22 @@
 </head>
 <body>
 	<header th:replace="layout/layout :: header"></header>
-
+	
 	<!--  dfadfadfadfadfadfadfadf -->
 
 	<div class="container py-4" sec:authorize="hasRole('ROLE_USER')">
 
-		<div class="card bg-light border-warning">
+		<div class="card bg-light border-info">
 
-			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-header text-info" th:text="${titulo}"></div>
 			<div class="card-body">
 
 				<h4 class="card-title">
 					<a sec:authorize="hasRole('ROLE_ADMIN')"
-						class="btn btn-warning btn-xs" th:href="@{form}">Crear
-						Comprobante</a>
-					<!-- <a class="btn btn-secondary btn-xs float-right mx-2 mr-4"
-						th:href="@{'/listarfactura'(format=csv)}">EXCEL</a> -->
+						class="btn btn-info btn-xs" th:href="@{form}">Crear
+						Producto</a>
+					<a class="btn btn-success btn-xs float-right mr-4"
+						th:href="@{'/producto/listarproductos'(format=xlsx)}">EXCEL</a>
 					<!--<a class="btn btn-outline-secondary btn-xs float-right mx-2"
 						th:href="@{'/listar'(format=xml)}">XML</a>
 					<a class="btn btn-warning btn-xs float-right"
@@ -30,27 +30,32 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th sec:authorize="hasRole('ROLE_USER')">Folio</th>
-							<th th:text="#{text.factura.descripcion}"></th>
-							<th th:text="#{text.factura.createAt}"></th>
-							<th th:text="#{text.factura.total}"></th>
+							<th sec:authorize="hasRole('ROLE_USER')">Id</th>
+							<th th:text="#{text.producto.nombre}"></th>
+							<th th:text="#{text.producto.laboratorio}"></th>
+							<th th:text="#{text.producto.precio}"></th>
+							<th th:text="#{text.producto.createAt}"></th>
 							<th sec:authorize="hasRole('ROLE_ADMIN')">Ver</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">Editar</th>
 							<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="factura: ${facturas}">
+						<tr th:each="producto: ${productos}">
 							<td sec:authorize="hasRole('ROLE_USER')"><a
-								class="btn btn-success btn-xs"
-								th:href="@{'/factura/ver/'+${factura.id}}" th:text="${factura.id}"></a></td>
-							<td th:text="${factura.descripcion}"></td>
-							<td th:text="${factura.createAt}"></td>
-							<td th:text="${factura.total}"></td>
+								class="btn btn-success btn-xs" 
+								th:href="@{/producto/ver/}+${producto.id}" th:text="${producto.id}"></a></td>
+							<td th:text="${producto.nombre}"></td>
+							<td th:text="${producto.laboratorio}"></td>
+							<td th:text="${producto.precio}"></td>
+							<td th:text="${producto.createAt}"></td>
 							<td sec:authorize="hasRole('ROLE_ADMIN')"><a
-								class="btn btn-warning btn-xs" th:href="@{'/factura/ver/'+${factura.id}}">detalle</a></td>
+								class="btn btn-info btn-xs" th:href="@{'/producto/ver/'+${producto.id}}">detalle</a></td>
+							<td sec:authorize="hasRole('ROLE_ADMIN')"><a
+								class="btn btn-success btn-xs" th:href="@{/producto/form/}+${producto.id}">editar</a></td>
 							<td sec:authorize="hasRole('ROLE_ADMIN')"><a
 								class="btn btn-danger btn-xs"
-								th:href="@{'/factura/eliminarsc/'+${factura.id}}"
+								th:href="@{'/producto/eliminar/'+${producto.id}}"
 								onclick="return confirm('Estas seguro que quieres eliminar?');">eliminar</a></td>
 						</tr>
 					</tbody>

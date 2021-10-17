@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmls:sec="http://www.thymeleaf.org/extras/spring-security" />
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+	
+	<div class="container py-4" sec:authorize="hasRole('ROLE_USER')">
+
+		<div class="card bg-light border-danger">
+
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+			
+			<h4 class="card-title">
+					<a sec:authorize="hasRole('ROLE_ADMIN')"
+						class="btn btn-danger btn-xs" th:href="@{form}">Crear
+						Usuario</a>
+					<!--<a class="btn btn-secondary btn-xs float-right mx-2 mr-4"
+						th:href="@{'/listar'(format=csv)}">EXCEL</a>
+					<a class="btn btn-outline-secondary btn-xs float-right mx-2"
+						th:href="@{'/listar'(format=xml)}">XML</a>
+					<a class="btn btn-warning btn-xs float-right"
+						th:href="@{'/listar'(format=json)}">JSON</a>-->
+			</h4>
+			<hr />
+			
+			<div class="row">
+				
+				<div class="col-4">
+					<div class="card text-dark border-warning mb-3" style="max-width: 18rem;">
+					  <div class="card-header alert-warning">Header</div>
+					  <div class="card-body">
+					    <h5 class="card-title">Warning card title</h5>
+					    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+					  </div>
+					</div>
+				</div>
+				
+				<div class="col-4">
+					<div class="card text-dark border-info mb-3" style="max-width: 18rem;">
+					  <div class="card-header alert-info">Header</div>
+					  <div class="card-body">
+					    <h5 class="card-title">Info card title</h5>
+					    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+					  </div>
+					</div>
+				</div>
+				
+				<div class="col-4">
+					<div class="card text-dark border-danger mb-3" style="max-width: 18rem;">
+					  <div class="card-header alert-danger">Header</div>
+					  <div class="card-body">
+					    <h5 class="card-title">Danger card title</h5>
+					    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+					  </div>
+					</div>
+				</div>
+					
+			</div>
+			<!-- <nav th:replace="paginator-nav :: paginator"></nav> -->
+			</div>
+		</div>
+	</div>
+	
+	<div id="cuadrarfooter"></div>
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+</html>

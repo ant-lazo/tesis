@@ -12,6 +12,8 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -22,14 +24,20 @@ public class Producto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotEmpty
 	private String nombre;
 	
+	@NotNull
 	private Double precio;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name="create_at")
 	private Date createAt;
 	
+	private String foto;
+	
+	@NotEmpty
+	private String laboratorio;
 
 	@PrePersist
 	public void prePersist() {
@@ -42,6 +50,14 @@ public class Producto implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getLaboratorio() {
+		return laboratorio;
+	}
+
+	public void setLaboratorio(String laboratorio) {
+		this.laboratorio = laboratorio;
 	}
 
 	public String getNombre() {
@@ -66,6 +82,14 @@ public class Producto implements Serializable {
 
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
+	}
+	
+	public String getFoto() {
+		return foto;
+	}
+	
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 
 	private static final long serialVersionUID = 1L;

@@ -22,9 +22,14 @@ public interface IClienteService {
 	public void deleteFactura(Long id);
 	public Factura fetchFacturaByIdWithClienteWithItemFacturaWithProducto(Long id);
 	public Cliente fetchByIdWithFacturas(Long id);
-	/*implementaciones mikarfarma*/
+	/*implementaciones mikarfarma facturas*/
 	public List<Factura> findAllFacturas();
 	public Page<Factura> findAllFacturas(Pageable pageable);
 	public Factura fetchFacturaByIdWithItemFacturaWithProducto(Long id);
-	
+	/*implementaciones mikarfarma productos*/
+	public List<Producto> findAllProductosl();
+	public Page<Producto> findAllProductos(Pageable pageable);
+	public Producto findOneProducto(Long id);
+	public void saveProducto(Producto producto);
+	public void deleteProducto(Long id);
 }

@@ -6,6 +6,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -15,7 +17,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bolsadeideas.springboot.app.models.dao.IRolDao;
 import com.bolsadeideas.springboot.app.models.dao.IUsuarioDao;
+import com.bolsadeideas.springboot.app.models.entity.Cliente;
 import com.bolsadeideas.springboot.app.models.entity.Role;
 import com.bolsadeideas.springboot.app.models.entity.Usuario;
 
@@ -24,6 +28,9 @@ public class JpaUserDetailsService implements UserDetailsService{
 
 	@Autowired
 	private IUsuarioDao usuarioDao;
+	
+	/*@Autowired
+	private IRolDao roleDao;*/
 	
 	private Logger logger= LoggerFactory.getLogger(JpaUserDetailsService.class);
 	
@@ -52,5 +59,26 @@ public class JpaUserDetailsService implements UserDetailsService{
 		
 		return new User(usuario.getUsername(), usuario.getPassword(), usuario.getEnabled(), true, true, true, authorities);
 	}
+	
+	
+	@Transactional
+	public void saveUsuario(Usuario usuario) {
+		usuarioDao.save(usuario);
+	}
+	
+	@Transactional
+	public boolean existsByUsername(String username) {
+		return usuarioDao.existsByUsername(username);
+	}
+	
+	/*@Transactional
+	public Page<Usuario> findAllUsuarios(Pageable pageable) {
+		return usuarioDao.findAll();
+	}*/
+	
+	/*@Transactional
+	public void saveRole(Role role) {
+		roleDao.save(role);
+	}*/
 
 }

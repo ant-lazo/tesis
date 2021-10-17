@@ -17,9 +17,13 @@ import org.springframework.web.servlet.view.document.AbstractPdfView;
 import com.bolsadeideas.springboot.app.models.entity.Factura;
 import com.bolsadeideas.springboot.app.models.entity.ItemFactura;
 import com.lowagie.text.Document;
+import com.lowagie.text.Element;
+import com.lowagie.text.Image;
+import com.lowagie.text.PageSize;
 import com.lowagie.text.Phrase;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfTable;
 import com.lowagie.text.pdf.PdfWriter;
 
 @Component("factura/ver")
@@ -41,6 +45,26 @@ public class FacturaPdfView extends AbstractPdfView {
 		Locale locale = localeResolver.resolveLocale(request);
 		
 		MessageSourceAccessor mensajes= getMessageSourceAccessor();
+		
+		/**/
+		document.setPageSize(PageSize.A4);
+		document.open();
+		
+		/**/
+		PdfPTable tablaimg= new PdfPTable(1);
+		tablaimg.setSpacingAfter(20);
+		/*Image image = Image.getInstance("https://i.postimg.cc/L8qFcgms/mkchico.png");
+		PdfPCell celda = new PdfPCell(image);*/
+		PdfPCell celd=null;
+		celd= new PdfPCell(new Phrase("MIKARFARMA"));
+		celd.setBorder(0);
+		celd.setBackgroundColor(new Color(255, 182, 120));
+		celd.setPadding(8f);
+		celd.setHorizontalAlignment(Element.ALIGN_CENTER);
+		celd.setVerticalAlignment(Element.ALIGN_CENTER);
+		tablaimg.addCell(celd);
+		document.add(tablaimg);
+		/**/
 		
 		PdfPTable tabla = new PdfPTable(1);
 		tabla.setSpacingAfter(20);

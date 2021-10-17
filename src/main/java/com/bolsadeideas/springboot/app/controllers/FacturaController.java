@@ -286,7 +286,7 @@ public class FacturaController {
 		
 		if(result.hasErrors()) {
 			model.addAttribute("titulo", "Crear Comprobante");
-			return "factura/form";
+			return "factura/formsc";
 			
 		}
 		

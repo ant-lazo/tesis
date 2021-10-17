@@ -11,7 +11,7 @@
 		<div class="card-header">Error: Acceso Denegado</div>
 		<div class="card-body">
 		
-		<h5 class="card-title">Lo sentimos<span th:text="${#httpServletRequest.remoteUser}"></span>, No tienes permiso para acceder al recurso</h5>
+		<h5 class="card-title">Lo sentimos <span th:text="${#httpServletRequest.remoteUser}"></span>, No tienes permiso para acceder al recurso</h5>
 		<a th:href="@{/listar}" class="btn btn-outline-light" role="button">Ir al inicio</a>
 		</div>
 		</div>
