@@ -71,14 +71,11 @@ public class JpaUserDetailsService implements UserDetailsService{
 		return usuarioDao.existsByUsername(username);
 	}
 	
-	/*@Transactional
+	@Transactional
 	public Page<Usuario> findAllUsuarios(Pageable pageable) {
-		return usuarioDao.findAll();
-	}*/
+		return usuarioDao.findAll(pageable);
+	}
 	
-	/*@Transactional
-	public void saveRole(Role role) {
-		roleDao.save(role);
-	}*/
+	
 
 }

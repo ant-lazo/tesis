@@ -134,15 +134,14 @@ public class UsuarioController {
 
 		}
 		
-		//Pageable pageRequest = PageRequest.of(page, 3,Sort.by(Sort.Direction.DESC,"id"));
+		Pageable pageRequest = PageRequest.of(page, 3,Sort.by(Sort.Direction.DESC,"id"));
 
-		//Page<Usuario> usuarios = usuarioService.findAllUsuarios(pageRequest);
+		Page<Usuario> usuarios = usuarioService.findAllUsuarios(pageRequest);
 
-		//PageRender<Producto> pageRender = new PageRender<>("/producto/listarproductos", productos);
-		//model.addAttribute("titulo", messageSource.getMessage("text.usuario.listar.titulo", null, locale));
-		/*model.addAttribute("productos", productos);
+		PageRender<Usuario> pageRender = new PageRender<>("/usuario/listarusuarios", usuarios);
+		model.addAttribute("titulo", messageSource.getMessage("text.usuario.listar.titulo", null, locale));
+		model.addAttribute("usuarios", usuarios);
 		model.addAttribute("page", pageRender);
-		model.addAttribute("lproductos", lproductos);*/
 
 		return "usuario/listarusuarios";
 	}

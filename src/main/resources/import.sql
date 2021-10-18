@@ -50,9 +50,9 @@ INSERT INTO facturas_items(cantidad, factura_id, producto_id)VALUES(13, 13, 5);
 INSERT INTO facturas(descripcion, observacion, cliente_id, create_at)VALUES('Factura de equipo para sala 14', null, null, NOW());
 INSERT INTO facturas_items(cantidad, factura_id, producto_id)VALUES(14, 14, 5);
 
-INSERT INTO users (username, password, enabled,nombre, apellido, telefono, foto) VALUES ('lomar','$2a$10$fAIFeHMMLBpTSNDiqleli.pjdMx5Umk4qrPzxt9JuDGCik5UafCH.',1,'omar','lazo','955026134','');
-INSERT INTO users (username, password, enabled,nombre, apellido, telefono, foto) VALUES ('admin','$2a$10$ym3oS46aAhPTFhCURYzO2u1msgxRbZbqEwBsS66G0UUHgS4Zga3cC',1,'karina','jorge','956398863','');
-INSERT INTO users (username, password, enabled,nombre, apellido, telefono, foto) VALUES ('cgrabiela','$2a$10$ym3oS46aAhPTFhCURYzO2u1msgxRbZbqEwBsS66G0UUHgS4Zga3cC',1,'grabiela','correa','930289465','');
+INSERT INTO users (username, password, enabled,nombre, apellido, telefono, email, foto) VALUES ('lomar','$2a$10$fAIFeHMMLBpTSNDiqleli.pjdMx5Umk4qrPzxt9JuDGCik5UafCH.',1,'omar','lazo','955026134','omar@gmail.com', '');
+INSERT INTO users (username, password, enabled,nombre, apellido, telefono, email, foto) VALUES ('admin','$2a$10$ym3oS46aAhPTFhCURYzO2u1msgxRbZbqEwBsS66G0UUHgS4Zga3cC',1,'karina','jorge','956398863','admin@gmail.com', '');
+INSERT INTO users (username, password, enabled,nombre, apellido, telefono, email, foto) VALUES ('cgrabiela','$2a$10$ym3oS46aAhPTFhCURYzO2u1msgxRbZbqEwBsS66G0UUHgS4Zga3cC',1,'grabiela','correa','930289465','grabiela@gmail.com', '');
 
 INSERT INTO authorities (user_id, authority) VALUES (1,'ROLE_USER');
 INSERT INTO authorities (user_id, authority) VALUES (2,'ROLE_ADMIN');

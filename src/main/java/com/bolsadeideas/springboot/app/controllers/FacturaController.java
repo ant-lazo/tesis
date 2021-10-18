@@ -57,6 +57,7 @@ public class FacturaController {
 	private IClienteService clienteService;
 	
 	
+	
 	private final Logger log= LoggerFactory.getLogger(getClass());
 	
 	@Autowired
@@ -91,7 +92,8 @@ public class FacturaController {
 	
 	@GetMapping("/form/{clienteId}")
 	public String crear(@PathVariable(value="clienteId") Long clienteId,
-			Map<String, Object> model, RedirectAttributes flash) {
+			Map<String, Object> model, RedirectAttributes flash,Authentication authentication,
+			HttpServletRequest request ) {
 		
 		Cliente cliente=clienteService.findOne(clienteId);
 		
@@ -121,6 +123,8 @@ public class FacturaController {
 			@RequestParam(name="item_id[]",required = false)Long[] itemId,
 			@RequestParam(name="cantidad[]",required = false)Integer[] cantidad,
 			RedirectAttributes flash,
+			Authentication authentication,
+			HttpServletRequest request,
 			SessionStatus status) {
 		
 		if(result.hasErrors()) {
@@ -146,6 +150,7 @@ public class FacturaController {
 			log.info("ID: "+ itemId[i].toString() +", CANTIDAD: "+ cantidad[i].toString());
 		}
 		
+		factura.setCreatedBy(authentication.getName());
 		clienteService.saveFactura(factura);
 		status.setComplete();
 		flash.addFlashAttribute("success", "Comprobante creada con éxito");
@@ -282,6 +287,8 @@ public class FacturaController {
 			@RequestParam(name="item_id[]",required = false)Long[] itemId,
 			@RequestParam(name="cantidad[]",required = false)Integer[] cantidad,
 			RedirectAttributes flash,
+			Authentication authentication,
+			HttpServletRequest request,
 			SessionStatus status) {
 		
 		if(result.hasErrors()) {
@@ -307,6 +314,7 @@ public class FacturaController {
 			log.info("ID: "+ itemId[i].toString() +", CANTIDAD: "+ cantidad[i].toString());
 		}
 		
+		factura.setCreatedBy(authentication.getName());
 		clienteService.saveFactura(factura);
 		status.setComplete();
 		flash.addFlashAttribute("success", "Comprobante creada con éxito");

@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -40,8 +41,20 @@ public class Usuario implements Serializable {
 	
 	private String telefono;
 	
+	@NotEmpty
+	@Email
+	private String email;
+	
 	private String foto;
 	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public String getFoto() {
 		return foto;
 	}

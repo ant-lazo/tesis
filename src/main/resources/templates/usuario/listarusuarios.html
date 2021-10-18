@@ -28,38 +28,28 @@
 			
 			<div class="row">
 				
-				<div class="col-4">
-					<div class="card text-dark border-warning mb-3" style="max-width: 18rem;">
-					  <div class="card-header alert-warning">Header</div>
+				<div class="col-4" th:each="usuario: ${usuarios}">
+					<div class="card text-dark border-warning mb-3" style="max-width: 20rem;">
+					  <div class="card-header alert-warning" th:text="${usuario.nombre}+' '+${usuario.apellido}"></div>
 					  <div class="card-body">
-					    <h5 class="card-title">Warning card title</h5>
-					    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-					  </div>
-					</div>
-				</div>
-				
-				<div class="col-4">
-					<div class="card text-dark border-info mb-3" style="max-width: 18rem;">
-					  <div class="card-header alert-info">Header</div>
-					  <div class="card-body">
-					    <h5 class="card-title">Info card title</h5>
-					    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-					  </div>
-					</div>
-				</div>
-				
-				<div class="col-4">
-					<div class="card text-dark border-danger mb-3" style="max-width: 18rem;">
-					  <div class="card-header alert-danger">Header</div>
-					  <div class="card-body">
-					    <h5 class="card-title">Danger card title</h5>
-					    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+					  			<img  th:if="${#strings.length(usuario.foto) > 0}"
+								class="img-thumbnail rounded" style="max-width: 100%;"
+								th:src="@{'/uploads/' + ${usuario.foto}}" >
+								 <img  th:if="${usuario.foto == null || usuario.foto == ''}"
+								class="img-thumbnail rounded" style="max-width: 100%;"
+								th:src="@{/images/userdefault.png}" th:alt="${usuario.foto}" >
+								
+						<hr>
+					    <h5 class="card-title">Detalle del Usuario:</h5>
+					    <p class="card-text">Username: <span th:text="${usuario.username}"></span></p>
+					    <p class="card-text">Email: <span th:text="${usuario.email}"></span></p>
+					    <p class="card-text">Telefono: <span th:text="${usuario.telefono}"></span></p>
 					  </div>
 					</div>
 				</div>
 					
 			</div>
-			<!-- <nav th:replace="paginator-nav :: paginator"></nav> -->
+			<nav th:replace="paginator-nav :: paginator"></nav>
 			</div>
 		</div>
 	</div>

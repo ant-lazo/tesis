@@ -46,6 +46,14 @@
 					<input type="number" th:field="*{telefono}" class="form-control" name="telefono" id="telefono">
 					<small class="form-text text-danger" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></small>
 				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Email</label>
+				<div class="col-sm-6">
+					<input type="text" th:field="*{email}" class="form-control">
+					<small class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+				</div>
 			</div> 
 			
 			<div class="form-group row formulario__grupo" id="grupo__username">

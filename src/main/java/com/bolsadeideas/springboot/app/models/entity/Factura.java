@@ -53,7 +53,17 @@ public class Factura implements Serializable {
 	
 	private Double preciototal;
 	
+	private String createdBy;
 	
+	
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
 	public Factura() {
 		this.items = new ArrayList<ItemFactura>();
 	}
