@@ -52,7 +52,7 @@ import com.bolsadeideas.springboot.app.models.service.IClienteService;
 import com.bolsadeideas.springboot.app.models.service.IUploadFileService;
 import com.bolsadeideas.springboot.app.util.paginator.PageRender;
 
-@Secured("ROLE_ADMIN")
+//@Secured("ROLE_ADMIN")
 @Controller
 @RequestMapping("/producto")
 @SessionAttributes("producto")
@@ -87,6 +87,7 @@ public class ProductoController {
 
 	}
 	
+	@Secured("ROLE_USER")
 	@PreAuthorize("hasRole('ROLE_USER')")
 	@GetMapping(value = "/ver/{id}")
 	public String ver(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash) {
@@ -103,6 +104,7 @@ public class ProductoController {
 		return "producto/ver";
 	}
 	
+	@Secured("ROLE_USER")
 	@RequestMapping(value ="/listarproductos", method = RequestMethod.GET)
 	public String listar(@RequestParam(name = "page", defaultValue = "0") int page, Model model,
 			Authentication authentication,
@@ -157,7 +159,7 @@ public class ProductoController {
 		return "producto/listarproductos";
 	}
 	
-	@Secured("ROLE_ADMIN")
+	@Secured("ROLE_USER")
 	@RequestMapping(value = "/form")
 	public String crear(Map<String, Object> model) {
 		Producto producto = new Producto();

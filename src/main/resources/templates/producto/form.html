@@ -40,7 +40,7 @@
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Precio</label>
 				<div class="col-sm-6">
-					<input type="number" th:field="*{precio}" class="form-control">
+					<input type="text" th:field="*{precio}" class="form-control">
 					<small class="form-text text-danger" th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></small>
 				</div>
 			</div>

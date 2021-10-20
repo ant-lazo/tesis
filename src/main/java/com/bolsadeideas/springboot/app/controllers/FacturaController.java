@@ -47,7 +47,7 @@ import com.bolsadeideas.springboot.app.models.service.IClienteService;
 import com.bolsadeideas.springboot.app.util.paginator.PageRender;
 
 
-@Secured("ROLE_ADMIN")
+//@Secured("ROLE_ADMIN")
 @Controller
 @RequestMapping("/factura")
 @SessionAttributes("factura")
@@ -63,6 +63,7 @@ public class FacturaController {
 	@Autowired
 	private MessageSource messageSource;
 
+	@Secured("ROLE_USER")
 	@GetMapping("/ver/{id}")
 	public String ver(@PathVariable(value="id") Long id, Model model, RedirectAttributes flash) {
 		
@@ -89,7 +90,7 @@ public class FacturaController {
 		return "factura/ver";
 	}
 	
-	
+	@Secured("ROLE_USER")
 	@GetMapping("/form/{clienteId}")
 	public String crear(@PathVariable(value="clienteId") Long clienteId,
 			Map<String, Object> model, RedirectAttributes flash,Authentication authentication,
@@ -111,11 +112,13 @@ public class FacturaController {
 		return "factura/form";
 	}
 	
+	@Secured("ROLE_USER")
 	@GetMapping(value="/cargar-productos/{term}",produces= {"application/json"})
 	public @ResponseBody List<Producto> cargarProductos(@PathVariable String term){
 		return clienteService.finByNombre(term);
 	}
 	
+	@Secured("ROLE_USER")
 	@PostMapping("/form")
 	public String guardar(@Valid Factura factura,
 			BindingResult result,
@@ -158,6 +161,7 @@ public class FacturaController {
 		return "redirect:/ver/"+ factura.getCliente().getId();
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/eliminar/{id}")
 	public String eliminar(@PathVariable(value="id") Long id, RedirectAttributes flash) {
 		
@@ -173,6 +177,7 @@ public class FacturaController {
 		
 	}
 	
+	@Secured("ROLE_USER")
 	@RequestMapping(value ="/listarfacturas", method = RequestMethod.GET)
 	public String listar(@RequestParam(name = "page", defaultValue = "0") int page, Model model,
 			Authentication authentication,
@@ -252,6 +257,7 @@ public class FacturaController {
 		return false;*/
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/eliminarsc/{id}")
 	public String eliminarsc(@PathVariable(value="id") Long id, RedirectAttributes flash) {
 		
@@ -268,6 +274,7 @@ public class FacturaController {
 		
 	}
 	
+	@Secured("ROLE_USER")
 	@GetMapping("/form")
 	public String crearsc(Map<String, Object> model) {
 		
@@ -280,6 +287,7 @@ public class FacturaController {
 		return "factura/formsc";
 	}
 	
+	@Secured("ROLE_USER")
 	@PostMapping("/formsc")
 	public String guardarsc(@Valid Factura factura,
 			BindingResult result,

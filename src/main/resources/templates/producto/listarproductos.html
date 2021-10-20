@@ -20,7 +20,8 @@
 					<a sec:authorize="hasRole('ROLE_ADMIN')"
 						class="btn btn-info btn-xs" th:href="@{form}">Crear
 						Producto</a>
-					<a class="btn btn-success btn-xs float-right mr-4"
+					<a  sec:authorize="hasRole('ROLE_USER')"
+						class="btn btn-success btn-xs float-right mr-4 my-2"
 						th:href="@{'/producto/listarproductos'(format=xlsx)}">EXCEL</a>
 					<!--<a class="btn btn-outline-secondary btn-xs float-right mx-2"
 						th:href="@{'/listar'(format=xml)}">XML</a>
@@ -35,7 +36,7 @@
 							<th th:text="#{text.producto.laboratorio}"></th>
 							<th th:text="#{text.producto.precio}"></th>
 							<th th:text="#{text.producto.createAt}"></th>
-							<th sec:authorize="hasRole('ROLE_ADMIN')">Ver</th>
+							<th sec:authorize="hasRole('ROLE_USER')">Ver</th>
 							<th sec:authorize="hasRole('ROLE_ADMIN')">Editar</th>
 							<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
 						</tr>
@@ -49,7 +50,7 @@
 							<td th:text="${producto.laboratorio}"></td>
 							<td th:text="${producto.precio}"></td>
 							<td th:text="${producto.createAt}"></td>
-							<td sec:authorize="hasRole('ROLE_ADMIN')"><a
+							<td sec:authorize="hasRole('ROLE_USER')"><a
 								class="btn btn-info btn-xs" th:href="@{'/producto/ver/'+${producto.id}}">detalle</a></td>
 							<td sec:authorize="hasRole('ROLE_ADMIN')"><a
 								class="btn btn-success btn-xs" th:href="@{/producto/form/}+${producto.id}">editar</a></td>
