@@ -53,7 +53,7 @@ import com.bolsadeideas.springboot.app.models.service.IUploadFileService;
 import com.bolsadeideas.springboot.app.models.service.JpaUserDetailsService;
 import com.bolsadeideas.springboot.app.util.paginator.PageRender;
 
-@Secured("ROLE_ADMIN")
+//@Secured("ROLE_ADMIN")
 @Controller
 @RequestMapping("/usuario")
 @SessionAttributes("usuario")
@@ -94,6 +94,7 @@ public class UsuarioController {
 
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value ="/listarusuarios", method = RequestMethod.GET)
 	public String listar(@RequestParam(name = "page", defaultValue = "0") int page, Model model,
 			Authentication authentication,
