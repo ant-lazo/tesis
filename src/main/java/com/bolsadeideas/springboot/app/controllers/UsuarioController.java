@@ -15,6 +15,7 @@ import org.apache.commons.codec.binary.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.context.MessageSource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
@@ -34,7 +35,9 @@ import org.springframework.security.web.servletapi.SecurityContextHolderAwareReq
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -53,7 +56,7 @@ import com.bolsadeideas.springboot.app.models.service.IUploadFileService;
 import com.bolsadeideas.springboot.app.models.service.JpaUserDetailsService;
 import com.bolsadeideas.springboot.app.util.paginator.PageRender;
 
-//@Secured("ROLE_ADMIN")
+@Secured("ROLE_ADMIN")
 @Controller
 @RequestMapping("/usuario")
 @SessionAttributes("usuario")
@@ -147,7 +150,7 @@ public class UsuarioController {
 		return "usuario/listarusuarios";
 	}
 	
-	@Secured("ROLE_ADMIN")
+	
 	@RequestMapping(value = "/form")
 	public String crear(Map<String, Object> model) {
 		Usuario usuario = new Usuario();
@@ -156,7 +159,7 @@ public class UsuarioController {
 		return "usuario/form";
 	}
 	
-	@Secured("ROLE_ADMIN")
+	
 	@RequestMapping(value = "/form", method = RequestMethod.POST)
 	public String guardar(@Valid Usuario usuario, BindingResult result, Model model,
 			@RequestParam("file") MultipartFile foto, RedirectAttributes flash, SessionStatus status) {
@@ -198,6 +201,13 @@ public class UsuarioController {
 		usuario.setEnabled(true);
 		String encryppass =passwordEncoder.encode(usuario.getPassword());
 		usuario.setPassword(encryppass);
+		
+		/*foto nulos a vacios*/
+		
+		if(usuario.getFoto()==null) {
+			usuario.setFoto("");
+		}
+		
 		Role rol = new Role();
 		rol.setAuthority("ROLE_USER");
 		List<Role> roles = new ArrayList<>();
@@ -244,5 +254,11 @@ public class UsuarioController {
 		}
 		return false;*/
 	}
+	
+	/*@InitBinder
+	public void vaciosComoNulos(WebDataBinder binder) {
+		StringTrimmerEditor recortarEspacios= new StringTrimmerEditor(true);
+		binder.registerCustomEditor(String.class, recortarEspacios);
+	}*/
 	
 }

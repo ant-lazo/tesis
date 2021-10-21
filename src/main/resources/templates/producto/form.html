@@ -19,7 +19,7 @@
 			</ul>
 		</div>
 		
-		<form th:action="@{/producto/form}" th:object="${producto}" method="post" enctype="multipart/form-data">
+		<form th:action="@{/producto/form}" th:object="${producto}" method="post" enctype="multipart/form-data" id="formulario">
 
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Nombre</label>
@@ -40,7 +40,7 @@
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Precio</label>
 				<div class="col-sm-6">
-					<input type="text" th:field="*{precio}" class="form-control">
+					<input name="precio" id="precio" type="text" th:field="*{precio}" class="form-control">
 					<small class="form-text text-danger" th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></small>
 				</div>
 			</div>
@@ -66,6 +66,6 @@
 	</div>
 	<div id="cuadrarfooter"></div>
 	<footer th:replace="layout/layout :: footer"></footer>
-
+	<script th:replace="producto/js/formulario :: javascript"></script>
 </body>
 </html>

@@ -32,13 +32,20 @@
 					<div class="card text-dark border-warning mb-3" style="max-width: 20rem;">
 					  <div class="card-header alert-warning" th:text="${usuario.nombre}+' '+${usuario.apellido}"></div>
 					  <div class="card-body">
-					  			<img  th:if="${#strings.length(usuario.foto) > 0}"
-								class="img-thumbnail rounded" style="max-width: 100%;"
-								th:src="@{'/uploads/' + ${usuario.foto}}" >
-								 <img  th:if="${usuario.foto == null || usuario.foto == ''}"
-								class="img-thumbnail rounded" style="max-width: 100%;"
-								th:src="@{/images/userdefault.png}" th:alt="${usuario.foto}" >
 								
+								<!-- <img  th:if="${usuario.foto == null OR usuario.foto == ''}" -->
+					  			<!-- <img th:if="${#strings.length(usuario.foto) > 0}" -->
+					  			
+					  			
+								
+								<img th:if="${usuario.foto==null OR usuario.foto==''}"
+								class="img-thumbnail rounded" style="max-width: 100%;"
+								 th:src="@{/images/userdefault.png}">
+
+								<img  th:if="${#strings.length(usuario.foto) > 0}"
+								class="img-thumbnail rounded" style="max-width: 100%;"
+								th:src="@{'/uploads/' + ${usuario.foto}}" th:alt="${usuario.foto}" >
+								 
 						<hr>
 					    <h5 class="card-title">Detalle del Usuario:</h5>
 					    <p class="card-text">Username: <span th:text="${usuario.username}"></span></p>

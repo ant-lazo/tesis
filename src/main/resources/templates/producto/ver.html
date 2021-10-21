@@ -23,9 +23,9 @@
 			</h4>
 			
 			
-				<img th:if="${#strings.length(producto.foto) > 0}"
+				<img th:if="${producto.foto!=null && producto.foto!=''}"
 					class="img-thumbnail rounded float-left" style="max-width: 25%;"
-					th:src="@{'/uploads/' + ${producto.foto}}" th:alt="${producto.foto}" >
+					th:src="@{'/uploads/' + ${producto.foto}}">
 
 				<ul class="list-group">
 					<li class="list-group-item" th:text="'Nombre: '+${producto.nombre}"></li>
