@@ -1,5 +1,6 @@
 package com.bolsadeideas.springboot.app.controllers;
 
+import java.text.DecimalFormat;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
@@ -221,6 +222,7 @@ public class FacturaController {
 
 		}
 		
+		
 		Pageable pageRequest = PageRequest.of(page, 7,Sort.by(Sort.Direction.DESC,"id"));
 
 		Page<Factura> facturas = clienteService.findAllFacturas(pageRequest);
@@ -325,6 +327,9 @@ public class FacturaController {
 			log.info("ID: "+ itemId[i].toString() +", CANTIDAD: "+ cantidad[i].toString());
 		}
 		
+		/*System.out.println(factura.getId());
+		this.transformaracodigo(1);*/
+		
 		factura.setCreatedBy(authentication.getName());
 		clienteService.saveFactura(factura);
 		status.setComplete();
@@ -332,6 +337,8 @@ public class FacturaController {
 		
 		return "redirect:/factura/listarfacturas";
 	}
+	
+	
 	
 	
 }

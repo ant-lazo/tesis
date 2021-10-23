@@ -1,6 +1,7 @@
 package com.bolsadeideas.springboot.app.models.entity;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +24,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.bolsadeideas.springboot.app.controllers.FacturaController;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
@@ -35,6 +37,8 @@ public class Factura implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	private String codigo;
+
 	@NotEmpty
 	private String descripcion;
 	private String observacion;
@@ -71,6 +75,8 @@ public class Factura implements Serializable {
 	@PostPersist
 	public void postPersistTotal() {
 		preciototal=this.getTotal();
+		double valor = (double)this.getId();
+		codigo=this.transformaracodigo(valor);
 	}
 
 	@PrePersist
@@ -78,11 +84,18 @@ public class Factura implements Serializable {
 		createAt=new Date();
 	}
 	
+	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 	public String getDescripcion() {
 		return descripcion;
@@ -129,6 +142,13 @@ public class Factura implements Serializable {
 			total+= items.get(i).calcularImporte();
 		}
 		return total;
+	}
+	
+	public String transformaracodigo(double valor){
+			DecimalFormat f = new DecimalFormat("CMP0000");
+			String salida=f.format(valor);
+			System.out.println(salida);
+			return salida;
 	}
 
 

@@ -38,7 +38,8 @@
 					class="table table-bordered table-striped my-4">
 					<thead>
 						<tr class="table-warning">
-							<th>folio</th>
+							<!-- <th>folio</th> -->
+							<th>código</th>
 							<th>descripcion</th>
 							<th>fecha</th>
 							<th>total</th>
@@ -48,7 +49,8 @@
 					</thead>
 					<tbody>
 						<tr th:each="factura: ${cliente.facturas}">
-							<th th:text="${factura.id}"></th>
+							<!-- <th th:text="${factura.id}"></th> -->
+							<th th:text="${factura.codigo}"></th>
 							<th th:text="${factura.descripcion}"></th>
 							<th th:text="${factura.createAt}"></th>
 							<th th:text="${factura.total}"></th>

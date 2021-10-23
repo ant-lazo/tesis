@@ -30,7 +30,8 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th sec:authorize="hasRole('ROLE_USER')">Folio</th>
+							<!-- <th sec:authorize="hasRole('ROLE_USER')">Folio</th> -->
+							<th sec:authorize="hasRole('ROLE_USER')">CÃ³digo</th>
 							<th th:text="#{text.factura.descripcion}"></th>
 							<th th:text="#{text.factura.createdBy}"></th>
 							<th th:text="#{text.factura.createAt}"></th>
@@ -41,9 +42,12 @@
 					</thead>
 					<tbody>
 						<tr th:each="factura: ${facturas}">
+							<!-- <td sec:authorize="hasRole('ROLE_USER')"><a
+								class="btn btn-success btn-xs"
+								th:href="@{'/factura/ver/'+${factura.id}}" th:text="${factura.id}"></a></td>-->
 							<td sec:authorize="hasRole('ROLE_USER')"><a
 								class="btn btn-success btn-xs"
-								th:href="@{'/factura/ver/'+${factura.id}}" th:text="${factura.id}"></a></td>
+								th:href="@{'/factura/ver/'+${factura.id}}" th:text="${factura.codigo}"></a></td>
 							<td th:text="${factura.descripcion}"></td>
 							<td th:text="${factura.createdBy}"></td>
 							<td th:text="${factura.createAt}"></td>
@@ -62,7 +66,7 @@
 		</div>
 	</div>
 
-	<!-- fadkfjaldkfjadkfjañldkfjañkdf -->
+	<!-- fadkfjaldkfjadkfjaï¿½ldkfjaï¿½kdf -->
 
 	<div id="cuadrarfooter"></div>
 	<footer th:replace="layout/layout :: footer"></footer>

@@ -1,6 +1,7 @@
 package com.bolsadeideas.springboot.app.models.entity;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PostPersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,9 +36,12 @@ public class Cliente implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	private String codigo;
+	
 	@NotEmpty
 	private String nombre;
-	
+
+
 	@NotEmpty
 	private String apellido;
 	
@@ -57,21 +62,31 @@ public class Cliente implements Serializable{
 	@JsonManagedReference
 	private List<Factura> facturas;
 	
+	@PostPersist
+	public void postPersistCodigo() {
+		double valor = (double)this.getId();
+		codigo=this.transformaracodigo(valor);
+	}
 	
 	public Cliente() {
 		facturas=new ArrayList<Factura>();
 	}
-
-
+	
 	public String getFoto() {
 		return foto;
 	}
 
-
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
+	
+	public String getCodigo() {
+		return codigo;
+	}
 
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
 
 	public Long getId() {
 		return id;
@@ -145,6 +160,13 @@ public class Cliente implements Serializable{
 	@Override
 	public String toString() {
 		return nombre + " " + apellido;
+	}
+	
+	public String transformaracodigo(double valor){
+		DecimalFormat f = new DecimalFormat("CL0000");
+		String salida=f.format(valor);
+		System.out.println(salida);
+		return salida;
 	}
 
 

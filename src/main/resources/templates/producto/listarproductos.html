@@ -31,10 +31,12 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th sec:authorize="hasRole('ROLE_USER')">Id</th>
+							<!-- <th sec:authorize="hasRole('ROLE_USER')">Id</th> -->
+							<th sec:authorize="hasRole('ROLE_USER')">CÃ³digo</th>
 							<th th:text="#{text.producto.nombre}"></th>
 							<th th:text="#{text.producto.laboratorio}"></th>
 							<th th:text="#{text.producto.precio}"></th>
+							<th th:text="#{text.producto.stock}"></th>
 							<th th:text="#{text.producto.createAt}"></th>
 							<th sec:authorize="hasRole('ROLE_USER')">Ver</th>
 							<th sec:authorize="hasRole('ROLE_ADMIN')">Editar</th>
@@ -43,12 +45,16 @@
 					</thead>
 					<tbody>
 						<tr th:each="producto: ${productos}">
+							<!-- <td sec:authorize="hasRole('ROLE_USER')"><a
+								class="btn btn-success btn-xs" 
+								th:href="@{/producto/ver/}+${producto.id}" th:text="${producto.id}"></a></td> -->
 							<td sec:authorize="hasRole('ROLE_USER')"><a
 								class="btn btn-success btn-xs" 
-								th:href="@{/producto/ver/}+${producto.id}" th:text="${producto.id}"></a></td>
+								th:href="@{/producto/ver/}+${producto.id}" th:text="${producto.codigo}"></a></td>
 							<td th:text="${producto.nombre}"></td>
 							<td th:text="${producto.laboratorio}"></td>
 							<td th:text="${producto.precio}"></td>
+							<td th:text="${producto.stock}"></td>
 							<td th:text="${producto.createAt}"></td>
 							<td sec:authorize="hasRole('ROLE_USER')"><a
 								class="btn btn-info btn-xs" th:href="@{'/producto/ver/'+${producto.id}}">detalle</a></td>
@@ -66,7 +72,7 @@
 		</div>
 	</div>
 
-	<!-- fadkfjaldkfjadkfjañldkfjañkdf -->
+	<!-- fadkfjaldkfjadkfjaï¿½ldkfjaï¿½kdf -->
 
 	<div id="cuadrarfooter"></div>
 	<footer th:replace="layout/layout :: footer"></footer>
