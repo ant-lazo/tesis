@@ -2,7 +2,9 @@ package com.bolsadeideas.springboot.app.controllers;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -46,7 +48,9 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.bolsadeideas.springboot.app.models.dao.IClienteDao;
 import com.bolsadeideas.springboot.app.models.entity.Cliente;
+import com.bolsadeideas.springboot.app.models.entity.Factura;
 import com.bolsadeideas.springboot.app.models.service.IClienteService;
 import com.bolsadeideas.springboot.app.models.service.IUploadFileService;
 import com.bolsadeideas.springboot.app.util.paginator.PageRender;
@@ -66,6 +70,10 @@ public class ClienteController {
 	
 	@Autowired
 	private MessageSource messageSource;
+	
+	//prueba
+	@Autowired
+	private IClienteDao clidao;
 	
 	@Secured("ROLE_USER")
 	@GetMapping(value = "/uploads/{filename:.+}")
@@ -89,7 +97,27 @@ public class ClienteController {
 	@GetMapping(value = "/ver/{id}")
 	public String ver(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash) {
 
-		Cliente cliente = clienteService.fetchByIdWithFacturas(id);//clienteService.findOne(id);
+		//Cliente cliente = clienteService.fetchByIdWithFacturas(id);//clienteService.findOne(id);
+		Cliente cliente = clienteService.fetchByIdWithFacturasEnabled(id);
+		
+		/*dfadfad*/
+		Cliente clientepruebahabilitado = clidao.fetchByIdWithFacturasEnabled(id);
+		//System.out.println("clienteprueba: "+clienteprueba.getFacturas());
+		List<Factura> facturashabilitadas = new ArrayList<Factura>();
+		facturashabilitadas = clientepruebahabilitado.getFacturas();
+		for(Factura f  :facturashabilitadas) {
+			System.out.println("codigo de factura habilitada: "+f.getCodigo());
+		}
+		/*dfadfadf*/
+		Cliente clientepruebadeshabilitado = clidao.fetchByIdWithFacturasDisabled(id);
+		//System.out.println("clienteprueba: "+clienteprueba.getFacturas());
+		List<Factura> facturasdeshabilitadas = new ArrayList<Factura>();
+		facturasdeshabilitadas= clientepruebadeshabilitado.getFacturas();
+		for(Factura fa  :facturasdeshabilitadas) {
+			System.out.println("codigo de factura anulada: "+fa.getCodigo());
+		}
+		/*dfadfad*/
+		
 		if (cliente == null) {
 			flash.addFlashAttribute("error", "El cliente no existe en la base de datos");
 			return "redirect:/listar";

@@ -149,6 +149,19 @@ public class FacturaController {
 		for(int i=0;i<itemId.length;i++) {
 			Producto producto= clienteService.findProductoById(itemId[i]);
 			
+			/*Probar si imprime la cantidad*/
+			Integer nuevostock = producto.getStock()-cantidad[i];
+			
+			if(nuevostock < 0) {
+				model.addAttribute("titulo", "Crear Comprobante");
+				model.addAttribute("error", "No hay suficiente Stock para realizar la venta del producto ".concat(producto.getNombre())+"!");
+				return "factura/form";
+			}
+			
+			producto.setStock(nuevostock);
+			clienteService.saveProducto(producto);
+			/**/
+			
 			ItemFactura linea= new ItemFactura();
 			linea.setCantidad(cantidad[i]);
 			linea.setProducto(producto);
@@ -208,25 +221,20 @@ public class FacturaController {
 		
 		if(securityContext.isUserInRole("ADMIN")) {
 			log.info("Hola usuario SecurityContextHolderAwareRequestWrapper: "+auth.getName().concat(" tienes acceso."));
-			
 		}else {
 			log.info("Hola usuario SecurityContextHolderAwareRequestWrapper: "+auth.getName().concat(" No tienes acceso."));
-
 		}
 		
 		if(request.isUserInRole("ROLE_ADMIN")) {
 			log.info("Hola usuario HttpServletRequest: "+auth.getName().concat(" tienes acceso."));
-			
 		}else {
 			log.info("Hola usuario HttpServletRequest: "+auth.getName().concat(" No tienes acceso."));
-
 		}
 		
-		
 		Pageable pageRequest = PageRequest.of(page, 7,Sort.by(Sort.Direction.DESC,"id"));
-
-		Page<Factura> facturas = clienteService.findAllFacturas(pageRequest);
-
+		//Page<Factura> facturas = clienteService.findAllFacturas(pageRequest);
+		Page<Factura> facturas = clienteService.findAllFacturasHabilitadas(pageRequest);
+		
 		PageRender<Factura> pageRender = new PageRender<>("/factura/listarfacturas", facturas);
 		model.addAttribute("titulo", messageSource.getMessage("text.factura.listar.titulo", null, locale));
 		model.addAttribute("facturas", facturas);
@@ -271,10 +279,46 @@ public class FacturaController {
 			clienteService.deleteFactura(id);
 			flash.addFlashAttribute("success", "Comprobante eliminado con éxito!");
 			/*return "redirect:/ver/" + factura.getCliente().getId();*/
-			return "redirect:/factura/listarfacturas";
+			return "redirect:/factura/listarfacturasanuladas";
 		}
 		
 		flash.addFlashAttribute("error", "El comprobante no exite en la base de datos, no se pudo eliminar!");
+		return "redirect:/listar";
+		
+	}
+	
+	@Secured("ROLE_ADMIN")
+	@GetMapping("/anularsc/{id}")
+	public String anularsc(@PathVariable(value="id") Long id, RedirectAttributes flash) {
+		
+		Factura factura= clienteService.findFactruaById(id);
+		if(factura!=null) {
+			factura.setEnabled(false);
+			clienteService.saveFactura(factura);
+			flash.addFlashAttribute("success", "Comprobante anulado con éxito!");
+			/*return "redirect:/ver/" + factura.getCliente().getId();*/
+			return "redirect:/factura/listarfacturas";
+		}
+		
+		flash.addFlashAttribute("error", "El comprobante no exite en la base de datos, no se pudo anular!");
+		return "redirect:/listar";
+		
+	}
+	
+	@Secured("ROLE_ADMIN")
+	@GetMapping("/anular/{id}")
+	public String anular(@PathVariable(value="id") Long id, RedirectAttributes flash) {
+		
+		Factura factura= clienteService.findFactruaById(id);
+		if(factura!=null) {
+			factura.setEnabled(false);
+			clienteService.saveFactura(factura);
+			flash.addFlashAttribute("success", "Comprobante anulado con éxito!");
+			return "redirect:/ver/" + factura.getCliente().getId();
+			/*return "redirect:/factura/listarfacturas";*/
+		}
+		
+		flash.addFlashAttribute("error", "El comprobante no exite en la base de datos, no se pudo anular!");
 		return "redirect:/listar";
 		
 	}
@@ -313,11 +357,24 @@ public class FacturaController {
 		if(itemId==null||itemId.length==0) {
 			model.addAttribute("titulo", "Crear Comprobante");
 			model.addAttribute("error", "Error: El comprobante tiene que estar lleno!");
-			return "factura/form";
+			return "factura/formsc";
 		}
 		
 		for(int i=0;i<itemId.length;i++) {
 			Producto producto= clienteService.findProductoById(itemId[i]);
+			
+			/*Probar si imprime la cantidad*/
+			Integer nuevostock = producto.getStock()-cantidad[i];
+			
+			if(nuevostock < 0) {
+				model.addAttribute("titulo", "Crear Comprobante");
+				model.addAttribute("error", "No hay suficiente Stock para realizar la venta del producto ".concat(producto.getNombre())+"!");
+				return "factura/formsc";
+			}
+			
+			producto.setStock(nuevostock);
+			clienteService.saveProducto(producto);
+			/**/
 			
 			ItemFactura linea= new ItemFactura();
 			linea.setCantidad(cantidad[i]);
@@ -338,7 +395,54 @@ public class FacturaController {
 		return "redirect:/factura/listarfacturas";
 	}
 	
-	
+	@Secured("ROLE_ADMIN")
+	@RequestMapping(value ="/listarfacturasanuladas", method = RequestMethod.GET)
+	public String listarfactanuladas(@RequestParam(name = "page", defaultValue = "0") int page, Model model,
+			Authentication authentication,
+			HttpServletRequest request,
+			Locale locale) {
+		
+		if(authentication!=null) {
+			log.info("Hola usuario authenticado, tu username es: ".concat(authentication.getName()));
+		}
+		
+		Authentication auth =SecurityContextHolder.getContext().getAuthentication();
+
+		if(auth!=null) {
+			log.info("'Utilizando forma estática' Hola usuario authenticado, tu username es: ".concat(auth.getName()));
+		}
+		
+		if(hasRole("ROLE_ADMIN")) {
+			log.info("Hola usuario"+auth.getName().concat(" tienes acceso."));
+		}else {
+			log.info("Hola usuario"+auth.getName().concat(" No tienes acceso."));
+		}
+		
+		SecurityContextHolderAwareRequestWrapper securityContext= new SecurityContextHolderAwareRequestWrapper(request, "ROLE_");
+		
+		if(securityContext.isUserInRole("ADMIN")) {
+			log.info("Hola usuario SecurityContextHolderAwareRequestWrapper: "+auth.getName().concat(" tienes acceso."));
+		}else {
+			log.info("Hola usuario SecurityContextHolderAwareRequestWrapper: "+auth.getName().concat(" No tienes acceso."));
+		}
+		
+		if(request.isUserInRole("ROLE_ADMIN")) {
+			log.info("Hola usuario HttpServletRequest: "+auth.getName().concat(" tienes acceso."));
+		}else {
+			log.info("Hola usuario HttpServletRequest: "+auth.getName().concat(" No tienes acceso."));
+		}
+		
+		Pageable pageRequest = PageRequest.of(page, 7,Sort.by(Sort.Direction.DESC,"id"));
+		//Page<Factura> facturas = clienteService.findAllFacturas(pageRequest);
+		Page<Factura> facturas = clienteService.findAllFacturasDeshabilitadas(pageRequest);
+		
+		PageRender<Factura> pageRender = new PageRender<>("/factura/listarfacturasanuladas", facturas);
+		model.addAttribute("titulo", messageSource.getMessage("text.factura.listar.titulo.anulados", null, locale));
+		model.addAttribute("facturas", facturas);
+		model.addAttribute("page", pageRender);
+
+		return "factura/listarfacturasanuladas";
+	}
 	
 	
 }

@@ -46,6 +46,14 @@
 			</div>
 			
 			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Stock</label>
+				<div class="col-sm-6">
+					<input name="stock" id="stock" type="text" th:field="*{stock}" class="form-control">
+					<small class="form-text text-danger" th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"></small>
+				</div>
+			</div>
+			
+			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Imagen</label>
 				<div class="col-sm-6">
 					<input type="file" name="file" class="from-control">

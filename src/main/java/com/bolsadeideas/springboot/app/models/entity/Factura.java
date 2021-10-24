@@ -59,7 +59,18 @@ public class Factura implements Serializable {
 	
 	private String createdBy;
 	
+	private Boolean enabled;
 	
+	
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	public String getCreatedBy() {
 		return createdBy;
 	}

@@ -35,6 +35,7 @@ public class Producto implements Serializable {
 	@NotNull
 	private Double precio;
 	
+	@NotNull
 	private Integer stock;
 
 

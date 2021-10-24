@@ -65,13 +65,15 @@ public class ProductoXlsxView extends AbstractXlsxView{
 		header.createCell(1).setCellValue("Nombre");
 		header.createCell(2).setCellValue("Laboratorio");
 		header.createCell(3).setCellValue("Precio");
-		header.createCell(4).setCellValue("Fecha");
+		header.createCell(4).setCellValue("Stock");
+		header.createCell(5).setCellValue("Fecha");
 		
 		header.getCell(0).setCellStyle(theaderStyle);
 		header.getCell(1).setCellStyle(theaderStyle);
 		header.getCell(2).setCellStyle(theaderStyle);
 		header.getCell(3).setCellStyle(theaderStyle);
 		header.getCell(4).setCellStyle(theaderStyle);
+		header.getCell(5).setCellStyle(theaderStyle);
 		
 		int rownum = 3;
 		for(Producto item: productos) {
@@ -94,6 +96,10 @@ public class ProductoXlsxView extends AbstractXlsxView{
 			cell.setCellStyle(tbodyStyle);
 			
 			cell= fila.createCell(4);
+			cell.setCellValue(item.getStock());
+			cell.setCellStyle(tbodyStyle);
+			
+			cell= fila.createCell(5);
 			cell.setCellValue(item.getCreateAt());
 			cell.setCellStyle(style2);
 			//cell.setCellStyle(tbodyStyle);

@@ -11,15 +11,15 @@
 
 	<div class="container py-4" sec:authorize="hasRole('ROLE_USER')">
 
-		<div class="card bg-light border-warning">
+		<div class="card bg-light border-danger">
 
-			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-header text-danger" th:text="${titulo}"></div>
 			<div class="card-body">
 
 				<h4 class="card-title">
-					<a sec:authorize="hasRole('ROLE_USER')"
+					<!-- <a sec:authorize="hasRole('ROLE_USER')"
 						class="btn btn-warning btn-xs" th:href="@{form}">Crear
-						Comprobante</a>
+						Comprobante</a> -->
 					<!-- <a class="btn btn-secondary btn-xs float-right mx-2 mr-4"
 						th:href="@{'/listarfactura'(format=csv)}">EXCEL</a> -->
 					<!--<a class="btn btn-outline-secondary btn-xs float-right mx-2"
@@ -37,7 +37,7 @@
 							<th th:text="#{text.factura.createAt}"></th>
 							<th sec:authorize="hasRole('ROLE_ADMIN')" th:text="#{text.factura.total}"></th>
 							<th sec:authorize="hasRole('ROLE_USER')">Ver</th>
-							<th sec:authorize="hasRole('ROLE_ADMIN')">Anular</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -56,8 +56,8 @@
 								class="btn btn-warning btn-xs" th:href="@{'/factura/ver/'+${factura.id}}">detalle</a></td>
 							<td sec:authorize="hasRole('ROLE_ADMIN')"><a
 								class="btn btn-danger btn-xs"
-								th:href="@{'/factura/anularsc/'+${factura.id}}"
-								onclick="return confirm('Estas seguro que quieres anular el comprobante?');">anular</a></td>
+								th:href="@{'/factura/eliminarsc/'+${factura.id}}"
+								onclick="return confirm('Estas seguro que quieres eliminar?');">eliminar</a></td>
 						</tr>
 					</tbody>
 				</table>

@@ -13,7 +13,7 @@
 			<div class="card-body">
 			
 			<h4 class="card-title">			
-			<a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-primary btn-xs"
+			<a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-info btn-xs"
 						th:href="@{'/factura/form/' + ${cliente.id}}"
 						th:text="'crear comprobante'"></a>
 			</h4>
@@ -27,12 +27,16 @@
 					<li class="list-group-item" th:text="'Nombre: '+${cliente.nombre}"></li>
 					<li class="list-group-item" th:text="'Apellido: '+${cliente.apellido}"></li>
 					<li class="list-group-item" th:text="'Email: '+${cliente.email}"></li>
-					<li class="list-group-item" th:text="'Fedcha: '+${cliente.createAt}"></li>
+					<li class="list-group-item" th:text="'Fecha: '+${cliente.createAt}"></li>
 				</ul>
 
 				<div th:if="${#lists.isEmpty(cliente.facturas)}"
 					class="alert alert-info my-4"
 					th:text="'No hay factura asignada para el cliente: '+${cliente.nombre}+' '+${cliente.apellido}"></div>
+
+				 <!-- <div th:if="${#lists.isEmpty(cliente.facturas)}"
+					class="alert alert-info my-4"
+					th:text="'No hay factura asignada para el cliente: '+${cliente.nombre}+' '+${cliente.apellido}"></div> -->
 
 				<table th:if="${not #lists.isEmpty(cliente.facturas)}"
 					class="table table-bordered table-striped my-4">
@@ -44,7 +48,7 @@
 							<th>fecha</th>
 							<th>total</th>
 							<th sec:authorize="hasRole('ROLE_ADMIN')">ver</th>
-							<th sec:authorize="hasRole('ROLE_ADMIN')">eliminar</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">anular</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -54,9 +58,9 @@
 							<th th:text="${factura.descripcion}"></th>
 							<th th:text="${factura.createAt}"></th>
 							<th th:text="${factura.total}"></th>
-							<th sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-primary btn-xs" th:href="@{'/factura/ver/'+${factura.id}}" th:text="'detalle'"></a></th>
-							<th sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger btn-xs" th:href="@{'/factura/eliminar/'+${factura.id}}" th:text="'eliminar'"
-							onclick="return confirm('¿Estas seguro de eliminar la factura?');"></a></th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-warning btn-xs" th:href="@{'/factura/ver/'+${factura.id}}" th:text="'detalle'"></a></th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger btn-xs" th:href="@{'/factura/eliminar/'+${factura.id}}" th:text="'anular'"
+							onclick="return confirm('¿Estas seguro de anular el comprobante?');"></a></th>
 						</tr>
 					</tbody>
 				</table>

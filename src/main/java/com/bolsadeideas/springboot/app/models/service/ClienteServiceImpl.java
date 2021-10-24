@@ -103,6 +103,18 @@ public class ClienteServiceImpl implements IClienteService{
 	
 	@Override
 	@Transactional(readOnly = true)
+	public Cliente fetchByIdWithFacturasEnabled(Long id) {
+		return clienteDao.fetchByIdWithFacturasEnabled(id);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Cliente fetchByIdWithFacturasDisabled(Long id) {
+		return clienteDao.fetchByIdWithFacturasDisabled(id);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
 	public List<Factura> findAllFacturas() {
 		return (List<Factura>)facturaDao.findAll();
 	}
@@ -146,6 +158,18 @@ public class ClienteServiceImpl implements IClienteService{
 	public void deleteProducto(Long id) {
 		productoDao.deleteById(id);
 		
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<Factura> findAllFacturasHabilitadas(Pageable pageable) {
+		return facturaDao.fetchFacturaWhereEnabledTrue(pageable);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<Factura> findAllFacturasDeshabilitadas(Pageable pageable) {
+		return facturaDao.fetchFacturaWhereEnabledFalse(pageable);
 	}
 
 
