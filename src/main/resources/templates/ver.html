@@ -59,7 +59,7 @@
 							<th th:text="${factura.createAt}"></th>
 							<th th:text="${factura.total}"></th>
 							<th sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-warning btn-xs" th:href="@{'/factura/ver/'+${factura.id}}" th:text="'detalle'"></a></th>
-							<th sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger btn-xs" th:href="@{'/factura/eliminar/'+${factura.id}}" th:text="'anular'"
+							<th sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger btn-xs" th:href="@{'/factura/anular/'+${factura.id}}" th:text="'anular'"
 							onclick="return confirm('¿Estas seguro de anular el comprobante?');"></a></th>
 						</tr>
 					</tbody>

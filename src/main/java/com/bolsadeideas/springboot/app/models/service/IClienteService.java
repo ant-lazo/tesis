@@ -21,13 +21,14 @@ public interface IClienteService {
 	public Factura findFactruaById(Long id);
 	public void deleteFactura(Long id);
 	public Factura fetchFacturaByIdWithClienteWithItemFacturaWithProducto(Long id);
+	public Factura fetchFacturaByIdWithClienteWithItemFacturaWithProductoEnabled(Long id, Boolean enabled);
 	public Cliente fetchByIdWithFacturas(Long id);
-	public Cliente fetchByIdWithFacturasEnabled(Long id);
-	public Cliente fetchByIdWithFacturasDisabled(Long id);
+	public Cliente fetchByIdWithFacturasEnabled(Long id, Boolean enabled);
 	/*implementaciones mikarfarma facturas*/
 	public List<Factura> findAllFacturas();
 	public Page<Factura> findAllFacturas(Pageable pageable);
 	public Factura fetchFacturaByIdWithItemFacturaWithProducto(Long id);
+	//public Factura fetchFacturaByIdWithItemFacturaWithProductoEnabled(Long id, Boolean enabled);
 	public Page<Factura> findAllFacturasHabilitadas(Pageable pageable);
 	public Page<Factura> findAllFacturasDeshabilitadas(Pageable pageable);
 	/*implementaciones mikarfarma productos*/

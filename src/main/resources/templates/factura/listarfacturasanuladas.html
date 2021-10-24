@@ -13,7 +13,7 @@
 
 		<div class="card bg-light border-danger">
 
-			<div class="card-header text-danger" th:text="${titulo}"></div>
+			<div class="card-header"><h4 class="text-danger" th:text="${titulo}"></h4></div>
 			<div class="card-body">
 
 				<h4 class="card-title">
@@ -36,6 +36,7 @@
 							<th th:text="#{text.factura.createdBy}"></th>
 							<th th:text="#{text.factura.createAt}"></th>
 							<th sec:authorize="hasRole('ROLE_ADMIN')" th:text="#{text.factura.total}"></th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">Habilitar</th>
 							<th sec:authorize="hasRole('ROLE_USER')">Ver</th>
 							<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
 						</tr>
@@ -52,6 +53,10 @@
 							<td th:text="${factura.createdBy}"></td>
 							<td th:text="${factura.createAt}"></td>
 							<td sec:authorize="hasRole('ROLE_ADMIN')" th:text="${factura.total}"></td>
+							<td sec:authorize="hasRole('ROLE_ADMIN')"><a
+								class="btn btn-danger btn-xs"
+								th:href="@{'/factura/habilitar/'+${factura.id}}"
+								onclick="return confirm('Estas seguro que quieres habilitar el comprobante?');">habilitar</a></td>
 							<td sec:authorize="hasRole('ROLE_USER')"><a
 								class="btn btn-warning btn-xs" th:href="@{'/factura/ver/'+${factura.id}}">detalle</a></td>
 							<td sec:authorize="hasRole('ROLE_ADMIN')"><a

@@ -13,8 +13,14 @@ public interface IFacturaDao extends PagingAndSortingRepository<Factura, Long> {
 	@Query("select f from Factura f join fetch f.cliente c join fetch f.items l join fetch l.producto where f.id=?1")
 	public Factura fetchByIdWithClienteWithItemFacturaWithProducto(Long id);
 	
+	@Query("select f from Factura f join fetch f.cliente c join fetch f.items l join fetch l.producto where f.id=?1 and f.enabled=?2")
+	public Factura fetchByIdWithClienteWithItemFacturaWithProductoEnabled(Long id, Boolean enabled);
+	
 	@Query("select f from Factura f join fetch f.items l join fetch l.producto where f.id=?1")
 	public Factura fetchByIdWithItemFacturaWithProducto(Long id);
+	
+	/*@Query("select f from Factura f join fetch f.items l join fetch l.producto where f.id=?1 and f.enabled=?2")
+	public Factura fetchByIdWithItemFacturaWithProductoEnabled(Long id, Boolean enabled);*/
 	
 	@Query(value = "select f from Factura f where f.enabled = true")
 	public Page<Factura> fetchFacturaWhereEnabledTrue(Pageable pegeable);

@@ -71,9 +71,6 @@ public class ClienteController {
 	@Autowired
 	private MessageSource messageSource;
 	
-	//prueba
-	@Autowired
-	private IClienteDao clidao;
 	
 	@Secured("ROLE_USER")
 	@GetMapping(value = "/uploads/{filename:.+}")
@@ -96,32 +93,47 @@ public class ClienteController {
 	@PreAuthorize("hasRole('ROLE_USER')")
 	@GetMapping(value = "/ver/{id}")
 	public String ver(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash) {
+		
+		System.out.println("jeje");
 
 		//Cliente cliente = clienteService.fetchByIdWithFacturas(id);//clienteService.findOne(id);
-		Cliente cliente = clienteService.fetchByIdWithFacturasEnabled(id);
+		//aqui esta el error.....
+		Cliente cliente = clienteService.fetchByIdWithFacturasEnabled(id,true);
 		
-		/*dfadfad*/
-		Cliente clientepruebahabilitado = clidao.fetchByIdWithFacturasEnabled(id);
-		//System.out.println("clienteprueba: "+clienteprueba.getFacturas());
-		List<Factura> facturashabilitadas = new ArrayList<Factura>();
-		facturashabilitadas = clientepruebahabilitado.getFacturas();
-		for(Factura f  :facturashabilitadas) {
-			System.out.println("codigo de factura habilitada: "+f.getCodigo());
-		}
-		/*dfadfadf*/
-		Cliente clientepruebadeshabilitado = clidao.fetchByIdWithFacturasDisabled(id);
-		//System.out.println("clienteprueba: "+clienteprueba.getFacturas());
-		List<Factura> facturasdeshabilitadas = new ArrayList<Factura>();
-		facturasdeshabilitadas= clientepruebadeshabilitado.getFacturas();
-		for(Factura fa  :facturasdeshabilitadas) {
-			System.out.println("codigo de factura anulada: "+fa.getCodigo());
-		}
-		/*dfadfad*/
+		/*List<Factura> facturas = cliente.getFacturas();
+		for(Factura f: facturas) {
+			System.out.println(f.getCodigo()+" "+f.getEnabled());
+		}*/
+		
 		
 		if (cliente == null) {
-			flash.addFlashAttribute("error", "El cliente no existe en la base de datos");
-			return "redirect:/listar";
+			
+			Cliente clientesf =clienteService.findOne(id);
+			
+			clientesf.setFacturas(null);
+			//Cliente clientesf =clienteService.fetchByIdWithFacturasEnabled(id, true);
+			/*List<Factura> facturas = clientesf.getFacturas();
+			for(Factura f: facturas) {
+				System.out.println(f.getCodigo()+" "+f.getEnabled());
+			}*/
+			
+			if(clientesf == null) {
+				flash.addFlashAttribute("error", "El cliente no existe en la base de datos");
+				return "redirect:/listar";
+			}
+			
+			System.out.println("primero");
+			
+			model.put("cliente", clientesf);
+			model.put("titulo", "Detalle cliente: " + clientesf.getNombre());
+			
+			return "ver";
+			
+			/*flash.addFlashAttribute("error", "El cliente no existe en la base de datos");
+			return "redirect:/listar";*/
 		}
+		
+		System.out.println("segundo");
 
 		model.put("cliente", cliente);
 		model.put("titulo", "Detalle cliente: " + cliente.getNombre());

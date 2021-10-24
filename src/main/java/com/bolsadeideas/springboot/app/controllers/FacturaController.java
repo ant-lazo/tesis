@@ -71,11 +71,17 @@ public class FacturaController {
 	@GetMapping("/ver/{id}")
 	public String ver(@PathVariable(value="id") Long id, Model model, RedirectAttributes flash) {
 		
+		System.out.println("que fueeeeee");
+		
 		Factura factura= clienteService.fetchFacturaByIdWithClienteWithItemFacturaWithProducto(id);//clienteService.findFactruaById(id);
+		//Factura factura= clienteService.fetchFacturaByIdWithClienteWithItemFacturaWithProductoEnabled(id,true);
+		
+		//System.out.println(factura.getEnabled());
 		
 		if(factura==null) {
 			
 			Factura fac = clienteService.fetchFacturaByIdWithItemFacturaWithProducto(id);
+			//Factura fac = clienteService.fetchFacturaByIdWithItemFacturaWithProductoEnabled(id,true);
 			
 			if(fac!=null) {
 				
@@ -170,6 +176,7 @@ public class FacturaController {
 			log.info("ID: "+ itemId[i].toString() +", CANTIDAD: "+ cantidad[i].toString());
 		}
 		
+		factura.setEnabled(true);
 		factura.setCreatedBy(authentication.getName());
 		clienteService.saveFactura(factura);
 		status.setComplete();
@@ -309,16 +316,41 @@ public class FacturaController {
 	@GetMapping("/anular/{id}")
 	public String anular(@PathVariable(value="id") Long id, RedirectAttributes flash) {
 		
+		
+		
 		Factura factura= clienteService.findFactruaById(id);
 		if(factura!=null) {
 			factura.setEnabled(false);
 			clienteService.saveFactura(factura);
-			flash.addFlashAttribute("success", "Comprobante anulado con éxito!");
+			flash.addFlashAttribute("success", "Comprobante anulado con éxito!"); 
+			
+			System.out.println("estamos aqui gigi");
+			
 			return "redirect:/ver/" + factura.getCliente().getId();
+			/*return "redirect:/ver/" + factura.getCliente().getId();*/
+			
 			/*return "redirect:/factura/listarfacturas";*/
 		}
 		
 		flash.addFlashAttribute("error", "El comprobante no exite en la base de datos, no se pudo anular!");
+		return "redirect:/listar";
+		
+	}
+	
+	@Secured("ROLE_ADMIN")
+	@GetMapping("/habilitar/{id}")
+	public String habilitar(@PathVariable(value="id") Long id, RedirectAttributes flash) {
+		
+		Factura factura= clienteService.findFactruaById(id);
+		if(factura!=null) {
+			factura.setEnabled(true);
+			clienteService.saveFactura(factura);
+			flash.addFlashAttribute("success", "Comprobante habilitado con éxito!");
+			/*return "redirect:/ver/" + factura.getCliente().getId();*/
+			return "redirect:/factura/listarfacturasanuladas";
+		}
+		
+		flash.addFlashAttribute("error", "El comprobante no exite en la base de datos, no se pudo habilitar!");
 		return "redirect:/listar";
 		
 	}
@@ -387,6 +419,7 @@ public class FacturaController {
 		/*System.out.println(factura.getId());
 		this.transformaracodigo(1);*/
 		
+		factura.setEnabled(true);
 		factura.setCreatedBy(authentication.getName());
 		clienteService.saveFactura(factura);
 		status.setComplete();

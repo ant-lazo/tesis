@@ -94,6 +94,12 @@ public class ClienteServiceImpl implements IClienteService{
 	public Factura fetchFacturaByIdWithClienteWithItemFacturaWithProducto(Long id) {
 		return facturaDao.fetchByIdWithClienteWithItemFacturaWithProducto(id);
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Factura fetchFacturaByIdWithClienteWithItemFacturaWithProductoEnabled(Long id, Boolean enabled) {
+		return facturaDao.fetchByIdWithClienteWithItemFacturaWithProductoEnabled(id, enabled);
+	}
 
 	@Override
 	@Transactional(readOnly = true)
@@ -103,14 +109,8 @@ public class ClienteServiceImpl implements IClienteService{
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Cliente fetchByIdWithFacturasEnabled(Long id) {
-		return clienteDao.fetchByIdWithFacturasEnabled(id);
-	}
-	
-	@Override
-	@Transactional(readOnly = true)
-	public Cliente fetchByIdWithFacturasDisabled(Long id) {
-		return clienteDao.fetchByIdWithFacturasDisabled(id);
+	public Cliente fetchByIdWithFacturasEnabled(Long id, Boolean enabled) {
+		return clienteDao.fetchByIdWithFacturasEnabled(id, enabled);
 	}
 	
 	@Override
@@ -130,6 +130,12 @@ public class ClienteServiceImpl implements IClienteService{
 	public Factura fetchFacturaByIdWithItemFacturaWithProducto(Long id) {
 		return facturaDao.fetchByIdWithItemFacturaWithProducto(id);
 	}
+	
+	/*@Override
+	@Transactional(readOnly = true)
+	public Factura fetchFacturaByIdWithItemFacturaWithProductoEnabled(Long id, Boolean enabled) {
+		return facturaDao.fetchByIdWithItemFacturaWithProductoEnabled(id, enabled);
+	}*/
 
 	@Override
 	@Transactional(readOnly = true)
