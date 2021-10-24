@@ -55,6 +55,7 @@ public class Factura implements Serializable {
 	@JoinColumn(name = "factura_id")
 	private List<ItemFactura> items;
 	
+	@Column(precision = 8, scale =2)
 	private Double preciototal;
 	
 	private String createdBy;

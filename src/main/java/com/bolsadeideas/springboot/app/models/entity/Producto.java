@@ -33,6 +33,7 @@ public class Producto implements Serializable {
 	private String nombre;
 	
 	@NotNull
+	@Column(precision = 8, scale =2)
 	private Double precio;
 	
 	@NotNull

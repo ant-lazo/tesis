@@ -29,8 +29,13 @@
 				</ul> -->
 
 				<ul class="list-group ">
-					<li class="list-group-item list-group-item-success"
-						th:text="'Datos Comprobante'"></li>
+					<li class="list-group-item list-group-item-success">
+					<div style="display:inline;">
+					<span style="float:left" th:text="'Datos del Comprobante'"></span>
+					<span style="float:right" th:if="${factura.enabled == true}" th:text="'Estado: Comprobante Habilitado'"></span>
+					<span style="float:right" th:if="${factura.enabled == false}" th:text="'Estado: Comprobante Anulado'"></span>
+					</div>
+					</li>
 					<li class="list-group-item" th:text="'Código: '+${factura.codigo}"></li>
 					<li class="list-group-item"
 						th:text="'Descripción: '+${factura.descripcion}"></li>
