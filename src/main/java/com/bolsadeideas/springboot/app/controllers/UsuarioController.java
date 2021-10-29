@@ -47,6 +47,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.bolsadeideas.springboot.app.models.entity.Cliente;
 import com.bolsadeideas.springboot.app.models.entity.Producto;
 import com.bolsadeideas.springboot.app.models.entity.Role;
 import com.bolsadeideas.springboot.app.models.entity.Usuario;
@@ -159,6 +160,26 @@ public class UsuarioController {
 		return "usuario/form";
 	}
 	
+	@Secured("ROLE_ADMIN")
+	@RequestMapping(value = "/form/{id}")
+	public String editar(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash) {
+
+		Usuario usuario = null;
+		if (id > 0) {
+			usuario = usuarioService.findOne(id);
+			if (usuario == null) {
+				flash.addFlashAttribute("error", "El id del usuario no éxite en la base de datos");
+				return "redirect:/listarusuarios";
+			}
+		} else {
+			flash.addFlashAttribute("error", "El id del usuario no puede ser cero");
+			return "redirect:/listarusuarios";
+		}
+		model.put("titulo", "Editar Usuario");
+		model.put("usuario", usuario);
+		return "usuario/formedt";
+	}
+	
 	
 	@RequestMapping(value = "/form", method = RequestMethod.POST)
 	public String guardar(@Valid Usuario usuario, BindingResult result, Model model,
@@ -198,7 +219,77 @@ public class UsuarioController {
 			return "usuario/form";
 		}
 		
-		usuario.setEnabled(true);
+		//usuario.setEnabled(true);
+		System.out.println(usuario.getEnabled());
+		String encryppass =passwordEncoder.encode(usuario.getPassword());
+		usuario.setPassword(encryppass);
+		
+		/*foto nulos a vacios*/
+		
+		if(usuario.getFoto()==null) {
+			usuario.setFoto("");
+		}
+		
+		Role rol = new Role();
+		rol.setAuthority("ROLE_USER");
+		List<Role> roles = new ArrayList<>();
+		roles.add(rol);
+		usuario.setRoles(roles);
+		usuarioService.saveUsuario(usuario);
+		
+		//Role rol = new Role();
+		/*rol.setId(usuario.getId()+1);
+		rol.setAuthority("ROLE_USER");
+		System.out.println("el roleid: "+rol.getId());
+		System.out.println("el authority: "+rol.getAuthority());*/
+		
+		
+		
+		status.setComplete();
+		flash.addFlashAttribute("success", mensajeflash);
+		return "redirect:listarusuarios";
+	}
+	
+	@RequestMapping(value = "/formedt", method = RequestMethod.POST)
+	public String guardaredt(@Valid Usuario usuario, BindingResult result, Model model,
+			@RequestParam("file") MultipartFile foto, RedirectAttributes flash, SessionStatus status) {
+
+		if (result.hasErrors()) {
+			model.addAttribute("titulo", "Formulario Usuario");
+			return "usuario/form";
+		}
+
+		if (!foto.isEmpty()) {
+
+			if (usuario.getId() != null && usuario.getId() > 0 && usuario.getFoto() != null
+					&& usuario.getFoto().length() > 0) {
+
+				uploadFileService.delete(usuario.getFoto());
+
+			}
+
+			String uniqueFilename = null;
+			try {
+				uniqueFilename = uploadFileService.copy(foto);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			flash.addFlashAttribute("info", "Has subido correctamente '" + foto.getOriginalFilename() + "'");
+			usuario.setFoto(uniqueFilename);
+		}
+
+		String mensajeflash = (usuario.getId() != null) ? "Usuario editado con éxito" : "Usuario creado con éxito";
+		
+		/*if(usuarioService.existsByUsername(usuario.getUsername())) {
+			model.addAttribute("titulo", "Formulario Usuario");
+			model.addAttribute("error", "El username ingresado ya existe en nuestros registros");
+			return "usuario/form";
+		}*/
+		
+		//usuario.setEnabled(true);
+		System.out.println(usuario.getEnabled());
 		String encryppass =passwordEncoder.encode(usuario.getPassword());
 		usuario.setPassword(encryppass);
 		

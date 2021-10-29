@@ -76,6 +76,10 @@ public class JpaUserDetailsService implements UserDetailsService{
 		return usuarioDao.findAll(pageable);
 	}
 	
+	@Transactional(readOnly = true)
+	public Usuario findOne(Long id) {
+		return usuarioDao.findById(id).orElse(null);
+	}
 	
 
 }

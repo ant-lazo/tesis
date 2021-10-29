@@ -51,6 +51,15 @@
 					    <p class="card-text">Username: <span th:text="${usuario.username}"></span></p>
 					    <p class="card-text">Email: <span th:text="${usuario.email}"></span></p>
 					    <p class="card-text">Telefono: <span th:text="${usuario.telefono}"></span></p>
+					    <p th:if="${usuario.enabled == true}" th:text="'Estado: Habilitado'"></p>
+						<p th:if="${usuario.enabled == false}" th:text="'Estado: Inhabilitado'"></p>
+					    
+					    <a  th:if="${usuario.username} != 'admin'" sec:authorize="hasRole('ROLE_ADMIN')"
+						class="btn btn-success btn-xs float-right mr-4"
+						th:href="@{/usuario/form/}+${usuario.id}">editar</a>
+						<h3  th:if="${usuario.username} == 'admin'" sec:authorize="hasRole('ROLE_ADMIN')"
+						class="text-success text-center">Usuario Admin</h3>
+						
 					  </div>
 					  
 					</div>
