@@ -20,38 +20,38 @@ INSERT INTO productos(codigo, nombre, precio, stock, laboratorio, foto, create_a
 INSERT INTO productos(codigo, nombre, precio, stock, laboratorio, foto, create_at)VALUES('PDT0008', 'SUPRADYN PRONATAL X 30 TAB', 19.0, 10, 'XCC', '', NOW());
 INSERT INTO productos(codigo, nombre, precio, stock, laboratorio, foto, create_at)VALUES('PDT0009', 'REUMO FLEX NF POTE 45G', 7.3, 10, 'HHP', '', NOW());
 
-INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, enabled)VALUES('CMP0001', 'Comprobante farmacia 1', null, 1, NOW(), 1);
+INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, preciototal, enabled)VALUES('CMP0001', 'Comprobante farmacia 1', null, 1, '2021-10-31', 100, 1);
 INSERT INTO facturas_items(cantidad, factura_id, producto_id)VALUES(1, 1, 2);
 
-INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, enabled)VALUES('CMP0002', 'Comprobante farmacia 2', null, 1, NOW(), 0);
+INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, preciototal, enabled)VALUES('CMP0002', 'Comprobante farmacia 2', null, 1, '2021-10-31', 85.0, 0);
 INSERT INTO facturas_items(cantidad, factura_id, producto_id)VALUES(1, 2, 2);
 
 /*Prueba de facturas con cliente null*/
-INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, enabled)VALUES('CMP0003', 'Comprobante farmacia 3', null, null, NOW(), 1);
+INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, preciototal, enabled)VALUES('CMP0003', 'Comprobante farmacia 3', null, null, '2021-10-31', 150, 1);
 INSERT INTO facturas_items(cantidad, factura_id, producto_id)VALUES(2, 3, 5);
-INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, enabled)VALUES('CMP0004', 'Comprobante farmacia 4', null, null, NOW(), 1);
+INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, preciototal, enabled)VALUES('CMP0004', 'Comprobante farmacia 4', null, null, '2021-10-31', 170, 1);
 INSERT INTO facturas_items(cantidad, factura_id, producto_id)VALUES(3, 4, 5);
-INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, enabled)VALUES('CMP0005', 'Comprobante farmacia 5', null, null, NOW(), 1);
+INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, preciototal, enabled)VALUES('CMP0005', 'Comprobante farmacia 5', null, null, NOW(), 180, 1);
 INSERT INTO facturas_items(cantidad, factura_id, producto_id)VALUES(4, 5, 5);
-INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, enabled)VALUES('CMP0006', 'Comprobante farmacia 6', null, null, NOW(), 1);
+INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, preciototal, enabled)VALUES('CMP0006', 'Comprobante farmacia 6', null, null, NOW(), 195.5, 1);
 INSERT INTO facturas_items(cantidad, factura_id, producto_id)VALUES(5, 6, 5);
-INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, enabled)VALUES('CMP0007', 'Comprobante farmacia 7', null, null, NOW(), 1);
+INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, preciototal, enabled)VALUES('CMP0007', 'Comprobante farmacia 7', null, null, NOW(), 193.3, 1);
 INSERT INTO facturas_items(cantidad, factura_id, producto_id)VALUES(6, 7, 5);
-INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, enabled)VALUES('CMP0008', 'Comprobante farmacia 8', null, null, NOW(), 0);
+INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, preciototal, enabled)VALUES('CMP0008', 'Comprobante farmacia 8', null, null, NOW(), 250, 0);
 INSERT INTO facturas_items(cantidad, factura_id, producto_id)VALUES(7, 8, 5);
-INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, enabled)VALUES('CMP0009', 'Comprobante farmacia 9', null, null, NOW(), 1);
+INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, preciototal, enabled)VALUES('CMP0009', 'Comprobante farmacia 9', null, null, NOW(), 750.3, 1);
 INSERT INTO facturas_items(cantidad, factura_id, producto_id)VALUES(8, 9, 5);
-INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, enabled)VALUES('CMP0010', 'Comprobante farmacia 10', null, null, NOW(), 1);
+INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, preciototal, enabled)VALUES('CMP0010', 'Comprobante farmacia 10', null, null, NOW(), 195.3, 1);
 INSERT INTO facturas_items(cantidad, factura_id, producto_id)VALUES(9, 10, 5);
-INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, enabled)VALUES('CMP0011', 'Comprobante farmacia 11', null, null, NOW(), 1);
+INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, preciototal, enabled)VALUES('CMP0011', 'Comprobante farmacia 11', null, null, NOW(), 280.5, 1);
 INSERT INTO facturas_items(cantidad, factura_id, producto_id)VALUES(10, 11, 5);
-INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, enabled)VALUES('CMP0012', 'Comprobante farmacia 12', null, null, NOW(), 0);
+INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, preciototal, enabled)VALUES('CMP0012', 'Comprobante farmacia 12', null, null, NOW(), 350.5, 0);
 INSERT INTO facturas_items(cantidad, factura_id, producto_id)VALUES(9, 12, 5);
-INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, enabled)VALUES('CMP0013', 'Comprobante farmacia 13', null, null, NOW(), 1);
+INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, preciototal, enabled)VALUES('CMP0013', 'Comprobante farmacia 13', null, null, NOW(), 200.0, 1);
 INSERT INTO facturas_items(cantidad, factura_id, producto_id)VALUES(8, 13, 5);
-INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, enabled)VALUES('CMP0014', 'Comprobante farmacia 14', null, null, NOW(), 0);
+INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, preciototal, enabled)VALUES('CMP0014', 'Comprobante farmacia 14', null, null, NOW(), 150.0, 0);
 INSERT INTO facturas_items(cantidad, factura_id, producto_id)VALUES(6, 14, 5);
-INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, enabled)VALUES('CMP0015', 'Comprobante farmacia 15', null, null, NOW(), 1);
+INSERT INTO facturas(codigo, descripcion, observacion, cliente_id, create_at, preciototal, enabled)VALUES('CMP0015', 'Comprobante farmacia 15', null, null, NOW(), 15.5, 1);
 INSERT INTO facturas_items(cantidad, factura_id, producto_id)VALUES(5, 15, 5);
 
 
@@ -63,3 +63,4 @@ INSERT INTO authorities (user_id, authority) VALUES (1,'ROLE_USER');
 INSERT INTO authorities (user_id, authority) VALUES (2,'ROLE_ADMIN');
 INSERT INTO authorities (user_id, authority) VALUES (2,'ROLE_USER');
 INSERT INTO authorities (user_id, authority) VALUES (3,'ROLE_USER');
+

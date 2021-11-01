@@ -1,7 +1,9 @@
 package com.bolsadeideas.springboot.app.controllers;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -160,7 +162,8 @@ public class FacturaController {
 			
 			if(nuevostock < 0) {
 				model.addAttribute("titulo", "Crear Comprobante");
-				model.addAttribute("error", "No hay suficiente Stock para realizar la venta del producto ".concat(producto.getNombre())+"!");
+				model.addAttribute("error", "No se pudo generar el comprobante !");
+				model.addAttribute("warning", "No hay suficiente Stock para realizar la venta del producto ".concat(producto.getNombre())+"!");
 				return "factura/form";
 			}
 			
@@ -400,7 +403,8 @@ public class FacturaController {
 			
 			if(nuevostock < 0) {
 				model.addAttribute("titulo", "Crear Comprobante");
-				model.addAttribute("error", "No hay suficiente Stock para realizar la venta del producto ".concat(producto.getNombre())+"!");
+				model.addAttribute("error", "No se pudo generar el comprobante !");
+				model.addAttribute("warning", "No hay suficiente Stock para realizar la venta del producto ".concat(producto.getNombre())+"!");
 				return "factura/formsc";
 			}
 			
@@ -416,15 +420,14 @@ public class FacturaController {
 			log.info("ID: "+ itemId[i].toString() +", CANTIDAD: "+ cantidad[i].toString());
 		}
 		
-		/*System.out.println(factura.getId());
-		this.transformaracodigo(1);*/
 		
 		factura.setEnabled(true);
 		factura.setCreatedBy(authentication.getName());
 		clienteService.saveFactura(factura);
 		status.setComplete();
+		/**/
+		/**/
 		flash.addFlashAttribute("success", "Comprobante creada con éxito");
-		
 		return "redirect:/factura/listarfacturas";
 	}
 	
@@ -477,5 +480,15 @@ public class FacturaController {
 		return "factura/listarfacturasanuladas";
 	}
 	
+	public void guardarindicadoresipv(String fechahoy){
+	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	Date today = new Date();
+	String hoy= format.format(today);
+		if(fechahoy.equals(hoy)) {
+			System.out.println("son iguales");
+		}else {
+			System.out.println("no son iguales");
+		}
+	}
 	
 }

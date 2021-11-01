@@ -87,7 +87,7 @@ public class FacturaPdfView2 extends AbstractPdfView {
 		cell.setPadding(8f);
 		
 		tabla2.addCell(cell);
-		tabla2.addCell(mensajes.getMessage("text.cliente.factura.folio")+": "+factura.getId());
+		tabla2.addCell(mensajes.getMessage("text.cliente.factura.codigo")+": "+factura.getCodigo());
 		tabla2.addCell(mensajes.getMessage("text.cliente.factura.descripcion")+": "+factura.getDescripcion());
 		tabla2.addCell(mensajes.getMessage("text.cliente.factura.fecha")+": "+ factura.getCreateAt());
 		

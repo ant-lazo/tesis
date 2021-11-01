@@ -24,8 +24,9 @@
 				<ul class="list-group my-2">
 					<li class="list-group-item list-group-item-primary"
 						th:text="'Datos del cliente'"></li>
-					<li class="list-group-item" th:text="${factura.cliente}"></li>
-					<li class="list-group-item" th:text="${factura.cliente.email}"></li>
+					<li class="list-group-item" th:text="'Código: '+${factura.cliente.codigo}"></li>
+					<li class="list-group-item" th:text="'Nombre: '+${factura.cliente}"></li>
+					<li class="list-group-item" th:text="'Email: '+${factura.cliente.email}"></li>
 				</ul>
 
 				<ul class="list-group ">

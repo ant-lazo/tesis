@@ -31,6 +31,7 @@
 					<li class="list-group-item" th:text="'Nombre: '+${producto.nombre}"></li>
 					<li class="list-group-item" th:text="'Laboratorio: '+${producto.laboratorio}"></li>
 					<li class="list-group-item" th:text="'Precio S/. '+${producto.precio}"></li>
+					<li class="list-group-item" th:text="'Stock: '+${producto.stock}"></li>
 					<li class="list-group-item" th:text="'Fecha: '+${producto.createAt}"></li>
 				</ul>
 
@@ -58,7 +59,7 @@
 							<th th:text="${factura.total}"></th>
 							<th sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-primary btn-xs" th:href="@{'/factura/ver/'+${factura.id}}" th:text="'detalle'"></a></th>
 							<th sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger btn-xs" th:href="@{'/factura/eliminar/'+${factura.id}}" th:text="'eliminar'"
-							onclick="return confirm('¿Estas seguro de eliminar la factura?');"></a></th>
+							onclick="return confirm('ï¿½Estas seguro de eliminar la factura?');"></a></th>
 						</tr>
 					</tbody>
 				</table> -->
