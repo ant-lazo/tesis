@@ -21,10 +21,10 @@ INSERT INTO productos(id, codigo, nombre, precio, stock, laboratorio, foto, crea
 INSERT INTO productos(id, codigo, nombre, precio, stock, laboratorio, foto, create_at)VALUES(9, 'PDT0009', 'REUMO FLEX NF POTE 45G', 7.3, 10, 'HHP', '', NOW());
 
 INSERT INTO facturas(id, codigo, descripcion, observacion, cliente_id, create_at, preciototal, enabled)VALUES(1, 'CMP0001', 'Comprobante farmacia 1', null, 1, '2021-10-31', 100, 1);
-INSERT INTO facturas_items(id, cantidad, factura_id, producto_id)VALUES(1, 1, 2);
+INSERT INTO facturas_items(cantidad, factura_id, producto_id)VALUES(1, 1, 2);
 
 INSERT INTO facturas(id, codigo, descripcion, observacion, cliente_id, create_at, preciototal, enabled)VALUES(2, 'CMP0002', 'Comprobante farmacia 2', null, 1, '2021-10-31', 85.0, 0);
-INSERT INTO facturas_items(id, cantidad, factura_id, producto_id)VALUES(1, 2, 2);
+INSERT INTO facturas_items(cantidad, factura_id, producto_id)VALUES(1, 2, 2);
 
 /*Prueba de facturas con cliente null*/
 INSERT INTO facturas(id, codigo, descripcion, observacion, cliente_id, create_at, preciototal, enabled)VALUES(3, 'CMP0003', 'Comprobante farmacia 3', null, null, '2021-10-31', 150, 1);
@@ -55,12 +55,8 @@ INSERT INTO facturas(id, codigo, descripcion, observacion, cliente_id, create_at
 INSERT INTO facturas_items(cantidad, factura_id, producto_id)VALUES(5, 15, 5);
 
 
-INSERT INTO users (id, username, password, enabled,nombre, apellido, telefono, email, foto) VALUES (1, 'lomar','$2a$10$fAIFeHMMLBpTSNDiqleli.pjdMx5Umk4qrPzxt9JuDGCik5UafCH.',1,'omar','lazo','955026134','omar@gmail.com', '');
-INSERT INTO users (id, username, password, enabled,nombre, apellido, telefono, email, foto) VALUES (2, 'admin','$2a$12$lOXR4VkTYDwM73iQoYwRleRGGKHzxIHlRuFiV1MGK69zeByqok.Fq',1,'karina','jorge','956398863','admin@gmail.com', '');
-INSERT INTO users (id, username, password, enabled,nombre, apellido, telefono, email, foto) VALUES (3,'cgrabiela','$2a$10$ym3oS46aAhPTFhCURYzO2u1msgxRbZbqEwBsS66G0UUHgS4Zga3cC',1,'grabiela','correa','930289465','grabiela@gmail.com', '');
+INSERT INTO users (id, username, password, enabled,nombre, apellido, telefono, email, foto) VALUES (1, 'admin','$2a$10$tpc.TWAQJLVnGBG7zd0ahO1znftsuyOc31pqu9msgPM8d/RcqYEdm',1,'karina','jorge','956398863','admin@gmail.com', '');
 
+INSERT INTO authorities (user_id, authority) VALUES (1,'ROLE_ADMIN');
 INSERT INTO authorities (user_id, authority) VALUES (1,'ROLE_USER');
-INSERT INTO authorities (user_id, authority) VALUES (2,'ROLE_ADMIN');
-INSERT INTO authorities (user_id, authority) VALUES (2,'ROLE_USER');
-INSERT INTO authorities (user_id, authority) VALUES (3,'ROLE_USER');
 
