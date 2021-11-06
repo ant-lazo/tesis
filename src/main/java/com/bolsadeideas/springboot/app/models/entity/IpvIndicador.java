@@ -3,6 +3,7 @@ package com.bolsadeideas.springboot.app.models.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +20,7 @@ public class IpvIndicador implements Serializable{
 
 	private String fecha;
 	
+	@Column(name="valor_reciente")
 	private Double valorReciente;
 	
 	private Double resultado;

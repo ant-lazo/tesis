@@ -64,3 +64,5 @@ INSERT INTO authorities (user_id, authority) VALUES (2,'ROLE_ADMIN');
 INSERT INTO authorities (user_id, authority) VALUES (2,'ROLE_USER');
 INSERT INTO authorities (user_id, authority) VALUES (3,'ROLE_USER');
 
+INSERT INTO list_ipv (fecha,valor_reciente,resultado) VALUES('2021-11-05', 12, 1);
+

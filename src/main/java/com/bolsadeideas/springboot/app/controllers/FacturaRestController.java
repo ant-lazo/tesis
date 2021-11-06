@@ -87,14 +87,20 @@ public class FacturaRestController {
 		String hoy= format.format(today);
 		Date ayert = new Date(today.getTime() + TimeUnit.DAYS.toMillis(-1));
 		String ayer= format.format(ayert);
+		
+		/*para probar*/
+		Date manana = new Date(today.getTime() + TimeUnit.DAYS.toMillis(+1));
+		String m= format.format(manana);
 
 		PcvIndicador pcv = new PcvIndicador();
 		Double vrd = 0.0;
 		Double vad = 0.0;
 			List<IpvIndicador> listIpv = new ArrayList<IpvIndicador>();
-			listIpv = em.createQuery("select i from PcvIndicador i where i.fecha ='"+ayer+"'").getResultList();
+			listIpv = em.createQuery("select i from IpvIndicador i where i.fecha ='"+ayer+"'").getResultList();
+			System.out.println("listIpv: "+listIpv);
 			for(IpvIndicador i : listIpv) {
 				vad = i.getValorReciente();
+				System.out.println("vad: "+i.getValorReciente().toString());
 			}
 			List<Factura> listfactura = new ArrayList<Factura>();
 			listfactura = em.createQuery("select f from Factura f where f.createAt ='"+hoy+"'").getResultList();

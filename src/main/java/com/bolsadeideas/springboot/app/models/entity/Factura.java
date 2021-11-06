@@ -22,7 +22,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlTransient;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.bolsadeideas.springboot.app.controllers.FacturaController;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -43,6 +46,8 @@ public class Factura implements Serializable {
 	private String descripcion;
 	private String observacion;
 	
+	/*@NotNull
+	@DateTimeFormat(pattern = "yyyy/MM/dd")*/
 	@Temporal(TemporalType.DATE)
 	@Column(name="create_at")
 	private Date createAt;
@@ -91,10 +96,10 @@ public class Factura implements Serializable {
 		codigo=this.transformaracodigo(valor);
 	}
 
-	@PrePersist
+	/*@PrePersist
 	public void prePersistFecha() {
 		createAt=new Date();
-	}
+	}*/
 	
 	
 	public Long getId() {
