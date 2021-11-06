@@ -96,10 +96,10 @@ public class Factura implements Serializable {
 		codigo=this.transformaracodigo(valor);
 	}
 
-	/*@PrePersist
+	@PrePersist
 	public void prePersistFecha() {
 		createAt=new Date();
-	}*/
+	}
 	
 	
 	public Long getId() {

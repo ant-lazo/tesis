@@ -56,13 +56,11 @@ INSERT INTO facturas_items(cantidad, factura_id, producto_id)VALUES(5, 15, 5);
 
 
 INSERT INTO users (id, username, password, enabled,nombre, apellido, telefono, email, foto) VALUES (1, 'lomar','$2a$10$fAIFeHMMLBpTSNDiqleli.pjdMx5Umk4qrPzxt9JuDGCik5UafCH.',1,'omar','lazo','955026134','omar@gmail.com', '');
-INSERT INTO users (id, username, password, enabled,nombre, apellido, telefono, email, foto) VALUES (2, 'admin','$2a$10$ym3oS46aAhPTFhCURYzO2u1msgxRbZbqEwBsS66G0UUHgS4Zga3cC',1,'karina','jorge','956398863','admin@gmail.com', '');
+INSERT INTO users (id, username, password, enabled,nombre, apellido, telefono, email, foto) VALUES (2, 'admin','$2a$12$lOXR4VkTYDwM73iQoYwRleRGGKHzxIHlRuFiV1MGK69zeByqok.Fq',1,'karina','jorge','956398863','admin@gmail.com', '');
 INSERT INTO users (id, username, password, enabled,nombre, apellido, telefono, email, foto) VALUES (3,'cgrabiela','$2a$10$ym3oS46aAhPTFhCURYzO2u1msgxRbZbqEwBsS66G0UUHgS4Zga3cC',1,'grabiela','correa','930289465','grabiela@gmail.com', '');
 
 INSERT INTO authorities (user_id, authority) VALUES (1,'ROLE_USER');
 INSERT INTO authorities (user_id, authority) VALUES (2,'ROLE_ADMIN');
 INSERT INTO authorities (user_id, authority) VALUES (2,'ROLE_USER');
 INSERT INTO authorities (user_id, authority) VALUES (3,'ROLE_USER');
-
-INSERT INTO list_ipv (fecha,valor_reciente,resultado) VALUES('2021-11-05', 12, 1);
 
