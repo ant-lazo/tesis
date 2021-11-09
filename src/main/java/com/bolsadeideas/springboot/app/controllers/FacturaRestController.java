@@ -39,7 +39,7 @@ public class FacturaRestController {
 	private IPcvDao pcvservice;
 	
 	@SuppressWarnings({ "null", "unchecked" })
-	@GetMapping(value = "/listaripv")
+	@GetMapping(value = "/ipv")
 	public List<IpvIndicador> listarIpvRest() {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date today = new Date();
@@ -74,13 +74,13 @@ public class FacturaRestController {
 		}
 	}
 	
-	@GetMapping(value= "/listar")
+	/*@GetMapping(value= "/listar")
 	public List<Factura> listarRest(){
 		return clienteService.findAllFacturas();
-	}
+	}*/
 	
 	@SuppressWarnings({ "null", "unchecked" })
-	@GetMapping(value = "/listarpcv")
+	@GetMapping(value = "/pcv")
 	public List<PcvIndicador> listarPcvRest() {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date today = new Date();

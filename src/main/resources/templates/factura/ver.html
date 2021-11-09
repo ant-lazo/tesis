@@ -60,16 +60,16 @@
 					<tbody>
 						<tr th:each="linea: ${factura.items}">
 							<td th:text="${linea.producto.nombre}"></td>
-							<td th:text="${linea.producto.precio}"></td>
+							<td th:text="${linea.producto.precio}+'0'"></td>
 							<td th:text="${linea.cantidad}"></td>
-							<td th:text="${linea.calcularImporte()}"></td>
+							<td th:text="${linea.calcularImporte()}+'0'"></td>
 						</tr>
 					</tbody>
 				</table>
 
 				<h5 class="float-right">
-					Gran Total <span th:text="${factura.total}"
-						class="badge badge-secondary"></span>
+					Gran Total S/. <span th:text="${factura.total}+'0'"
+						class="badge badge-info"></span>
 				</h5>
 
 				<div class="card border-info mb-4" style="max-width: 20rem;">

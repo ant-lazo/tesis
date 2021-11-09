@@ -32,7 +32,7 @@
 						<h4>Porcentaje de Crecimiento en Ventas</h4>
 					</div>
 					<div class="card-body">
-					<h1 align="right">1.85%</h1>
+					<h1 align="right" th:text="${pcv}+'%'"></h1>
 					</div>
 				</div>
 			</div>
@@ -43,7 +43,7 @@
 						<h4>Índice de Productividad en Ventas</h4>
 					</div>
 					<div class="card-body">
-					<h1 align="right">0.58</h1>
+					<h1 align="right" th:text="${ipv}"></h1>
 					</div>
 				</div>
 			</div>
@@ -53,20 +53,22 @@
 			<div class="col-md-6">
 				<div class="card">
 					<div class="card-header">
-					PCV
+						<a class="btn btn-success btn-xs mx-2"
+						th:href="@{'/pcv/ver/'(format=pdf)}">PCV</a>
 					</div>
 					<div class="card-body">
-						<canvas class="chart" width="400" height="200"></canvas>
+						<canvas class="chart1" width="400" height="200"></canvas>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="card">
 					<div class="card-header">
-					IPV
+						<a class="btn btn-warning btn-xs"
+						th:href="@{'/ipv/ver/'(format=pdf)}">IPV</a>
 					</div>
 					<div class="card-body">
-						<canvas class="chart" width="400" height="200"></canvas>
+						<canvas class="chart2" width="400" height="200"></canvas>
 					</div>
 				</div>
 			</div>

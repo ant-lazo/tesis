@@ -1,5 +1,6 @@
 package com.bolsadeideas.springboot.app.controllers;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,6 +36,9 @@ public class DashboardController {
 	@Autowired
 	private MessageSource messageSource;
 	
+	Double resultIpv;
+	Double resultPcv;
+	
 	@GetMapping("/panel")
 	public String mostrarDash(Model model, Locale locale) {
 		
@@ -69,6 +73,8 @@ public class DashboardController {
 		pcv(hoy,ayer1);
 		
 		model.addAttribute("titulo", messageSource.getMessage("text.dashboard.titulo", null, locale));
+		model.addAttribute("ipv",transformar(this.resultIpv));
+		model.addAttribute("pcv",transformar(this.resultPcv));
 		return "dashboard/panel";
 	}
 	
@@ -85,6 +91,7 @@ public class DashboardController {
 		//System.out.println("acumulador dinero ganado por dia "+vrd);
 		Double ipv =0.0;
 		ipv = vrd/12;
+		this.resultIpv = ipv;
 		System.out.println("indice de productividad en ventas: "+ipv);
 	}
 	
@@ -110,11 +117,19 @@ public class DashboardController {
 		//System.out.println("valor anterior por dia: "+vad);
 		Double pcv=0.0;
 		if(vad==0) {
-			pcv=100.0;	
+			pcv=100.0;
+			this.resultPcv=pcv;
 		}else {
 			pcv=((vrd/vad)-1)*100;
+			this.resultPcv=pcv;
 		}
 		System.out.println("porcentaje de crecimiento en ventas: "+pcv+"%");
+	}
+	
+	public String transformar(double valor){
+		DecimalFormat f = new DecimalFormat("#.00");
+		String salida=f.format(valor);
+		return salida;
 	}
 
 }
