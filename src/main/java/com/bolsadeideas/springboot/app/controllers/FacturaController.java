@@ -1,6 +1,5 @@
 package com.bolsadeideas.springboot.app.controllers;
 
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
@@ -11,12 +10,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -32,9 +28,7 @@ import org.springframework.security.web.servletapi.SecurityContextHolderAwareReq
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,7 +47,6 @@ import com.bolsadeideas.springboot.app.models.service.IClienteService;
 import com.bolsadeideas.springboot.app.util.paginator.PageRender;
 
 
-//@Secured("ROLE_ADMIN")
 @Controller
 @RequestMapping("/factura")
 @SessionAttributes("factura")
@@ -73,17 +66,11 @@ public class FacturaController {
 	@GetMapping("/ver/{id}")
 	public String ver(@PathVariable(value="id") Long id, Model model, RedirectAttributes flash) {
 		
-		System.out.println("que fueeeeee");
-		
-		Factura factura= clienteService.fetchFacturaByIdWithClienteWithItemFacturaWithProducto(id);//clienteService.findFactruaById(id);
-		//Factura factura= clienteService.fetchFacturaByIdWithClienteWithItemFacturaWithProductoEnabled(id,true);
-		
-		//System.out.println(factura.getEnabled());
+		Factura factura= clienteService.fetchFacturaByIdWithClienteWithItemFacturaWithProducto(id);
 		
 		if(factura==null) {
 			
 			Factura fac = clienteService.fetchFacturaByIdWithItemFacturaWithProducto(id);
-			//Factura fac = clienteService.fetchFacturaByIdWithItemFacturaWithProductoEnabled(id,true);
 			
 			if(fac!=null) {
 				
@@ -157,7 +144,6 @@ public class FacturaController {
 		for(int i=0;i<itemId.length;i++) {
 			Producto producto= clienteService.findProductoById(itemId[i]);
 			
-			/*Probar si imprime la cantidad*/
 			Integer nuevostock = producto.getStock()-cantidad[i];
 			
 			if(nuevostock < 0) {
@@ -169,7 +155,6 @@ public class FacturaController {
 			
 			producto.setStock(nuevostock);
 			clienteService.saveProducto(producto);
-			/**/
 			
 			ItemFactura linea= new ItemFactura();
 			linea.setCantidad(cantidad[i]);
@@ -242,7 +227,6 @@ public class FacturaController {
 		}
 		
 		Pageable pageRequest = PageRequest.of(page, 7,Sort.by(Sort.Direction.DESC,"id"));
-		//Page<Factura> facturas = clienteService.findAllFacturas(pageRequest);
 		Page<Factura> facturas = clienteService.findAllFacturasHabilitadas(pageRequest);
 		
 		PageRender<Factura> pageRender = new PageRender<>("/factura/listarfacturas", facturas);
@@ -270,14 +254,7 @@ public class FacturaController {
 		Collection<? extends GrantedAuthority> authorities= auth.getAuthorities();
 	
 		return authorities.contains(new SimpleGrantedAuthority(role));
-		
-		/*for(GrantedAuthority authority: authorities) {
-			if(role.equals(authority.getAuthority())) {
-				logger.info("Hola usuario: ".concat(auth.getName()).concat(" con el rol: ".concat(authority.getAuthority())));
-				return true;
-			}
-		}
-		return false;*/
+	
 	}
 	
 	@Secured("ROLE_ADMIN")
@@ -288,7 +265,6 @@ public class FacturaController {
 		if(factura!=null) {
 			clienteService.deleteFactura(id);
 			flash.addFlashAttribute("success", "Comprobante eliminado con éxito!");
-			/*return "redirect:/ver/" + factura.getCliente().getId();*/
 			return "redirect:/factura/listarfacturasanuladas";
 		}
 		
@@ -306,7 +282,6 @@ public class FacturaController {
 			factura.setEnabled(false);
 			clienteService.saveFactura(factura);
 			flash.addFlashAttribute("success", "Comprobante anulado con éxito!");
-			/*return "redirect:/ver/" + factura.getCliente().getId();*/
 			return "redirect:/factura/listarfacturas";
 		}
 		
@@ -327,12 +302,7 @@ public class FacturaController {
 			clienteService.saveFactura(factura);
 			flash.addFlashAttribute("success", "Comprobante anulado con éxito!"); 
 			
-			System.out.println("estamos aqui gigi");
-			
 			return "redirect:/ver/" + factura.getCliente().getId();
-			/*return "redirect:/ver/" + factura.getCliente().getId();*/
-			
-			/*return "redirect:/factura/listarfacturas";*/
 		}
 		
 		flash.addFlashAttribute("error", "El comprobante no exite en la base de datos, no se pudo anular!");
@@ -349,7 +319,6 @@ public class FacturaController {
 			factura.setEnabled(true);
 			clienteService.saveFactura(factura);
 			flash.addFlashAttribute("success", "Comprobante habilitado con éxito!");
-			/*return "redirect:/ver/" + factura.getCliente().getId();*/
 			return "redirect:/factura/listarfacturasanuladas";
 		}
 		
@@ -398,7 +367,6 @@ public class FacturaController {
 		for(int i=0;i<itemId.length;i++) {
 			Producto producto= clienteService.findProductoById(itemId[i]);
 			
-			/*Probar si imprime la cantidad*/
 			Integer nuevostock = producto.getStock()-cantidad[i];
 			
 			if(nuevostock < 0) {
@@ -410,7 +378,6 @@ public class FacturaController {
 			
 			producto.setStock(nuevostock);
 			clienteService.saveProducto(producto);
-			/**/
 			
 			ItemFactura linea= new ItemFactura();
 			linea.setCantidad(cantidad[i]);
@@ -425,8 +392,6 @@ public class FacturaController {
 		factura.setCreatedBy(authentication.getName());
 		clienteService.saveFactura(factura);
 		status.setComplete();
-		/**/
-		/**/
 		flash.addFlashAttribute("success", "Comprobante creada con éxito");
 		return "redirect:/factura/listarfacturas";
 	}
@@ -469,7 +434,6 @@ public class FacturaController {
 		}
 		
 		Pageable pageRequest = PageRequest.of(page, 7,Sort.by(Sort.Direction.DESC,"id"));
-		//Page<Factura> facturas = clienteService.findAllFacturas(pageRequest);
 		Page<Factura> facturas = clienteService.findAllFacturasDeshabilitadas(pageRequest);
 		
 		PageRender<Factura> pageRender = new PageRender<>("/factura/listarfacturasanuladas", facturas);

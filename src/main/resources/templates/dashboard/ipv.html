@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<html xmlns:th="http://www.thymeleaf.org" />
+<head th:replace="layout/layout :: head"></head>
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Fecha</th>
+							<th>Valor Reciente</th>
+							<th>Resultado</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="ipv: ${ipv}">
+							<td th:text="${ipv.id}"></td>
+							<td th:text="${ipv.fecha}"></td>
+							<td th:text="${ipv.valorReciente}"></td>
+							<td th:text="${ipv.resultado}"></td>
+						</tr>
+					</tbody>
+				</table>
+	
+	<div id="cuadrarfooter"></div>
+	<footer th:replace="layout/layout :: footer"></footer>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+	<script th:replace="dashboard/js/estadisticas-panel :: javascript"></script>
+</body>
+</html>

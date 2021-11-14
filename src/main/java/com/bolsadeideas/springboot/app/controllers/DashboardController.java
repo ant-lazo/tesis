@@ -10,14 +10,23 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.bolsadeideas.springboot.app.models.dao.IIpvDao;
+import com.bolsadeideas.springboot.app.models.dao.IPcvDao;
 import com.bolsadeideas.springboot.app.models.entity.Factura;
+import com.bolsadeideas.springboot.app.models.entity.IpvIndicador;
+import com.bolsadeideas.springboot.app.models.entity.PcvIndicador;
 
 import java.util.concurrent.TimeUnit;
 
@@ -29,6 +38,12 @@ import javax.persistence.PersistenceContext;
 @RequestMapping("/dashboard")
 @SessionAttributes("dashboard")
 public class DashboardController {
+	
+	@Autowired
+	private IIpvDao ipvservice;
+	
+	@Autowired
+	private IPcvDao pcvservice;
 	
 	@PersistenceContext
 	private EntityManager em;
@@ -46,28 +61,8 @@ public class DashboardController {
 		
 		Date today = new Date();
 		String hoy= format.format(today);
-		System.out.println("hoy :"+hoy);
 		Date ayer1t = new Date(today.getTime() + TimeUnit.DAYS.toMillis(-1));
 		String ayer1= format.format(ayer1t);
-		System.out.println("ayer1 :"+ayer1);
-		Date ayer2t = new Date(today.getTime() + TimeUnit.DAYS.toMillis(-2));
-		String ayer2= format.format(ayer2t);
-		System.out.println("ayer2 :"+ayer2);
-		Date ayer3t = new Date(today.getTime() + TimeUnit.DAYS.toMillis(-3));
-		String ayer3= format.format(ayer3t);
-		System.out.println("ayer3 :"+ayer3);
-		Date ayer4t = new Date(today.getTime() + TimeUnit.DAYS.toMillis(-4));
-		String ayer4= format.format(ayer4t);
-		System.out.println("ayer4 :"+ayer4);
-		Date ayer5t = new Date(today.getTime() + TimeUnit.DAYS.toMillis(-5));
-		String ayer5= format.format(ayer5t);
-		System.out.println("ayer5 :"+ayer5);
-		Date ayer6t = new Date(today.getTime() + TimeUnit.DAYS.toMillis(-6));
-		String ayer6= format.format(ayer6t);
-		System.out.println("ayer6 :"+ayer6);
-		Date ayer7t = new Date(today.getTime() + TimeUnit.DAYS.toMillis(-7));
-		String ayer7= format.format(ayer7t);
-		System.out.println("ayer7 :"+ayer7);
 		
 		ipv(hoy);
 		pcv(hoy,ayer1);
@@ -125,6 +120,24 @@ public class DashboardController {
 		DecimalFormat f = new DecimalFormat("#.00");
 		String salida=f.format(valor);
 		return salida;
+	}
+	
+	@GetMapping("/ipv")
+	public String mostrarIpv(Model model,@RequestParam(name = "page", defaultValue = "0") int page) {
+		Pageable pageRequest = PageRequest.of(page, 14,Sort.by(Sort.Direction.DESC,"id"));
+		Page<IpvIndicador> topPage = ipvservice.findAll(pageRequest);
+		List<IpvIndicador> topIpvList = topPage.getContent();
+		model.addAttribute("ipv",topIpvList);
+		return "dashboard/ipv";
+	}
+	
+	@GetMapping("/pcv")
+	public String mostrarPcv(Model model,@RequestParam(name = "page", defaultValue = "0") int page) {
+		Pageable pageRequest = PageRequest.of(page, 14,Sort.by(Sort.Direction.DESC,"id"));
+		Page<PcvIndicador> topPage = pcvservice.findAll(pageRequest);
+		List<PcvIndicador> topPcvList = topPage.getContent();
+		model.addAttribute("pcv",topPcvList);
+		return "dashboard/pcv";
 	}
 
 }
