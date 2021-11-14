@@ -149,7 +149,7 @@ public class Cliente implements Serializable{
 	}
 	
 	public String transformaracodigo(double valor){
-		DecimalFormat f = new DecimalFormat("CL0000");
+		DecimalFormat f = new DecimalFormat("CL00000");
 		String salida=f.format(valor);
 		System.out.println(salida);
 		return salida;

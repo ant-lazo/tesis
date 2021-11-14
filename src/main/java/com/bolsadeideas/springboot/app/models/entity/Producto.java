@@ -123,7 +123,7 @@ public class Producto implements Serializable {
 	}
 	
 	public String transformaracodigo(double valor){
-		DecimalFormat f = new DecimalFormat("PDT0000");
+		DecimalFormat f = new DecimalFormat("PD00000");
 		String salida=f.format(valor);
 		System.out.println(salida);
 		return salida;

@@ -163,7 +163,7 @@ public class Factura implements Serializable {
 	}
 	
 	public String transformaracodigo(double valor){
-			DecimalFormat f = new DecimalFormat("CMP0000");
+			DecimalFormat f = new DecimalFormat("CP00000");
 			String salida=f.format(valor);
 			System.out.println(salida);
 			return salida;
