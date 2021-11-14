@@ -1,9 +1,14 @@
 package com.bolsadeideas.springboot.app.models.dao;
 
-import org.springframework.data.repository.CrudRepository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.bolsadeideas.springboot.app.models.entity.IpvIndicador;
 
-public interface IIpvDao extends CrudRepository<IpvIndicador, Long> {
-
+public interface IIpvDao extends PagingAndSortingRepository<IpvIndicador, Long> {
+	
+	
 }

@@ -41,7 +41,6 @@ public class Cliente implements Serializable{
 	@NotEmpty
 	private String nombre;
 
-
 	@NotEmpty
 	private String apellido;
 	
@@ -92,56 +91,45 @@ public class Cliente implements Serializable{
 		return id;
 	}
 
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-
+	
 	public String getNombre() {
 		return nombre;
 	}
-
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-
 	public String getApellido() {
 		return apellido;
 	}
-
-
+	
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
-
 
 	public String getEmail() {
 		return email;
 	}
 
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 
 	public Date getCreateAt() {
 		return createAt;
 	}
 
-
 	public void setCreateAt(Date createAd) {
 		this.createAt = createAd;
 	}
 	
-
 	public List<Factura> getFacturas() {
 		return facturas;
 	}
-
 
 	public void setFacturas(List<Factura> facturas) {
 		this.facturas = facturas;
@@ -151,11 +139,9 @@ public class Cliente implements Serializable{
 		facturas.add(factura);
 	}
 
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
 
 	@Override
 	public String toString() {
@@ -169,9 +155,6 @@ public class Cliente implements Serializable{
 		return salida;
 	}
 
-
 	private static final long serialVersionUID = 1L;
 	
-	
-
 }

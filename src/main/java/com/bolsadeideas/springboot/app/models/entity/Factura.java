@@ -22,19 +22,14 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlTransient;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.bolsadeideas.springboot.app.controllers.FacturaController;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 @Entity
 @Table(name="facturas")
 public class Factura implements Serializable {
-
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,8 +41,6 @@ public class Factura implements Serializable {
 	private String descripcion;
 	private String observacion;
 	
-	/*@NotNull
-	@DateTimeFormat(pattern = "yyyy/MM/dd")*/
 	@Temporal(TemporalType.DATE)
 	@Column(name="create_at")
 	private Date createAt;
@@ -66,8 +59,6 @@ public class Factura implements Serializable {
 	private String createdBy;
 	
 	private Boolean enabled;
-	
-	
 
 	public Boolean getEnabled() {
 		return enabled;
@@ -101,41 +92,51 @@ public class Factura implements Serializable {
 		createAt=new Date();
 	}
 	
-	
 	public Long getId() {
 		return id;
 	}
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
 	public String getCodigo() {
 		return codigo;
 	}
+	
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
+	
 	public String getDescripcion() {
 		return descripcion;
 	}
+	
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	
 	public String getObservacion() {
 		return observacion;
 	}
+	
 	public void setObservacion(String observacion) {
 		this.observacion = observacion;
 	}
+	
 	public Date getCreateAt() {
 		return createAt;
 	}
+	
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
+	
 	@XmlTransient
 	public Cliente getCliente() {
 		return cliente;
 	}
+	
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
@@ -168,7 +169,6 @@ public class Factura implements Serializable {
 			return salida;
 	}
 
-
 	public Double getPreciototal() {
 		return preciototal;
 	}
@@ -176,7 +176,6 @@ public class Factura implements Serializable {
 	public void setPreciototal(Double preciototal) {
 		this.preciototal = preciototal;
 	}
-
 
 	private static final long serialVersionUID = 1L;
 	

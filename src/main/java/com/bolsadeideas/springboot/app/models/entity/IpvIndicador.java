@@ -1,7 +1,6 @@
 package com.bolsadeideas.springboot.app.models.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,7 +28,6 @@ public class IpvIndicador implements Serializable{
 		return id;
 	}
 
-
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -42,26 +40,21 @@ public class IpvIndicador implements Serializable{
 		this.fecha = fecha;
 	}
 
-
 	public Double getValorReciente() {
 		return valorReciente;
 	}
-
 
 	public void setValorReciente(Double valorReciente) {
 		this.valorReciente = valorReciente;
 	}
 
-
 	public Double getResultado() {
 		return resultado;
 	}
 
-
 	public void setResultado(Double resultado) {
 		this.resultado = resultado;
 	}
-
-
+	
 	private static final long serialVersionUID = 1L;
 }

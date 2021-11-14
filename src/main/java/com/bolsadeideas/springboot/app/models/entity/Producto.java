@@ -16,7 +16,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 
 @Entity
@@ -38,8 +37,6 @@ public class Producto implements Serializable {
 	
 	@NotNull
 	private Integer stock;
-
-
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="create_at")
@@ -131,7 +128,6 @@ public class Producto implements Serializable {
 		System.out.println(salida);
 		return salida;
 	}
-	
 	
 	private static final long serialVersionUID = 1L;
 

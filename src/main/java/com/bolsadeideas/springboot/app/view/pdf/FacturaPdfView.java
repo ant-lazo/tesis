@@ -46,11 +46,9 @@ public class FacturaPdfView extends AbstractPdfView {
 		
 		MessageSourceAccessor mensajes= getMessageSourceAccessor();
 		
-		/**/
 		document.setPageSize(PageSize.A4);
 		document.open();
 		
-		/**/
 		PdfPTable tablaimg= new PdfPTable(1);
 		tablaimg.setSpacingAfter(20);
 		/*Image image = Image.getInstance("https://i.postimg.cc/L8qFcgms/mkchico.png");

@@ -60,3 +60,28 @@ INSERT INTO users (id, username, password, enabled,nombre, apellido, telefono, e
 INSERT INTO authorities (user_id, authority) VALUES (1,'ROLE_ADMIN');
 INSERT INTO authorities (user_id, authority) VALUES (1,'ROLE_USER');
 
+INSERT INTO list_ipv(fecha,valor_reciente,resultado) VALUES ('2021-11-01',12,1);
+INSERT INTO list_ipv(fecha,valor_reciente,resultado) VALUES ('2021-11-02',12,1);
+INSERT INTO list_ipv(fecha,valor_reciente,resultado) VALUES ('2021-11-03',12,1);
+INSERT INTO list_ipv(fecha,valor_reciente,resultado) VALUES ('2021-11-04',12,1);
+INSERT INTO list_ipv(fecha,valor_reciente,resultado) VALUES ('2021-11-05',12,1);
+INSERT INTO list_ipv(fecha,valor_reciente,resultado) VALUES ('2021-11-06',12,1);
+INSERT INTO list_ipv(fecha,valor_reciente,resultado) VALUES ('2021-11-07',12,1);
+INSERT INTO list_ipv(fecha,valor_reciente,resultado) VALUES ('2021-11-08',12,1);
+INSERT INTO list_ipv(fecha,valor_reciente,resultado) VALUES ('2021-11-09',12,1);
+INSERT INTO list_ipv(fecha,valor_reciente,resultado) VALUES ('2021-11-10',12,1);
+INSERT INTO list_ipv(fecha,valor_reciente,resultado) VALUES ('2021-11-11',12,1);
+
+INSERT INTO list_pcv(fecha,valor_anterior,valor_reciente,resultado) VALUES ('2021-11-01',0,100,100);
+INSERT INTO list_pcv(fecha,valor_anterior,valor_reciente,resultado) VALUES ('2021-11-02',100,101,1);
+INSERT INTO list_pcv(fecha,valor_anterior,valor_reciente,resultado) VALUES ('2021-11-03',101,102,1);
+INSERT INTO list_pcv(fecha,valor_anterior,valor_reciente,resultado) VALUES ('2021-11-04',102,103,1);
+INSERT INTO list_pcv(fecha,valor_anterior,valor_reciente,resultado) VALUES ('2021-11-05',103,104,1);
+INSERT INTO list_pcv(fecha,valor_anterior,valor_reciente,resultado) VALUES ('2021-11-06',104,105,1);
+INSERT INTO list_pcv(fecha,valor_anterior,valor_reciente,resultado) VALUES ('2021-11-07',105,106,1);
+INSERT INTO list_pcv(fecha,valor_anterior,valor_reciente,resultado) VALUES ('2021-11-08',106,107,1);
+INSERT INTO list_pcv(fecha,valor_anterior,valor_reciente,resultado) VALUES ('2021-11-08',107,108,1);
+INSERT INTO list_pcv(fecha,valor_anterior,valor_reciente,resultado) VALUES ('2021-11-10',108,109,1);
+INSERT INTO list_pcv(fecha,valor_anterior,valor_reciente,resultado) VALUES ('2021-11-11',109,110,1);
+
+

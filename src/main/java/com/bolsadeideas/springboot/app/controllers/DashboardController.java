@@ -88,11 +88,9 @@ public class DashboardController {
 				vrd += f.getPreciototal();
 			}
 		}
-		//System.out.println("acumulador dinero ganado por dia "+vrd);
 		Double ipv =0.0;
 		ipv = vrd/12;
 		this.resultIpv = ipv;
-		System.out.println("indice de productividad en ventas: "+ipv);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -113,8 +111,6 @@ public class DashboardController {
 				vad += f.getPreciototal();
 			}
 		}
-		//System.out.println("valor reciente por dia: "+vrd);
-		//System.out.println("valor anterior por dia: "+vad);
 		Double pcv=0.0;
 		if(vad==0) {
 			pcv=100.0;
@@ -123,7 +119,6 @@ public class DashboardController {
 			pcv=((vrd/vad)-1)*100;
 			this.resultPcv=pcv;
 		}
-		System.out.println("porcentaje de crecimiento en ventas: "+pcv+"%");
 	}
 	
 	public String transformar(double valor){

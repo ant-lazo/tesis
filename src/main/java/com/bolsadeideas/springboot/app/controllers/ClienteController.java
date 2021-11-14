@@ -2,9 +2,7 @@ package com.bolsadeideas.springboot.app.controllers;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -48,9 +46,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.bolsadeideas.springboot.app.models.dao.IClienteDao;
 import com.bolsadeideas.springboot.app.models.entity.Cliente;
-import com.bolsadeideas.springboot.app.models.entity.Factura;
 import com.bolsadeideas.springboot.app.models.service.IClienteService;
 import com.bolsadeideas.springboot.app.models.service.IUploadFileService;
 import com.bolsadeideas.springboot.app.util.paginator.PageRender;
@@ -80,7 +76,6 @@ public class ClienteController {
 		try {
 			recurso = uploadFileService.load(filename);
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -90,32 +85,20 @@ public class ClienteController {
 
 	}
 
+	@SuppressWarnings("unused")
 	@PreAuthorize("hasRole('ROLE_USER')")
 	@GetMapping(value = "/ver/{id}")
 	public String ver(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash) {
 		
 		System.out.println("jeje");
 
-		//Cliente cliente = clienteService.fetchByIdWithFacturas(id);//clienteService.findOne(id);
-		//aqui esta el error.....
 		Cliente cliente = clienteService.fetchByIdWithFacturasEnabled(id,true);
-		
-		/*List<Factura> facturas = cliente.getFacturas();
-		for(Factura f: facturas) {
-			System.out.println(f.getCodigo()+" "+f.getEnabled());
-		}*/
-		
 		
 		if (cliente == null) {
 			
 			Cliente clientesf =clienteService.findOne(id);
 			
 			clientesf.setFacturas(null);
-			//Cliente clientesf =clienteService.fetchByIdWithFacturasEnabled(id, true);
-			/*List<Factura> facturas = clientesf.getFacturas();
-			for(Factura f: facturas) {
-				System.out.println(f.getCodigo()+" "+f.getEnabled());
-			}*/
 			
 			if(clientesf == null) {
 				flash.addFlashAttribute("error", "El cliente no existe en la base de datos");
@@ -128,9 +111,6 @@ public class ClienteController {
 			model.put("titulo", "Detalle cliente: " + clientesf.getNombre());
 			
 			return "ver";
-			
-			/*flash.addFlashAttribute("error", "El cliente no existe en la base de datos");
-			return "redirect:/listar";*/
 		}
 		
 		System.out.println("segundo");
@@ -243,16 +223,13 @@ public class ClienteController {
 
 			if (cliente.getId() != null && cliente.getId() > 0 && cliente.getFoto() != null
 					&& cliente.getFoto().length() > 0) {
-
 				uploadFileService.delete(cliente.getFoto());
-
 			}
 
 			String uniqueFilename = null;
 			try {
 				uniqueFilename = uploadFileService.copy(foto);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -302,13 +279,6 @@ public class ClienteController {
 	
 		return authorities.contains(new SimpleGrantedAuthority(role));
 		
-		/*for(GrantedAuthority authority: authorities) {
-			if(role.equals(authority.getAuthority())) {
-				logger.info("Hola usuario: ".concat(auth.getName()).concat(" con el rol: ".concat(authority.getAuthority())));
-				return true;
-			}
-		}
-		return false;*/
 	}
 	
 	@InitBinder
