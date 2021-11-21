@@ -372,7 +372,7 @@ public class FacturaController {
 			if(nuevostock < 0) {
 				model.addAttribute("titulo", "Crear Comprobante");
 				model.addAttribute("error", "No se pudo generar el comprobante !");
-				model.addAttribute("warning", "No hay suficiente Stock para realizar la venta del producto ".concat(producto.getNombre())+"!");
+				model.addAttribute("warning", "No hay suficiente Stock para realizar la venta del producto ".concat(producto.getNombre())+", cantidad en Stock '"+producto.getStock()+"' !");
 				return "factura/formsc";
 			}
 			

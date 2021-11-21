@@ -1,6 +1,7 @@
 package com.bolsadeideas.springboot.app.view.pdf;
 
 import java.awt.Color;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -82,18 +83,25 @@ public class PcvPdfView extends AbstractPdfView{
 		tabla3.addCell("Valor Reciente");
 		tabla3.addCell("Resultado");
 		
-		
+		int i = 0;
 		for(PcvIndicador item: pcv) {
-			tabla3.addCell(item.getId().toString());
+			i++;
+			tabla3.addCell(i+"");
 			tabla3.addCell(item.getFecha().toString());
-			tabla3.addCell(item.getValorAnterior().toString());
-			tabla3.addCell(item.getValorReciente().toString());
-			tabla3.addCell(item.getResultado().toString()+"%");
+			tabla3.addCell(this.transformar(item.getValorAnterior()));
+			tabla3.addCell(this.transformar(item.getValorReciente()));
+			tabla3.addCell(this.transformar(item.getResultado())+"%");
 		}
 		
 		
 		document.add(tabla3);
 		
+	}
+	
+	public String transformar(double valor){
+		DecimalFormat f = new DecimalFormat("#.00");
+		String salida=f.format(valor);
+		return salida;
 	}
 
 }

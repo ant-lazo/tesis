@@ -37,4 +37,5 @@ public interface IClienteService {
 	public Producto findOneProducto(Long id);
 	public void saveProducto(Producto producto);
 	public void deleteProducto(Long id);
+	public Page<Producto> findByNombreP(String term, Pageable pageable);
 }

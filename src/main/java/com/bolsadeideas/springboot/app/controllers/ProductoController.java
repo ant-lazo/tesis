@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -106,7 +107,8 @@ public class ProductoController {
 	
 	@Secured("ROLE_USER")
 	@RequestMapping(value ="/listarproductos", method = RequestMethod.GET)
-	public String listar(@RequestParam(name = "page", defaultValue = "0") int page, Model model,
+	public String listar(@RequestParam Optional<String> nombre,
+			@RequestParam(name = "page", defaultValue = "0") int page, Model model,
 			Authentication authentication,
 			HttpServletRequest request,
 			Locale locale) {
@@ -147,7 +149,8 @@ public class ProductoController {
 		
 		Pageable pageRequest = PageRequest.of(page, 7,Sort.by(Sort.Direction.DESC,"id"));
 
-		Page<Producto> productos = clienteService.findAllProductos(pageRequest);
+		//Page<Producto> productos = clienteService.findAllProductos(pageRequest);
+		Page<Producto> productos = clienteService.findByNombreP(nombre.orElse("_"),pageRequest);
 		List<Producto> lproductos = clienteService.findAllProductosl();
 
 		PageRender<Producto> pageRender = new PageRender<>("/producto/listarproductos", productos);

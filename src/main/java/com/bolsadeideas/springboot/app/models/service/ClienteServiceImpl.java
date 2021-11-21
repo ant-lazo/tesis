@@ -178,5 +178,11 @@ public class ClienteServiceImpl implements IClienteService{
 		return facturaDao.fetchFacturaWhereEnabledFalse(pageable);
 	}
 
+	@Override
+	public Page<Producto> findByNombreP(String nombre, Pageable pageable) {
+		return productoDao.findByNombre(nombre, pageable);
+	}
+
+
 
 }

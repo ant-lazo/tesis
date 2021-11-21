@@ -1,6 +1,7 @@
 package com.bolsadeideas.springboot.app.view.pdf;
 
 import java.awt.Color;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -83,17 +84,24 @@ public class IpvPdfView extends AbstractPdfView{
 		tabla3.addCell("Horas trabajadas");
 		tabla3.addCell("Resultado");
 		
-		
+		int i = 0;
 		for(IpvIndicador item: ipv) {
-			tabla3.addCell(item.getId().toString());
+			i++;
+			tabla3.addCell(i+"");
 			tabla3.addCell(item.getFecha().toString());
-			tabla3.addCell(item.getValorReciente().toString());
+			tabla3.addCell(this.transformar(item.getValorReciente()));
 			tabla3.addCell("12");
-			tabla3.addCell(item.getResultado().toString());
+			tabla3.addCell(this.transformar(item.getResultado()));
 		}
 		
 		
 		document.add(tabla3);
+	}
+	
+	public String transformar(double valor){
+		DecimalFormat f = new DecimalFormat("#.00");
+		String salida=f.format(valor);
+		return salida;
 	}
 
 }
