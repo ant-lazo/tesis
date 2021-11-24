@@ -21,6 +21,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -107,8 +108,9 @@ public class ProductoController {
 	
 	@Secured("ROLE_USER")
 	@RequestMapping(value ="/listarproductos", method = RequestMethod.GET)
-	public String listar(@RequestParam Optional<String> nombre,
-			@RequestParam(name = "page", defaultValue = "0") int page, Model model,
+	public String listar( Model model,
+			@RequestParam(name = "page", defaultValue = "0", required=true) int page,
+			@Param("nombre") Optional<String> nombre,
 			Authentication authentication,
 			HttpServletRequest request,
 			Locale locale) {
@@ -152,11 +154,20 @@ public class ProductoController {
 		//Page<Producto> productos = clienteService.findAllProductos(pageRequest);
 		Page<Producto> productos = clienteService.findByNombreP(nombre.orElse("_"),pageRequest);
 		List<Producto> lproductos = clienteService.findAllProductosl();
+		
+		
+		String nombres = nombre.stream()
+        .filter(x -> x.length() == 1)
+        .findFirst()
+        .map(Object::toString)
+        .orElse("");
 
 		PageRender<Producto> pageRender = new PageRender<>("/producto/listarproductos", productos);
 		model.addAttribute("titulo", messageSource.getMessage("text.producto.listar.titulo", null, locale));
 		model.addAttribute("productos", productos);
 		model.addAttribute("page", pageRender);
+		model.addAttribute("pagep", page);
+		model.addAttribute("nombre", nombres);
 		model.addAttribute("lproductos", lproductos);
 
 		return "producto/listarproductos";

@@ -20,7 +20,8 @@
 					<form sec:authorize="hasRole('ROLE_USER')" class="form-inline ml-4"
 					th:action="@{listarproductos}" method="GET"
 					>
-				      <input id="idInput" name="nombre" class="form-control mr-sm-2 float-right" type="search" placeholder="Buscar Productos" aria-label="Search">
+					  <input type="hidden" name="page" th:value="${pagep}">
+				      <input id="idInput" name="nombre" th:value="${nombre}" class="form-control mr-sm-2 float-right" type="search" placeholder="Buscar Productos" aria-label="Search">
 				      <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Buscar</button>
 				    </form>
 				</div>

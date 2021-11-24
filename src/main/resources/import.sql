@@ -19,6 +19,9 @@ INSERT INTO productos(id, codigo, nombre, precio, stock, laboratorio, foto, crea
 INSERT INTO productos(id, codigo, nombre, precio, stock, laboratorio, foto, create_at)VALUES(7, 'PDT0007', 'ACICLAV 250MG SUSPENCION 60ML', 3.5, 10, 'MLC', '', NOW());
 INSERT INTO productos(id, codigo, nombre, precio, stock, laboratorio, foto, create_at)VALUES(8, 'PDT0008', 'SUPRADYN PRONATAL X 30 TAB', 19.0, 10, 'XCC', '', NOW());
 INSERT INTO productos(id, codigo, nombre, precio, stock, laboratorio, foto, create_at)VALUES(9, 'PDT0009', 'REUMO FLEX NF POTE 45G', 7.3, 10, 'HHP', '', NOW());
+INSERT INTO productos(id, codigo, nombre, precio, stock, laboratorio, foto, create_at)VALUES(10, 'PDT0009', 'MOCO DE GORILLA', 8.5, 10, 'GOR', '', NOW());
+INSERT INTO productos(id, codigo, nombre, precio, stock, laboratorio, foto, create_at)VALUES(11, 'PDT0009', 'IVERMECTINA', 5.0, 10, 'J&J', '', NOW());
+INSERT INTO productos(id, codigo, nombre, precio, stock, laboratorio, foto, create_at)VALUES(12, 'PDT0009', 'ALCOHOL 100ML', 9.5, 10, 'BAY', '', NOW());
 
 INSERT INTO facturas(id, codigo, descripcion, observacion, cliente_id, create_at, preciototal, enabled)VALUES(1, 'CMP0001', 'Comprobante farmacia 1', null, 1, '2021-10-31', 100, 1);
 INSERT INTO facturas_items(cantidad, factura_id, producto_id)VALUES(1, 1, 2);
