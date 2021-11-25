@@ -157,7 +157,7 @@ public class ProductoController {
 		
 		
 		String nombres = nombre.stream()
-        .filter(x -> x.length() == 1)
+        //.filter(x -> x.length() == 1)
         .findFirst()
         .map(Object::toString)
         .orElse("");
