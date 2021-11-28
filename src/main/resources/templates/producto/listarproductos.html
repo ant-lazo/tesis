@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<html xmlns:th="http://www.thymeleaf.org" />
+<head th:replace="layout/layout :: head"></head>
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	
+	<!--  dfadfadfadfadfadfadfadf -->
+
+	<div class="container py-4" sec:authorize="hasRole('ROLE_USER')">
+
+		<div class="card bg-light border-info">
+
+			<div class="card-header">
+				<div class="row">
+					<h4 class="text-info col-8" th:text="${titulo}"></h4>
+				
+					<form sec:authorize="hasRole('ROLE_USER')" class="form-inline ml-4"
+					th:action="@{listarproductos}" method="GET"
+					>
+					  <input type="hidden" name="page" th:value="${pagep}">
+				      <input id="idInput" name="nombre" th:value="${nombre}" class="form-control mr-sm-2 float-right" type="search" placeholder="Buscar Productos" aria-label="Search">
+				      <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Buscar</button>
+				    </form>
+				</div>
+			</div>
+			<div class="card-body">
+
+				<h4 class="card-title">
+					<a sec:authorize="hasRole('ROLE_ADMIN')"
+						class="btn btn-info btn-xs" th:href="@{form}">Crear
+						Producto</a>
+					<a  sec:authorize="hasRole('ROLE_USER')"
+						class="btn btn-success btn-xs mr-4 my-2"
+						th:href="@{'/producto/listarproductos'(format=xlsx)}">EXCEL</a>
+					<!--<a class="btn btn-outline-secondary btn-xs float-right mx-2"
+						th:href="@{'/listar'(format=xml)}">XML</a>
+					<a class="btn btn-warning btn-xs float-right"
+						th:href="@{'/listar'(format=json)}">JSON</a>-->
+				</h4>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<!-- <th sec:authorize="hasRole('ROLE_USER')">Id</th> -->
+							<th sec:authorize="hasRole('ROLE_USER')">Código</th>
+							<th th:text="#{text.producto.nombre}"></th>
+							<th th:text="#{text.producto.laboratorio}"></th>
+							<th th:text="#{text.producto.precio}"></th>
+							<th th:text="#{text.producto.stock}"></th>
+							<th th:text="#{text.producto.createAt}"></th>
+							<th sec:authorize="hasRole('ROLE_USER')">Ver</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">Editar</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="producto: ${productos}">
+							<!-- <td sec:authorize="hasRole('ROLE_USER')"><a
+								class="btn btn-success btn-xs" 
+								th:href="@{/producto/ver/}+${producto.id}" th:text="${producto.id}"></a></td> -->
+							<td sec:authorize="hasRole('ROLE_USER')"><a
+								class="btn btn-success btn-xs" 
+								th:href="@{/producto/ver/}+${producto.id}" th:text="${producto.codigo}"></a></td>
+							<td th:text="${producto.nombre}"></td>
+							<td th:text="${producto.laboratorio}"></td>
+							<td th:text="'S/. '+${producto.precio}+'0'"></td>
+							<td th:text="${producto.stock}"></td>
+							<td th:text="${producto.createAt}"></td>
+							<td sec:authorize="hasRole('ROLE_USER')"><a
+								class="btn btn-info btn-xs" th:href="@{'/producto/ver/'+${producto.id}}">detalle</a></td>
+							<td sec:authorize="hasRole('ROLE_ADMIN')"><a
+								class="btn btn-success btn-xs" th:href="@{/producto/form/}+${producto.id}">editar</a></td>
+							<td sec:authorize="hasRole('ROLE_ADMIN')"><a
+								class="btn btn-danger btn-xs"
+								th:href="@{'/producto/eliminar/'+${producto.id}}"
+								onclick="return confirm('Estas seguro que quieres eliminar?');">eliminar</a></td>
+						</tr>
+					</tbody>
+				</table>
+				<nav th:replace="paginator-nav :: paginator"></nav>
+			</div>
+		</div>
+	</div>
+
+	<!-- fadkfjaldkfjadkfja�ldkfja�kdf -->
+
+	<div id="cuadrarfooter"></div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

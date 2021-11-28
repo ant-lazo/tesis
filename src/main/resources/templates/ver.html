@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-light">
+
+			<div class="card-header text-success" th:text="${titulo}"></div>
+			<div class="card-body">
+			
+			<h4 class="card-title">			
+			<a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-info btn-xs"
+						th:href="@{'/factura/form/' + ${cliente.id}}"
+						th:text="'crear comprobante'"></a>
+			</h4>
+			
+				<!-- <img th:if="${#strings.length(cliente.foto) > 0}" -->
+				<img th:if="${cliente.foto !=  null && cliente.foto != ''}"
+					class="img-thumbnail rounded float-left" style="max-width: 25%;"
+					th:src="@{'/uploads/' + ${cliente.foto}}" >
+
+				<ul class="list-group">
+					<li class="list-group-item" th:text="'Código: '+${cliente.codigo}"></li>
+					<li class="list-group-item" th:text="'Nombre: '+${cliente.nombre}"></li>
+					<li class="list-group-item" th:text="'Apellido: '+${cliente.apellido}"></li>
+					<li class="list-group-item" th:text="'Email: '+${cliente.email}"></li>
+					<li class="list-group-item" th:text="'Fecha: '+${cliente.createAt}"></li>
+				</ul>
+
+				<div th:if="${#lists.isEmpty(cliente.facturas)}"
+					class="alert alert-info my-4"
+					th:text="'No hay comprobantes asignados para el cliente: '+${cliente.nombre}+' '+${cliente.apellido}"></div>
+
+				 <!-- <div th:if="${#lists.isEmpty(cliente.facturas)}"
+					class="alert alert-info my-4"
+					th:text="'No hay factura asignada para el cliente: '+${cliente.nombre}+' '+${cliente.apellido}"></div> -->
+
+				<table th:if="${not #lists.isEmpty(cliente.facturas)}"
+					class="table table-bordered table-striped my-4">
+					<thead>
+						<tr class="table-warning">
+							<!-- <th>folio</th> -->
+							<th>código</th>
+							<th>descripcion</th>
+							<th>fecha</th>
+							<th>total</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">ver</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">anular</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="factura: ${cliente.facturas}">
+							<!-- <th th:text="${factura.id}"></th> -->
+							<th th:text="${factura.codigo}"></th>
+							<th th:text="${factura.descripcion}"></th>
+							<th th:text="${factura.createAt}"></th>
+							<th th:text="${factura.total}"></th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-warning btn-xs" th:href="@{'/factura/ver/'+${factura.id}}" th:text="'detalle'"></a></th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger btn-xs" th:href="@{'/factura/anular/'+${factura.id}}" th:text="'anular'"
+							onclick="return confirm('¿Estas seguro de anular el comprobante?');"></a></th>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</div>
+	<div id="cuadrarfooter"></div>
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+</html>

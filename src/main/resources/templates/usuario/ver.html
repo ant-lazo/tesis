@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmls:sec="http://www.thymeleaf.org/extras/spring-security" />
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+	
+	<div class="container py-4" sec:authorize="hasRole('ROLE_USER')">
+	
+	
+	</div>
+	
+	<div id="cuadrarfooter"></div>
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+</html>

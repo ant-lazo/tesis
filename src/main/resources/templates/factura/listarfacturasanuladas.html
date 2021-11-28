@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<html xmlns:th="http://www.thymeleaf.org" />
+<head th:replace="layout/layout :: head"></head>
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<!--  dfadfadfadfadfadfadfadf -->
+
+	<div class="container py-4" sec:authorize="hasRole('ROLE_USER')">
+
+		<div class="card bg-light border-danger">
+
+			<div class="card-header"><h4 class="text-danger" th:text="${titulo}"></h4></div>
+			<div class="card-body">
+
+				<h4 class="card-title">
+					<!-- <a sec:authorize="hasRole('ROLE_USER')"
+						class="btn btn-warning btn-xs" th:href="@{form}">Crear
+						Comprobante</a> -->
+					<!-- <a class="btn btn-secondary btn-xs float-right mx-2 mr-4"
+						th:href="@{'/listarfactura'(format=csv)}">EXCEL</a> -->
+					<!--<a class="btn btn-outline-secondary btn-xs float-right mx-2"
+						th:href="@{'/listar'(format=xml)}">XML</a>
+					<a class="btn btn-warning btn-xs float-right"
+						th:href="@{'/listar'(format=json)}">JSON</a>-->
+				</h4>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<!-- <th sec:authorize="hasRole('ROLE_USER')">Folio</th> -->
+							<th sec:authorize="hasRole('ROLE_USER')">Código</th>
+							<th th:text="#{text.factura.descripcion}"></th>
+							<th th:text="#{text.factura.createdBy}"></th>
+							<th th:text="#{text.factura.createAt}"></th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')" th:text="#{text.factura.total}"></th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">Habilitar</th>
+							<th sec:authorize="hasRole('ROLE_USER')">Ver</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="factura: ${facturas}">
+							<!-- <td sec:authorize="hasRole('ROLE_USER')"><a
+								class="btn btn-success btn-xs"
+								th:href="@{'/factura/ver/'+${factura.id}}" th:text="${factura.id}"></a></td>-->
+							<td sec:authorize="hasRole('ROLE_USER')"><a
+								class="btn btn-success btn-xs"
+								th:href="@{'/factura/ver/'+${factura.id}}" th:text="${factura.codigo}"></a></td>
+							<td th:text="${factura.descripcion}"></td>
+							<td th:text="${factura.createdBy}"></td>
+							<td th:text="${factura.createAt}"></td>
+							<td sec:authorize="hasRole('ROLE_ADMIN')" th:text="'S/. '+${factura.total}+'0'"></td>
+							<td sec:authorize="hasRole('ROLE_ADMIN')"><a
+								class="btn btn-info btn-xs"
+								th:href="@{'/factura/habilitar/'+${factura.id}}"
+								onclick="return confirm('Estas seguro que quieres habilitar el comprobante?');">habilitar</a></td>
+							<td sec:authorize="hasRole('ROLE_USER')"><a
+								class="btn btn-warning btn-xs" th:href="@{'/factura/ver/'+${factura.id}}">detalle</a></td>
+							<td sec:authorize="hasRole('ROLE_ADMIN')"><a
+								class="btn btn-danger btn-xs"
+								th:href="@{'/factura/eliminarsc/'+${factura.id}}"
+								onclick="return confirm('Estas seguro que quieres eliminar?');">eliminar</a></td>
+						</tr>
+					</tbody>
+				</table>
+				<nav th:replace="paginator-nav :: paginator"></nav>
+			</div>
+		</div>
+	</div>
+
+	<!-- fadkfjaldkfjadkfja�ldkfja�kdf -->
+
+	<div id="cuadrarfooter"></div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

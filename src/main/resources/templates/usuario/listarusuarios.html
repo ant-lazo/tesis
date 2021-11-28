@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmls:sec="http://www.thymeleaf.org/extras/spring-security" />
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+	
+	<div class="container py-4" sec:authorize="hasRole('ROLE_USER')">
+
+		<div class="card bg-light border-danger">
+
+			<div class="card-header"><h4 class="text-danger" th:text="${titulo}"></h4></div>
+			<div class="card-body">
+			
+			<h4 class="card-title">
+					<a sec:authorize="hasRole('ROLE_ADMIN')"
+						class="btn btn-danger btn-xs" th:href="@{form}">Crear
+						Usuario</a>
+					<!--<a class="btn btn-secondary btn-xs float-right mx-2 mr-4"
+						th:href="@{'/listar'(format=csv)}">EXCEL</a>
+					<a class="btn btn-outline-secondary btn-xs float-right mx-2"
+						th:href="@{'/listar'(format=xml)}">XML</a>
+					<a class="btn btn-warning btn-xs float-right"
+						th:href="@{'/listar'(format=json)}">JSON</a>-->
+			</h4>
+			<hr />
+			
+			<div class="row">
+				
+				<div class="col-4" th:each="usuario: ${usuarios}">
+					<div class="card text-dark border-warning mb-3" style="max-width: 20rem;">
+					  <div class="card-header alert-warning" th:text="${usuario.nombre}+' '+${usuario.apellido}"></div>
+					  <div class="card-body">
+								
+								<!-- <img  th:if="${usuario.foto == null OR usuario.foto == ''}" -->
+					  			<!-- <img th:if="${#strings.length(usuario.foto) > 0}" -->
+					  			
+					  			
+								
+								<img th:if="${usuario.foto==null OR usuario.foto==''}"
+								class="img-thumbnail rounded" style="max-width: 100%;"
+								 th:src="@{/images/userdefault.png}">
+
+								<img  th:if="${#strings.length(usuario.foto) > 0}"
+								class="img-thumbnail rounded" style="max-width: 100%;"
+								th:src="@{'/uploads/' + ${usuario.foto}}" th:alt="${usuario.foto}" >
+								 
+						<hr>
+					    <h5 class="card-title">Detalle del Usuario:</h5>
+					    <p class="card-text">Username: <span th:text="${usuario.username}"></span></p>
+					    <p class="card-text">Email: <span th:text="${usuario.email}"></span></p>
+					    <p class="card-text">Telefono: <span th:text="${usuario.telefono}"></span></p>
+					    <p th:if="${usuario.enabled == true}" th:text="'Estado: Habilitado'"></p>
+						<p th:if="${usuario.enabled == false}" th:text="'Estado: Inhabilitado'"></p>
+					    
+					    <a  th:if="${usuario.username} != 'admin'" sec:authorize="hasRole('ROLE_ADMIN')"
+						class="btn btn-success btn-xs float-right mr-4"
+						th:href="@{/usuario/form/}+${usuario.id}">editar</a>
+						<h3  th:if="${usuario.username} == 'admin'" sec:authorize="hasRole('ROLE_ADMIN')"
+						class="text-success text-center">Usuario Admin</h3>
+						
+					  </div>
+					  
+					</div>
+				</div>
+					
+			</div>
+			<nav th:replace="paginator-nav :: paginator"></nav>
+			</div>
+		</div>
+	</div>
+	
+	<div id="cuadrarfooter"></div>
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+</html>
