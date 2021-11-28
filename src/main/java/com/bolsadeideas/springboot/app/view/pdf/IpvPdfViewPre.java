@@ -26,7 +26,7 @@ public class IpvPdfViewPre extends AbstractPdfView{
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		
-		URL imageUrl = getClass().getResource("/static/images/ipvpre.jpg");
+		URL imageUrl = getClass().getResource("/static/images/ipvpre.png");
 		Image logo = Image.getInstance(imageUrl);
 		
 		PdfPTable tablaimg= new PdfPTable(1);

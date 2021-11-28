@@ -22,9 +22,9 @@ public class PcvPdfViewPre extends AbstractPdfView{
 	@Override
 	protected void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter writer,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		URL imageUrl = getClass().getResource("/static/images/pcvpre.jpeg");
+		URL imageUrl = getClass().getResource("/static/images/pcvpre.png");
 		Image logo = Image.getInstance(imageUrl);
-		
+		/*dfdfa*/
 		PdfPTable tablaimg= new PdfPTable(1);
 		tablaimg.setSpacingAfter(20);
 		PdfPCell celd=null;
