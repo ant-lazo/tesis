@@ -37,7 +37,7 @@
             }
         })
 
-        let url1 = 'https://mikarfarma.herokuapp.com/api/facturas/pcv/10'
+        let url1 = 'https://mikarfarma.herokuapp.com/api/facturas/pcv/14'
         //let url1 = 'http://localhost:8080/api/facturas/pcv/10'
         fetch(url1)
             .then( response => response.json() )
@@ -92,7 +92,7 @@
             }
         })
 
-        let url2 = 'https://mikarfarma.herokuapp.com/api/facturas/ipv/10'
+        let url2 = 'https://mikarfarma.herokuapp.com/api/facturas/ipv/14'
         //let url2 = 'http://localhost:8080/api/facturas/ipv/10'
         fetch(url2)
             .then( response => response.json() )
@@ -107,7 +107,160 @@
                 myChart2.update()
             });
             console.log(myChart2.data)
-        }    
+        } 
+        
+        //Pre-Test
+        
+        const charts1 = document.querySelectorAll(".chartPost1");
+		
+			charts1.forEach(function (chart) {
+			  var ctx = chart.getContext("2d");
+			  var myChart = new Chart(ctx, {
+			    type: "bar",
+			    data: {
+			      labels: [
+			      "2021-05-02", 
+			      "2021-05-01", 
+			      "2021-04-30",  
+			      "2021-04-29", 
+			      "2021-04-28",
+			      "2021-04-27",
+			      "2021-04-26",
+			      "2021-04-25",
+			      "2021-04-24",
+			      "2021-04-23",
+			      "2021-04-22",
+			      "2021-04-21",
+			      "2021-04-20",
+			      "2021-04-19"
+			      ],
+			      datasets: [
+			        {
+			          label: "Porcentaje de Crecimiento en Ventas",
+			          data: [
+			          11.75,
+			          13.47,
+			          1.43,
+			          -5.97,
+			          -3.30,
+			          -2.46,
+			          -9.51,
+			          5.72,
+			          12.49,
+			          4.28,
+			          -0.47,
+			          -4.39,
+			          -4.99,
+			          -10.95
+			          ],
+			          backgroundColor: [
+			            "rgba(255, 99, 132, 0.2)",
+			            "rgba(54, 162, 235, 0.2)",
+			            "rgba(255, 206, 86, 0.2)",
+			            "rgba(75, 192, 192, 0.2)",
+			            "rgba(153, 102, 255, 0.2)",
+			            "rgba(255, 159, 64, 0.2)",
+			          ],
+			          borderColor: [
+			            "rgba(255, 99, 132, 1)",
+			            "rgba(54, 162, 235, 1)",
+			            "rgba(255, 206, 86, 1)",
+			            "rgba(75, 192, 192, 1)",
+			            "rgba(153, 102, 255, 1)",
+			            "rgba(255, 159, 64, 1)",
+			          ],
+			          borderWidth: 1,
+			        },
+			      ],
+			    },
+			    options: {
+			      scales: {
+			        y: {
+			          beginAtZero: true,
+			        },
+			      },
+			    },
+			  });
+			});
+        
+        
+           const charts2 = document.querySelectorAll(".chartPost2");
+		
+			charts2.forEach(function (chart) {
+			  var ctx = chart.getContext("2d");
+			  var myChart = new Chart(ctx, {
+			    type: "bar",
+			    data: {
+			      labels: [
+			      "2021-05-02", 
+			      "2021-05-01", 
+			      "2021-04-30", 
+			      "2021-04-29", 
+			      "2021-04-28",
+			      "2021-04-27",
+			      "2021-04-26",
+			      "2021-04-25",
+			      "2021-04-24",
+			      "2021-04-23",
+			      "2021-04-22",
+			      "2021-04-21",
+			      "2021-04-20",
+			      "2021-04-19"
+			      ],
+			      datasets: [
+			        {
+			          label: "Indice de Productividad en Ventas",
+			          data: [
+			          22.43,
+			          20.08,
+			          17.69,
+			          17.44,
+			          18.55,
+			          19.18,
+			          19.67,
+			          21.73,
+			          20.56,
+			          18.28,
+			          17.53,
+			          17.61,
+			          18.42,
+			          19.38
+			          ],
+			          backgroundColor: [
+			            "rgba(255, 99, 132, 0.2)",
+			            "rgba(54, 162, 235, 0.2)",
+			            "rgba(255, 206, 86, 0.2)",
+			            "rgba(75, 192, 192, 0.2)",
+			            "rgba(153, 102, 255, 0.2)",
+			            "rgba(255, 159, 64, 0.2)",
+			          ],
+			          borderColor: [
+			            "rgba(255, 99, 132, 1)",
+			            "rgba(54, 162, 235, 1)",
+			            "rgba(255, 206, 86, 1)",
+			            "rgba(75, 192, 192, 1)",
+			            "rgba(153, 102, 255, 1)",
+			            "rgba(255, 159, 64, 1)",
+			          ],
+			          borderWidth: 1,
+			        },
+			      ],
+			    },
+			    options: {
+			      scales: {
+			        y: {
+			          beginAtZero: true,
+			        },
+			      },
+			    },
+			  });
+			});
+		
+			$(document).ready(function () {
+			  $(".data-table").each(function (_, table) {
+			    $(table).DataTable();
+			  });
+			});
 			
 	</script>
 </body>

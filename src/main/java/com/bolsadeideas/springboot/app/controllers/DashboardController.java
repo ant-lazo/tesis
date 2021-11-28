@@ -139,5 +139,15 @@ public class DashboardController {
 		model.addAttribute("pcv",topPcvList);
 		return "dashboard/pcv";
 	}
+	
+	@GetMapping("/ipvpre")
+	public String mostrarIpvpre() {
+		return "dashboard/ipvpre";
+	}
+	
+	@GetMapping("/pcvpre")
+	public String mostrarPcvpre() {
+		return "dashboard/pcvpre";
+	}
 
 }

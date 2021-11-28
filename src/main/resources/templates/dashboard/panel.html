@@ -11,7 +11,7 @@
 	
 	
 
-	<div class="container py-4 px-4" sec:authorize="hasRole('ROLE_USER')">
+	<div class="container py-2 px-4" sec:authorize="hasRole('ROLE_USER')">
 		
 		
 		<!--<from>
@@ -24,7 +24,7 @@
 		</from>-->
 		
 		
-		<div class="row">
+		<div class="row py-4">
 			<div class="col-6">
 				<div class="card bg-light border-success">
 		
@@ -47,6 +47,10 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		
+		<div class="px-4">
+			<h4>Post-test</h4>
 		</div>
 		
 		<div class="row py-4">
@@ -74,6 +78,34 @@
 			</div>
 		</div>
 		
+		<div class="px-4">
+		<h4>Pre-test</h4>
+		</div>
+		
+		<div class="row py-4">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+					<a class="btn btn-secondary btn-xs mx-2"
+						th:href="@{'/dashboard/pcvpre'(format=pdf)}">Post-Test PCV</a>
+					</div>
+					<div class="card-body">
+						<canvas class="chartPost1" width="400" height="200"></canvas>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+					<a class="btn btn-secondary btn-xs"
+						th:href="@{'/dashboard/ipvpre'(format=pdf)}">Post-Test IPV</a>
+					</div>
+					<div class="card-body">
+						<canvas class="chartPost2" width="400" height="200"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
 		
 	</div>
 
