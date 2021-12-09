@@ -8,10 +8,10 @@
 		<version>2.3.0.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.bolsadeideas.springboot.jemma.app</groupId>
-	<artifactId>spring-boot-jemma</artifactId>
+	<groupId>com.bolsadeideas.springboot.mikarfarma.app</groupId>
+	<artifactId>spring-boot-mikarfarma</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-boot-jemma</name>
+	<name>spring-boot-mikarfarma</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
