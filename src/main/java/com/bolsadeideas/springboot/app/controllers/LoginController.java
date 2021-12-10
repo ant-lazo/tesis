@@ -31,6 +31,8 @@ public class LoginController {
 			model.addAttribute("info", "Cerro sesión correctamente!");
 		}
 		
+		model.addAttribute("titulo", "Inicio de Sesión");
+		
 		return "login";
 	}
 	
