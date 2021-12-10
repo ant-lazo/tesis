@@ -10,5 +10,6 @@ import com.bolsadeideas.springboot.app.models.entity.IpvIndicador;
 
 public interface IIpvDao extends PagingAndSortingRepository<IpvIndicador, Long> {
 	
-	
+	@Query("SELECT CASE WHEN COUNT(i) > 0 THEN 'true' ELSE 'false' END FROM IpvIndicador i WHERE i.fecha = ?1")
+    public Boolean existsByCreateAt(String fecha);
 }

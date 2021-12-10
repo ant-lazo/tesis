@@ -60,10 +60,13 @@ public class FacturaRestController {
 		listfactura = em.createQuery("select f from Factura f where f.createAt ='"+hoy+"'").getResultList();
 		
 		if(listfactura==null || listfactura.size()==0) {
-			ipv.setFecha(hoy);
-			ipv.setValorReciente(vrd);
-			ipv.setResultado(vrd/12);
-			ipvservice.save(ipv);
+			if(!ipvservice.existsByCreateAt(hoy)) {
+				ipv.setFecha(hoy);
+				ipv.setValorReciente(vrd);
+				ipv.setResultado(vrd/12);
+				ipvservice.save(ipv);
+				return (List<IpvIndicador>) ipvservice.findAll();
+			}
 			return (List<IpvIndicador>) ipvservice.findAll();
 		}else{
 			for(Factura f : listfactura) {
