@@ -115,7 +115,14 @@
 		
 		<div sec:authorize="isAuthenticated()" class="container text-white">
 		<p>
-			Usuario: <span sec:authentication="name"></span> Rol:<span sec:authentication="principal.authorities"></span>
+			Usuario: <span sec:authentication="name"></span> 
+			Rol:  <span sec:authorize="!hasRole('ROLE_ADMIN')" th:text="'Vendedor'"></span>
+				  <span sec:authorize="hasRole('ROLE_ADMIN')" th:text="'Administrador'"></span>
+			
+			<!--<span sec:authentication="principal.authorities"></span>-->
+			<!--
+			<span style="float:right" th:if="${factura.enabled == true}" th:text="'Estado: Comprobante Habilitado'"></span>
+			-->		
 		</p>
 		</div>
 		
