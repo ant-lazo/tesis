@@ -57,7 +57,6 @@ INSERT INTO facturas_items(cantidad, factura_id, producto_id)VALUES(6, 14, 5);
 INSERT INTO facturas(id, codigo, descripcion, observacion, cliente_id, create_at, preciototal, enabled)VALUES(15, 'CMP0015', 'Comprobante farmacia 15', null, null, NOW(), 15.5, 1);
 INSERT INTO facturas_items(cantidad, factura_id, producto_id)VALUES(5, 15, 5);
 
-
 INSERT INTO users (id, username, password, enabled,nombre, apellido, telefono, email, foto) VALUES (1, 'admin','$2a$10$tpc.TWAQJLVnGBG7zd0ahO1znftsuyOc31pqu9msgPM8d/RcqYEdm',1,'karina','jorge','956398863','admin@gmail.com', '');
 
 INSERT INTO authorities (user_id, authority) VALUES (1,'ROLE_ADMIN');

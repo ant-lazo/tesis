@@ -60,13 +60,15 @@ public class FacturaRestController {
 		listfactura = em.createQuery("select f from Factura f where f.createAt ='"+hoy+"'").getResultList();
 		
 		if(listfactura==null || listfactura.size()==0) {
-			if(ipvservice.existsByCreateAt(hoy)) {
+			if(!ipvservice.existsByCreateAt(hoy)) {
+				System.out.println("dentro");
 				ipv.setFecha(hoy);
 				ipv.setValorReciente(vrd);
 				ipv.setResultado(vrd/12);
 				ipvservice.save(ipv);
 				return (List<IpvIndicador>) ipvservice.findAll();
 			}
+			System.out.println("fuera");
 			return (List<IpvIndicador>) ipvservice.findAll();
 		}else{
 			for(Factura f : listfactura) {
@@ -113,16 +115,18 @@ public class FacturaRestController {
 			List<Factura> listfactura = new ArrayList<Factura>();
 			listfactura = em.createQuery("select f from Factura f where f.createAt ='"+hoy+"'").getResultList();
 				if(listfactura==null || listfactura.size()==0) {
-					pcv.setFecha(hoy);
-					pcv.setValorAnterior(vad);
-					pcv.setValorReciente(vrd);
-					if(vad<=0) {
-						pcv.setResultado(100.0);
-					}else{
-						pcv.setResultado(((vrd/vad)-1)*100);
+					if(!pcvservice.existsByCreateAt(hoy)) {
+						pcv.setFecha(hoy);
+						pcv.setValorAnterior(vad);
+						pcv.setValorReciente(vrd);
+						if(vad<=0) {
+							pcv.setResultado(100.0);
+						}else{
+							pcv.setResultado(((vrd/vad)-1)*100);
+						}
+						pcvservice.save(pcv);
+						return (List<PcvIndicador>) pcvservice.findAll();
 					}
-					pcvservice.save(pcv);
-					System.out.println("HOla3");
 					return (List<PcvIndicador>) pcvservice.findAll();
 				}else {
 					for(Factura f : listfactura) {
@@ -164,11 +168,16 @@ public class FacturaRestController {
 		listfactura = em.createQuery("select f from Factura f where f.createAt ='"+hoy+"'").getResultList();
 		
 		if(listfactura==null || listfactura.size()==0) {
-			ipv.setFecha(hoy);
-			ipv.setValorReciente(vrd);
-			ipv.setResultado(vrd/12);
-			ipvservice.save(ipv);
-			
+			if(!ipvservice.existsByCreateAt(hoy)) {
+				ipv.setFecha(hoy);
+				ipv.setValorReciente(vrd);
+				ipv.setResultado(vrd/12);
+				ipvservice.save(ipv);
+				Pageable pageRequest = PageRequest.of(page, 10,Sort.by(Sort.Direction.DESC,"id"));
+				Page<IpvIndicador> topPage = ipvservice.findAll(pageRequest);
+				List<IpvIndicador> topIpvList = topPage.getContent();
+				return topIpvList;
+			}
 			Pageable pageRequest = PageRequest.of(page, 10,Sort.by(Sort.Direction.DESC,"id"));
 			Page<IpvIndicador> topPage = ipvservice.findAll(pageRequest);
 			List<IpvIndicador> topIpvList = topPage.getContent();
@@ -223,15 +232,21 @@ public class FacturaRestController {
 			List<Factura> listfactura = new ArrayList<Factura>();
 			listfactura = em.createQuery("select f from Factura f where f.createAt ='"+hoy+"'").getResultList();
 				if(listfactura==null || listfactura.size()==0) {
-					pcv.setFecha(hoy);
-					pcv.setValorAnterior(vad);
-					pcv.setValorReciente(vrd);
-					if(vad<=0) {
-						pcv.setResultado(100.0);
-					}else{
-						pcv.setResultado(((vrd/vad)-1)*100);
+					if(!pcvservice.existsByCreateAt(hoy)) {
+						pcv.setFecha(hoy);
+						pcv.setValorAnterior(vad);
+						pcv.setValorReciente(vrd);
+						if(vad<=0) {
+							pcv.setResultado(100.0);
+						}else{
+							pcv.setResultado(((vrd/vad)-1)*100);
+						}
+						pcvservice.save(pcv);
+						Pageable pageRequest = PageRequest.of(page, 10,Sort.by(Sort.Direction.DESC,"id"));
+						Page<PcvIndicador> topPage = pcvservice.findAll(pageRequest);
+						List<PcvIndicador> topPcvList = topPage.getContent();
+						return topPcvList;
 					}
-					pcvservice.save(pcv);
 					Pageable pageRequest = PageRequest.of(page, 10,Sort.by(Sort.Direction.DESC,"id"));
 					Page<PcvIndicador> topPage = pcvservice.findAll(pageRequest);
 					List<PcvIndicador> topPcvList = topPage.getContent();
@@ -279,11 +294,16 @@ public class FacturaRestController {
 		listfactura = em.createQuery("select f from Factura f where f.createAt ='"+hoy+"'").getResultList();
 		
 		if(listfactura==null || listfactura.size()==0) {
-			ipv.setFecha(hoy);
-			ipv.setValorReciente(vrd);
-			ipv.setResultado(vrd/12);
-			ipvservice.save(ipv);
-			
+			if(!ipvservice.existsByCreateAt(hoy)) {
+				ipv.setFecha(hoy);
+				ipv.setValorReciente(vrd);
+				ipv.setResultado(vrd/12);
+				ipvservice.save(ipv);
+				Pageable pageRequest = PageRequest.of(page, 14,Sort.by(Sort.Direction.DESC,"id"));
+				Page<IpvIndicador> topPage = ipvservice.findAll(pageRequest);
+				List<IpvIndicador> topIpvList = topPage.getContent();
+				return topIpvList;
+			}
 			Pageable pageRequest = PageRequest.of(page, 14,Sort.by(Sort.Direction.DESC,"id"));
 			Page<IpvIndicador> topPage = ipvservice.findAll(pageRequest);
 			List<IpvIndicador> topIpvList = topPage.getContent();
@@ -338,15 +358,21 @@ public class FacturaRestController {
 			List<Factura> listfactura = new ArrayList<Factura>();
 			listfactura = em.createQuery("select f from Factura f where f.createAt ='"+hoy+"'").getResultList();
 				if(listfactura==null || listfactura.size()==0) {
-					pcv.setFecha(hoy);
-					pcv.setValorAnterior(vad);
-					pcv.setValorReciente(vrd);
-					if(vad<=0) {
-						pcv.setResultado(100.0);
-					}else{
-						pcv.setResultado(((vrd/vad)-1)*100);
+					if(!pcvservice.existsByCreateAt(hoy)) {
+						pcv.setFecha(hoy);
+						pcv.setValorAnterior(vad);
+						pcv.setValorReciente(vrd);
+						if(vad<=0) {
+							pcv.setResultado(100.0);
+						}else{
+							pcv.setResultado(((vrd/vad)-1)*100);
+						}
+						pcvservice.save(pcv);
+						Pageable pageRequest = PageRequest.of(page, 14,Sort.by(Sort.Direction.DESC,"id"));
+						Page<PcvIndicador> topPage = pcvservice.findAll(pageRequest);
+						List<PcvIndicador> topPcvList = topPage.getContent();
+						return topPcvList;
 					}
-					pcvservice.save(pcv);
 					Pageable pageRequest = PageRequest.of(page, 14,Sort.by(Sort.Direction.DESC,"id"));
 					Page<PcvIndicador> topPage = pcvservice.findAll(pageRequest);
 					List<PcvIndicador> topPcvList = topPage.getContent();
