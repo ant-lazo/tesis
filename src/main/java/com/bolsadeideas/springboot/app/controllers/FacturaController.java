@@ -152,6 +152,19 @@ public class FacturaController {
 				model.addAttribute("warning", "No hay suficiente Stock para realizar la venta del producto ".concat(producto.getNombre())+"!");
 				return "factura/form";
 			}
+		}
+		
+		for(int i=0;i<itemId.length;i++) {
+			Producto producto= clienteService.findProductoById(itemId[i]);
+			
+			Integer nuevostock = producto.getStock()-cantidad[i];
+			
+			/*if(nuevostock < 0) {
+				model.addAttribute("titulo", "Crear Comprobante");
+				model.addAttribute("error", "No se pudo generar el comprobante !");
+				model.addAttribute("warning", "No hay suficiente Stock para realizar la venta del producto ".concat(producto.getNombre())+"!");
+				return "factura/form";
+			}*/
 			
 			producto.setStock(nuevostock);
 			clienteService.saveProducto(producto);
@@ -160,7 +173,7 @@ public class FacturaController {
 			linea.setCantidad(cantidad[i]);
 			linea.setProducto(producto);
 			factura.addItemFactura(linea);
-			
+			log.info("tampoco deberia salir esto");
 			log.info("ID: "+ itemId[i].toString() +", CANTIDAD: "+ cantidad[i].toString());
 		}
 		
@@ -372,9 +385,22 @@ public class FacturaController {
 			if(nuevostock < 0) {
 				model.addAttribute("titulo", "Crear Comprobante");
 				model.addAttribute("error", "No se pudo generar el comprobante !");
-				model.addAttribute("warning", "No hay suficiente Stock para realizar la venta del producto ".concat(producto.getNombre())+", cantidad en Stock '"+producto.getStock()+"' !");
+				model.addAttribute("warning", "No hay suficiente Stock para realizar la venta del producto ".concat(producto.getNombre())+"!");
 				return "factura/formsc";
 			}
+		}
+		
+		for(int i=0;i<itemId.length;i++) {
+			Producto producto= clienteService.findProductoById(itemId[i]);
+			
+			Integer nuevostock = producto.getStock()-cantidad[i];
+			
+			/*if(nuevostock < 0) {
+				model.addAttribute("titulo", "Crear Comprobante");
+				model.addAttribute("error", "No se pudo generar el comprobante !");
+				model.addAttribute("warning", "No hay suficiente Stock para realizar la venta del producto ".concat(producto.getNombre())+", cantidad en Stock '"+producto.getStock()+"' !");
+				return "factura/formsc";
+			}*/
 			
 			producto.setStock(nuevostock);
 			clienteService.saveProducto(producto);
