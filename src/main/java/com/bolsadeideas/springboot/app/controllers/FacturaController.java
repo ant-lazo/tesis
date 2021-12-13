@@ -1,6 +1,7 @@
 package com.bolsadeideas.springboot.app.controllers;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -45,6 +46,8 @@ import com.bolsadeideas.springboot.app.models.entity.ItemFactura;
 import com.bolsadeideas.springboot.app.models.entity.Producto;
 import com.bolsadeideas.springboot.app.models.service.IClienteService;
 import com.bolsadeideas.springboot.app.util.paginator.PageRender;
+
+import net.bytebuddy.asm.Advice.This;
 
 
 @Controller
@@ -141,30 +144,29 @@ public class FacturaController {
 			return "factura/form";
 		}
 		
-		for(int i=0;i<itemId.length;i++) {
-			Producto producto= clienteService.findProductoById(itemId[i]);
-			
-			Integer nuevostock = producto.getStock()-cantidad[i];
-			
-			if(nuevostock < 0) {
-				model.addAttribute("titulo", "Crear Comprobante");
-				model.addAttribute("error", "No se pudo generar el comprobante !");
-				model.addAttribute("warning", "No hay suficiente Stock para realizar la venta del producto ".concat(producto.getNombre())+"!");
-				return "factura/form";
-			}
-		}
+		List<String> productsWithoutStock = new ArrayList<String>();
 		
 		for(int i=0;i<itemId.length;i++) {
 			Producto producto= clienteService.findProductoById(itemId[i]);
 			
 			Integer nuevostock = producto.getStock()-cantidad[i];
 			
-			/*if(nuevostock < 0) {
-				model.addAttribute("titulo", "Crear Comprobante");
-				model.addAttribute("error", "No se pudo generar el comprobante !");
-				model.addAttribute("warning", "No hay suficiente Stock para realizar la venta del producto ".concat(producto.getNombre())+"!");
-				return "factura/form";
-			}*/
+			if(nuevostock < 0) {
+				productsWithoutStock.add(producto.getNombre().concat(" con Stock "+producto.getStock()+ " !"));
+			}
+		}
+		
+		if(productsWithoutStock.size()>0) {
+			model.addAttribute("titulo", "Crear Comprobante");
+			model.addAttribute("error", "No se pudo generar el comprobante !");
+			model.addAttribute("listProductsWarning", productsWithoutStock);
+			return "factura/formsc";
+		}
+		
+		for(int i=0;i<itemId.length;i++) {
+			Producto producto= clienteService.findProductoById(itemId[i]);
+			
+			Integer nuevostock = producto.getStock()-cantidad[i];
 			
 			producto.setStock(nuevostock);
 			clienteService.saveProducto(producto);
@@ -377,30 +379,29 @@ public class FacturaController {
 			return "factura/formsc";
 		}
 		
-		for(int i=0;i<itemId.length;i++) {
-			Producto producto= clienteService.findProductoById(itemId[i]);
-			
-			Integer nuevostock = producto.getStock()-cantidad[i];
-			
-			if(nuevostock < 0) {
-				model.addAttribute("titulo", "Crear Comprobante");
-				model.addAttribute("error", "No se pudo generar el comprobante !");
-				model.addAttribute("warning", "No hay suficiente Stock para realizar la venta del producto ".concat(producto.getNombre())+"!");
-				return "factura/formsc";
-			}
-		}
+		List<String> productsWithoutStock = new ArrayList<String>();
 		
 		for(int i=0;i<itemId.length;i++) {
 			Producto producto= clienteService.findProductoById(itemId[i]);
 			
 			Integer nuevostock = producto.getStock()-cantidad[i];
 			
-			/*if(nuevostock < 0) {
-				model.addAttribute("titulo", "Crear Comprobante");
-				model.addAttribute("error", "No se pudo generar el comprobante !");
-				model.addAttribute("warning", "No hay suficiente Stock para realizar la venta del producto ".concat(producto.getNombre())+", cantidad en Stock '"+producto.getStock()+"' !");
-				return "factura/formsc";
-			}*/
+			if(nuevostock < 0) {
+				productsWithoutStock.add(producto.getNombre().concat(" con Stock "+producto.getStock()+ " !"));
+			}
+		}
+		
+		if(productsWithoutStock.size()>0) {
+			model.addAttribute("titulo", "Crear Comprobante");
+			model.addAttribute("error", "No se pudo generar el comprobante !");
+			model.addAttribute("listProductsWarning", productsWithoutStock);
+			return "factura/formsc";
+		}
+		
+		for(int i=0;i<itemId.length;i++) {
+			Producto producto= clienteService.findProductoById(itemId[i]);
+			
+			Integer nuevostock = producto.getStock()-cantidad[i];
 			
 			producto.setStock(nuevostock);
 			clienteService.saveProducto(producto);

@@ -99,7 +99,14 @@
 			th:text="${error}"></div>
 		<div class="alert alert-warning" th:if="${warning!=null}"
 			th:text="${warning}"></div>
-		<div class="alert alert-info" th:if="${info!=null}" th:text="${info}"></div>
+		<div class="alert alert-info" th:if="${info!=null}"
+		 	th:text="${info}"></div>
+		<div class="alert alert-warning" th:if="${listProductsWarning!=null}">
+			<span>No hay Stock sufiente para :</span>
+			<ul>
+				<li th:each="variable : ${listProductsWarning}" th:text="${variable}"></li>
+			</ul>
+		</div>
 
 	</header>
 	
