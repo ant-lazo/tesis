@@ -53,7 +53,7 @@ public class PcvPdfView extends AbstractPdfView{
 		PdfPCell celd=null;
 		celd= new PdfPCell(new Phrase("Porcentaje de Crecimiento en Ventas"));
 		celd.setBorder(0);
-		celd.setBackgroundColor(new Color(255, 182, 120));
+		celd.setBackgroundColor(new Color(111, 210, 151));
 		celd.setPadding(8f);
 		celd.setHorizontalAlignment(Element.ALIGN_CENTER);
 		celd.setVerticalAlignment(Element.ALIGN_CENTER);
