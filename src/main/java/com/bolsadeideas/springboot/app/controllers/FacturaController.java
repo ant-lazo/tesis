@@ -382,6 +382,7 @@ public class FacturaController {
 		
 		List<String> productsWithoutStock = new ArrayList<String>();
 		List<ProductError> productsWithStock = new ArrayList<ProductError>();
+		Double productsTotal = 0.0;
 		
 		for(int i=0;i<itemId.length;i++) {
 			Producto producto= clienteService.findProductoById(itemId[i]);
@@ -397,6 +398,7 @@ public class FacturaController {
 				p.setPrecio(producto.getPrecio());
 				p.setCantidad(cantidad[i]);
 				p.setTotal(producto.getPrecio()*cantidad[i]);
+				productsTotal+=p.getTotal();
 				productsWithStock.add(p);
 			}
 		}
@@ -406,6 +408,7 @@ public class FacturaController {
 			model.addAttribute("error", "No se pudo generar el comprobante !");
 			model.addAttribute("listProductsWarning", productsWithoutStock);
 			model.addAttribute("listProducts", productsWithStock);
+			model.addAttribute("productsTotal", productsTotal);
 			return "factura/formsc";
 		}
 		
