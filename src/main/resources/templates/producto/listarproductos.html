@@ -66,7 +66,9 @@
 							<td th:text="${producto.nombre}"></td>
 							<td th:text="${producto.laboratorio}"></td>
 							<td th:text="'S/. '+${producto.precio}+'0'"></td>
-							<td th:text="${producto.stock}"></td>
+							<td th:if="${producto.stock<=10}"><h5><span class="float-right badge badge-pill badge-danger align-middle py-1" th:text="${producto.stock}"></span></h5></td>
+							<td th:if="${producto.stock>10 && producto.stock<=25}"><h5><span class="float-right badge badge-pill badge-warning align-middle py-1 text-light" th:text="${producto.stock}"></span></h5></td>
+							<td th:if="${producto.stock>25}"><h5><span class="float-right badge badge-pill badge-info align-middle py-1" th:text="${producto.stock}"></span></h5></td>		
 							<td th:text="${producto.createAt}"></td>
 							<td sec:authorize="hasRole('ROLE_USER')"><a
 								class="btn btn-info btn-xs" th:href="@{'/producto/ver/'+${producto.id}}">detalle</a></td>

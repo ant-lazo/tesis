@@ -24,3 +24,7 @@
   margin-left: auto;
   margin-right: auto;
 }
+#centrar-badge{
+	 vertical-align:middle;
+	 margin-top: 5px;
+}
