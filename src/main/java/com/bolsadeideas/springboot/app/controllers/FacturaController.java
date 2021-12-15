@@ -43,6 +43,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.bolsadeideas.springboot.app.models.entity.Cliente;
 import com.bolsadeideas.springboot.app.models.entity.Factura;
 import com.bolsadeideas.springboot.app.models.entity.ItemFactura;
+import com.bolsadeideas.springboot.app.models.entity.ProductError;
 import com.bolsadeideas.springboot.app.models.entity.Producto;
 import com.bolsadeideas.springboot.app.models.service.IClienteService;
 import com.bolsadeideas.springboot.app.util.paginator.PageRender;
@@ -380,6 +381,7 @@ public class FacturaController {
 		}
 		
 		List<String> productsWithoutStock = new ArrayList<String>();
+		List<ProductError> productsWithStock = new ArrayList<ProductError>();
 		
 		for(int i=0;i<itemId.length;i++) {
 			Producto producto= clienteService.findProductoById(itemId[i]);
@@ -388,6 +390,14 @@ public class FacturaController {
 			
 			if(nuevostock < 0) {
 				productsWithoutStock.add(producto.getNombre().concat(" con Stock "+producto.getStock()+ " !"));
+			}else {
+				ProductError p = new ProductError();
+				p.setId(producto.getId());
+				p.setNombre(producto.getNombre());
+				p.setPrecio(producto.getPrecio());
+				p.setCantidad(cantidad[i]);
+				p.setTotal(producto.getPrecio()*cantidad[i]);
+				productsWithStock.add(p);
 			}
 		}
 		
@@ -395,6 +405,7 @@ public class FacturaController {
 			model.addAttribute("titulo", "Crear Comprobante");
 			model.addAttribute("error", "No se pudo generar el comprobante !");
 			model.addAttribute("listProductsWarning", productsWithoutStock);
+			model.addAttribute("listProducts", productsWithStock);
 			return "factura/formsc";
 		}
 		
@@ -413,7 +424,6 @@ public class FacturaController {
 			
 			log.info("ID: "+ itemId[i].toString() +", CANTIDAD: "+ cantidad[i].toString());
 		}
-		
 		
 		factura.setEnabled(true);
 		factura.setCreatedBy(authentication.getName());

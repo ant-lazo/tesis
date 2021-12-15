@@ -18,17 +18,6 @@
 				<form th:action="@{/factura/formsc/}" th:object="${factura}"
 					method="post">
 
-
-					<!-- <div class="form-group row">
-						<label class="col-sm-2 col-form-label" th:text="'Cliente'"></label>
-						<div class="col-sm-6">
-							<input
-								th:value="${factura.cliente.nombre}+' '+${factura.cliente.apellido}"
-								class="form-control" disabled="disabled">
-						</div>
-					</div> -->
-
-
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label" th:text="'Descripción'"></label>
 						<div class="col-sm-6">
@@ -38,25 +27,12 @@
 						</div>
 					</div>
 
-
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label" th:text="'Observación'"></label>
 						<div class="col-sm-6">
 							<textarea th:field="*{observacion}" class="form-control"></textarea>
 						</div>
 					</div>
-					
-					<!-- Prueba para indicador pcv -->
-					
-					<!--<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Fecha</label>
-						<div class="col-sm-6">
-							<input type="text" th:field="*{createAt}" class="form-control">
-							<small class="form-text text-danger" th:if="${#fields.hasErrors('createAt')}" th:errors="*{createAt}"></small>
-						</div>
-					</div>-->
-					
-					<!-- -->
 
 					<div class="form-group row">
 						<label for="buscar_producto" class="col-sm-2 col-form-label"
@@ -83,6 +59,17 @@
 						</thead>
 
 						<tbody>
+							<tr th:each="producto: ${listProducts}" th:id="'row_'+${producto.id}">
+								<td class="d-none"><input type="hidden" th:value="${producto.id}"
+								name="item_id[]"></td>
+								<td th:text="${producto.nombre}"></td>
+								<td th:text="${producto.precio}"></td>
+								<td><input type="number" th:value="${producto.cantidad}" name="cantidad[]"
+								id="cantidad_{ID}" class="form-control col-sm-4"
+								th:onchange="'itemsHelper.calcularImporte('+${producto.id}+','+${producto.precio}+',this.value);'"></td>
+								<td><span th:id="'total_importe_'+${producto.id}" th:text="${producto.total}+'0'"></span></td>
+								<td><a href="#" class="btn btn-danger btn-xs" th:onclick="'itemsHelper.eliminarLineaFactura('+${producto.id}+');'">x</a></td>
+							</tr>
 						</tbody>
 
 					</table>
