@@ -74,11 +74,22 @@
 						</thead>
 
 						<tbody>
+							<tr th:each="producto: ${listProducts}" th:id="'row_'+${producto.id}">
+								<td class="d-none"><input type="hidden" th:value="${producto.id}"
+								name="item_id[]"></td>
+								<td th:text="${producto.nombre}"></td>
+								<td th:text="${producto.precio}"></td>
+								<td><input type="number" th:value="${producto.cantidad}" name="cantidad[]"
+								id="cantidad_{ID}" class="form-control col-sm-4"
+								th:onchange="'itemsHelper.calcularImporte('+${producto.id}+','+${producto.precio}+',this.value);'"></td>
+								<td><span th:id="'total_importe_'+${producto.id}" th:text="${producto.total}+'0'"></span></td>
+								<td><a href="#" class="btn btn-danger btn-xs" th:onclick="'itemsHelper.eliminarLineaFactura('+${producto.id}+');'">x</a></td>
+							</tr>
 						</tbody>
 
 					</table>
 
-					<h5><span class="badge badge-secondary" id="gran_total">0</span></h5>
+					<h5><span class="badge badge-secondary" id="gran_total" th:text="${productsTotal}" >0</span></h5>
 
 					<div class="form-group row">
 						<div class="col-sm-6">
